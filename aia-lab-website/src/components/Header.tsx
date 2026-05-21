@@ -344,7 +344,7 @@ export default function Header() {
             animate="visible"
             exit="hidden"
             variants={overlayVariants}
-            className="fixed inset-0 bg-[#0B0B0B]/98 backdrop-blur-3xl z-60 md:hidden flex flex-col pt-32 px-6 pb-8"
+            className="fixed inset-0 bg-[#FAFAFA]/98 backdrop-blur-3xl z-60 md:hidden flex flex-col pt-32 px-6 pb-8"
           >
             {/* Glowing Effects in Background */}
             <motion.div 
@@ -358,7 +358,7 @@ export default function Header() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute top-[15%] right-[-10%] w-[260px] h-[260px] rounded-full bg-primary/10 blur-[80px] pointer-events-none" 
+              className="absolute top-[15%] right-[-10%] w-[260px] h-[260px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" 
             />
             <motion.div 
               animate={{
@@ -371,12 +371,12 @@ export default function Header() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute bottom-[15%] left-[-15%] w-[300px] h-[300px] rounded-full bg-secondary/10 blur-[90px] pointer-events-none" 
+              className="absolute bottom-[15%] left-[-15%] w-[300px] h-[300px] rounded-full bg-secondary/5 blur-[90px] pointer-events-none" 
             />
             
             {/* Noise overlay */}
             <div
-              className="absolute inset-0 z-[1] pointer-events-none opacity-[0.015]"
+              className="absolute inset-0 z-[1] pointer-events-none opacity-[0.01]"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
                 backgroundRepeat: "repeat",
@@ -397,36 +397,36 @@ export default function Header() {
                         key={item.label} 
                         className="flex flex-col"
                       >
-                        <div className="overflow-hidden flex items-center justify-between py-2 border-b border-white/5">
+                        <div className="overflow-hidden flex items-center justify-between py-2 border-b border-black/[0.06]">
                           <button
                             onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
                             className={`text-3xl font-heading font-bold text-left w-full flex items-center justify-between transition-colors duration-300 ${
-                              isMobileServicesOpen ? "text-primary" : "text-white"
+                              isMobileServicesOpen ? "text-primary" : "text-black-deep"
                             }`}
                           >
                             <span className="flex items-baseline">
                               <span className="font-mono text-xs text-primary/60 mr-4">0{idx + 1}</span>
                               <span>{item.label}</span>
                             </span>
-                            <ChevronDown className={`w-6 h-6 transition-transform duration-500 ${isMobileServicesOpen ? "rotate-180 text-primary" : "text-white/40"}`} />
+                            <ChevronDown className={`w-6 h-6 transition-transform duration-500 ${isMobileServicesOpen ? "rotate-180 text-primary" : "text-black-deep/30"}`} />
                           </button>
                         </div>
 
                         {/* Accordion content */}
                         <motion.div
-                          initial={false}
-                          animate={isMobileServicesOpen ? { height: "auto", opacity: 1, marginTop: 16 } : { height: 0, opacity: 0, marginTop: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-                          className="overflow-hidden pl-2 flex flex-col gap-4"
+                           initial={false}
+                           animate={isMobileServicesOpen ? { height: "auto", opacity: 1, marginTop: 16 } : { height: 0, opacity: 0, marginTop: 0 }}
+                           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
+                           className="overflow-hidden pl-2 flex flex-col gap-4"
                         >
-                          <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5 flex flex-col gap-5 backdrop-blur-md">
+                          <div className="bg-black/[0.015] border border-black/[0.05] rounded-2xl p-5 flex flex-col gap-5 backdrop-blur-md">
                             {/* Branding */}
                             <div className="space-y-2.5">
                               <div className="flex items-center gap-2 text-primary">
                                 <Sparkles className="w-4 h-4" />
                                 <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] font-heading">Branding Élite</h4>
                               </div>
-                              <div className="flex flex-col gap-2 pl-6 border-l border-white/10">
+                              <div className="flex flex-col gap-2 pl-6 border-l border-black/[0.08]">
                                 {[
                                   { label: "Identité Visuelle", href: "#expertises" },
                                   { label: "Direction Artistique", href: "#expertises" },
@@ -436,9 +436,9 @@ export default function Header() {
                                     key={sIdx}
                                     href={sub.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-[13px] text-white/60 hover:text-white transition-colors flex items-center gap-2 group/sublink"
+                                    className="text-[13px] text-black-deep/60 hover:text-primary transition-colors flex items-center gap-2 group/sublink"
                                   >
-                                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover/sublink:bg-primary transition-colors" />
+                                    <span className="w-1 h-1 rounded-full bg-black-deep/15 group-hover/sublink:bg-primary transition-colors" />
                                     <span>{sub.label}</span>
                                   </a>
                                 ))}
@@ -451,7 +451,7 @@ export default function Header() {
                                 <Monitor className="w-4 h-4" />
                                 <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] font-heading">Web & Tech</h4>
                               </div>
-                              <div className="flex flex-col gap-2 pl-6 border-l border-white/10">
+                              <div className="flex flex-col gap-2 pl-6 border-l border-black/[0.08]">
                                 {[
                                   { label: "Web Design Expérientiel", href: "#expertises" },
                                   { label: "Développement Next.js", href: "#expertises" },
@@ -461,9 +461,9 @@ export default function Header() {
                                     key={sIdx}
                                     href={sub.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-[13px] text-white/60 hover:text-white transition-colors flex items-center gap-2 group/sublink"
+                                    className="text-[13px] text-black-deep/60 hover:text-primary transition-colors flex items-center gap-2 group/sublink"
                                   >
-                                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover/sublink:bg-primary transition-colors" />
+                                    <span className="w-1 h-1 rounded-full bg-black-deep/15 group-hover/sublink:bg-primary transition-colors" />
                                     <span>{sub.label}</span>
                                   </a>
                                 ))}
@@ -476,7 +476,7 @@ export default function Header() {
                                 <Zap className="w-4 h-4" />
                                 <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] font-heading">IA & Stratégie</h4>
                               </div>
-                              <div className="flex flex-col gap-2 pl-6 border-l border-white/10">
+                              <div className="flex flex-col gap-2 pl-6 border-l border-black/[0.08]">
                                 {[
                                   { label: "Consulting IA", href: "#expertises" },
                                   { label: "Agent IA & Chatbots", href: "#expertises" },
@@ -486,9 +486,9 @@ export default function Header() {
                                     key={sIdx}
                                     href={sub.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-[13px] text-white/60 hover:text-white transition-colors flex items-center gap-2 group/sublink"
+                                    className="text-[13px] text-black-deep/60 hover:text-primary transition-colors flex items-center gap-2 group/sublink"
                                   >
-                                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover/sublink:bg-primary transition-colors" />
+                                    <span className="w-1 h-1 rounded-full bg-black-deep/15 group-hover/sublink:bg-primary transition-colors" />
                                     <span>{sub.label}</span>
                                   </a>
                                 ))}
@@ -504,12 +504,12 @@ export default function Header() {
                     <motion.div 
                       variants={navItemVariants}
                       key={item.label} 
-                      className="overflow-hidden border-b border-white/5 py-2 group/menu-link"
+                      className="overflow-hidden border-b border-black/[0.06] py-2 group/menu-link"
                     >
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="text-3xl font-heading font-bold text-white hover:text-primary transition-all duration-300 block relative py-1"
+                        className="text-3xl font-heading font-bold text-black-deep hover:text-primary transition-all duration-300 block relative py-1"
                       >
                         <div className="flex items-center justify-between">
                           <span className="flex items-baseline">
@@ -526,24 +526,24 @@ export default function Header() {
 
               <motion.div 
                 variants={navItemVariants}
-                className="mt-auto pt-8 border-t border-white/5"
+                className="mt-auto pt-8 border-t border-black/[0.06]"
               >
-                <p className="text-white/40 text-xs font-sans mb-6">Prêt à transformer votre vision en réalité augmentée ?</p>
+                <p className="text-[#32565C]/60 text-xs font-sans mb-6">Prêt à transformer votre vision en réalité augmentée ?</p>
                 
                 <a
                   href="#cta-contact"
                   onClick={() => setIsOpen(false)}
-                  className="w-full inline-flex items-center justify-between p-5 bg-white text-black-deep rounded-[1.5rem] group hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
+                  className="w-full inline-flex items-center justify-between p-5 bg-black-deep text-white rounded-[1.5rem] group hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
                 >
                   <span className="text-xs font-heading font-bold uppercase tracking-[0.25em] pl-2 z-10">Nous contacter</span>
                   <div className="bg-primary p-3.5 rounded-full group-hover:rotate-45 transition-transform duration-500 z-10">
                     <ArrowRight className="w-4 h-4 text-black-deep" />
                   </div>
-                  <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
 
                 <div className="flex items-center justify-between mt-8 px-2">
-                  <span className="font-mono text-[9px] tracking-widest text-white/20 uppercase">AIA LAB © {new Date().getFullYear()}</span>
+                  <span className="font-mono text-[9px] tracking-widest text-black-deep/30 uppercase">AIA LAB © {new Date().getFullYear()}</span>
                   <div className="flex gap-2.5">
                     {[
                       { label: "LinkedIn", href: "https://linkedin.com" },
@@ -555,7 +555,7 @@ export default function Header() {
                         href={s.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-[10px] tracking-wider text-white/40 hover:text-primary transition-colors duration-300 border border-white/10 px-2.5 py-1 rounded-full bg-white/[0.02]"
+                        className="font-mono text-[10px] tracking-wider text-black-deep/50 hover:text-primary transition-colors duration-300 border border-black/[0.08] px-2.5 py-1 rounded-full bg-black/[0.01]"
                       >
                         {s.label}
                       </a>
