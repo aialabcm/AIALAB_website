@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "cd aia-lab-website && npm run build"
+    "build": "npm install --prefix aia-lab-website && npm run build --prefix aia-lab-website"
   },
   "dependencies": {
     "framer-motion": "^12.39.0",
