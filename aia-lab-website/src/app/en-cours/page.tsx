@@ -67,7 +67,7 @@ function ProgressRing() {
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
     >
       <svg
@@ -101,7 +101,7 @@ function ProgressRing() {
           transition={{
             duration: 3,
             delay: 1.2,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as const,
           }}
           style={{
             transformOrigin: "center",

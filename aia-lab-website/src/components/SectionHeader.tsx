@@ -28,7 +28,7 @@ export default function SectionHeader({
             initial={{ opacity: 0, y: "100%" }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
             className={`font-heading font-bold text-4xl md:text-6xl lg:text-7xl tracking-tighter leading-[1.1] mb-4 ${dark ? "text-white" : "text-black-deep"}`}
           >
             {title} {highlight && <span className="text-primary italic">{highlight}</span>}

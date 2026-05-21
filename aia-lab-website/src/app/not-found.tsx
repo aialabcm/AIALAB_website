@@ -38,7 +38,7 @@ export default function NotFound() {
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
               className="font-heading font-black text-5xl md:text-7xl text-white tracking-tighter"
             >
               Page introuvable.

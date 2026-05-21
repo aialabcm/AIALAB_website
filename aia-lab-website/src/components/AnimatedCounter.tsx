@@ -21,7 +21,7 @@ export default function AnimatedCounter({ value, suffix = "", className = "", tr
       count.set(0); // Reset to 0 before starting
       const controls = animate(count, value, {
         duration: 2,
-        ease: [0.16, 1, 0.3, 1], // Custom slow out curve
+        ease: [0.16, 1, 0.3, 1] as const, // Custom slow out curve
       });
       return controls.stop;
     }

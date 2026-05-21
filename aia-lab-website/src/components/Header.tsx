@@ -78,19 +78,11 @@ export default function Header() {
   const overlayVariants = {
     hidden: {
       y: "-100%",
-      opacity: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.76, 0, 0.24, 1]
-      }
+      opacity: 0
     },
     visible: {
       y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1]
-      }
+      opacity: 1
     }
   };
 
@@ -112,7 +104,7 @@ export default function Header() {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: [0.16, 1, 0.3, 1]
+        ease: [0.16, 1, 0.3, 1] as const
       }
     }
   };
@@ -424,7 +416,7 @@ export default function Header() {
                         <motion.div
                           initial={false}
                           animate={isMobileServicesOpen ? { height: "auto", opacity: 1, marginTop: 16 } : { height: 0, opacity: 0, marginTop: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
                           className="overflow-hidden pl-2 flex flex-col gap-4"
                         >
                           <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5 flex flex-col gap-5 backdrop-blur-md">

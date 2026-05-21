@@ -147,7 +147,7 @@ function FAQItem({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] as const }}
             className="overflow-hidden"
           >
             <div className="pb-8 pr-12">
