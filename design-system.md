@@ -8,7 +8,7 @@ Ce document régit les fondations visuelles de l'application Next.js.
 Ces couleurs forment l'ADN visuel d'AIA LAB.
 
 Rôle	Couleur Hex	Usage
-Fond Principal	#F0FAFB (Blanc cassé)	Fond global de la page
+
 Fond Principal	#FAFAFA	couleur de section alternative 
 Accent Primaire	#08C1DC	Boutons principaux, éléments d'appel (CTA)
 Accent Secondaire	#259EB1	Éléments de survol, gradients, accents
@@ -30,24 +30,13 @@ Regular (400) : Paragraphes, descriptions.
 Medium (500) : Éléments interactifs ou labels.
 
 Police Alternative (Accents/Logos) : Space Grotesk (pour un aspect plus technique et moderne dans les éléments de dataviz ou les petits labels).
-3. Gestions des Espaces & Mise en page
-Le respect de ces règles garantit la cohérence du wireframe.
+4. Animations & Interactivité (Laboratory Showcase)
+Utilisation de Framer Motion pour des interactions fluides et organiques.
 
-Container : Max-width 1440px, centré.
-
-Marges Latérales (Padding) : 80px (fixe sur desktop).
-
-Grid System : Gouttière (Gap) de 24px minimum entre les éléments Bento Grid.
-
-Borders : border-width: 1px (strictement).
- espace entre les section : 80px
-
-4. Animations & Interactivité
-Utilisation de Framer Motion pour des interactions fluides.
-
-Typographie (Apparition) : Animation de type "Fade-up" (opacité 0 → 1, Y 20px → 0px) sur le scroll pour les titres.
-
-Animation de mots clés : Utiliser une animation de type staggerChildren sur les lettres des titres H1 pour un effet de typing léger ou de glissement.
+Accordéon (Expertises) : 
+- Timing : 400ms - 500ms.
+- Courbe : easing cubic-bezier(0.23, 1, 0.32, 1) pour un effet "snap" premium.
+- Comportement : Expansion verticale au survol (MD+) ou au clic (SM).
 
 Bento Grid : Effet "Hover-lift" (légère ombre portée sans arrondis) au survol des cartes pour signaler l'interactivité.
 

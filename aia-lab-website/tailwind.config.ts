@@ -9,16 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        accent: "var(--color-accent)",
-        "black-deep": "var(--foreground)",
-        "bg-main": "var(--background)",
-        "bg-alt": "var(--color-muted)",
+        primary: "#08C1DC",
+        secondary: "#259EB1",
+        dark: "#32565C",
+        "black-deep": "#0B0B0B",
+        "bg-main": "#FAFAFA",
+        "bg-alt": "#F0FAFB",
+        anthracite: "#172A2E",
       },
       fontFamily: {
-        sans: ["var(--font-body)", "sans-serif"],
-        heading: ["var(--font-heading)", "serif"],
+        sans: ["var(--font-roboto)", "sans-serif"],
+        heading: ["var(--font-montserrat)", "sans-serif"],
+        mono: ["var(--font-space-grotesk)", "monospace"],
       },
       spacing: {
         section: "80px",
@@ -35,11 +37,21 @@ const config: Config = {
       },
       animation: {
         marquee: "marquee 30s linear infinite",
+        "marquee-vertical-up": "marquee-vertical-up 40s linear infinite",
+        "marquee-vertical-down": "marquee-vertical-down 40s linear infinite",
       },
       keyframes: {
         marquee: {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-vertical-up": {
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(-50%)" },
+        },
+        "marquee-vertical-down": {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0%)" },
         },
       },
     },
