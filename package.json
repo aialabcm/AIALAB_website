@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "cd aia-lab-website && npm run build"
+  },
   "dependencies": {
     "framer-motion": "^12.39.0",
     "lucide-react": "^1.16.0"

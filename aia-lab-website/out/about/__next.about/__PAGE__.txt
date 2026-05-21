@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+3:I[91727,["/_next/static/chunks/04f2p5n3yxv~l.js","/_next/static/chunks/0.6.fyvc0iqer.js","/_next/static/chunks/0b1v3~1v7mxz2.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":["$L2",null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"skCiHD_4cFx44YuLOUD68"}
+5:null
+2:E{"digest":"NEXT_REDIRECT;replace;/en-cours?page=La page About Us;307;"}

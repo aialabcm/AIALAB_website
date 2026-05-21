@@ -15,7 +15,7 @@
 
 # next.js
 /.next/
-/out/
+# /out/ - NOT ignored: Hostinger Git deploy needs built files
 
 # production
 /build

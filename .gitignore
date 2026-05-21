@@ -11,7 +11,7 @@ yarn-error.log*
 
 # Next.js build output
 .next/
-out/
+# out/ - NOT ignored: Hostinger Git deploy needs built files
 
 # Local env files
 .env

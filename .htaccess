@@ -1,0 +1,26 @@
+# Redirect all traffic to the built site in aia-lab-website/out/
+# This is needed because Hostinger Git deploy clones the entire repo
+
+RewriteEngine On
+
+# If the request is for a file/folder that exists in aia-lab-website/out/, serve it
+RewriteCond %{REQUEST_URI} !^/aia-lab-website/out/
+RewriteCond %{DOCUMENT_ROOT}/aia-lab-website/out%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/aia-lab-website/out%{REQUEST_URI} -d
+RewriteRule ^(.*)$ /aia-lab-website/out/$1 [L]
+
+# If requesting root, serve the index.html from the out folder
+RewriteCond %{REQUEST_URI} !^/aia-lab-website/out/
+RewriteRule ^$ /aia-lab-website/out/index.html [L]
+
+# For clean URLs (e.g. /about -> /aia-lab-website/out/about.html)
+RewriteCond %{REQUEST_URI} !^/aia-lab-website/out/
+RewriteCond %{DOCUMENT_ROOT}/aia-lab-website/out%{REQUEST_URI}.html -f
+RewriteRule ^(.*)$ /aia-lab-website/out/$1.html [L]
+
+# Handle _next static assets
+RewriteCond %{REQUEST_URI} ^/_next/
+RewriteRule ^_next/(.*)$ /aia-lab-website/out/_next/$1 [L]
+
+# 404 fallback
+ErrorDocument 404 /aia-lab-website/out/404.html
