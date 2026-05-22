@@ -18,17 +18,13 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: aia-lab-website/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: |
-          cd aia-lab-website
-          npm ci
+        run: npm ci
 
       - name: Build and Export
-        run: |
-          cd aia-lab-website
-          npm run build
+        run: npm run build
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -36,6 +32,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: aia-lab-website/out/
+          local-dir: out/
           server-dir: public_html/
           dangerous-clean-slate: true
