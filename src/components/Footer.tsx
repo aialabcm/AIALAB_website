@@ -20,7 +20,7 @@ export default function Footer() {
         {/* Top Header Section */}
         <div className="text-center mb-24 md:mb-32">
           <h2 className="font-heading font-extrabold text-4xl md:text-7xl tracking-tighter leading-none mb-8">
-            Votre lab créatif, <br/> pour vos <span className="text-primary italic">idées d'élite™</span>
+            Votre lab créatif, <br/> pour vos <span className="text-primary accent-italic">idées d'élite™</span>
           </h2>
           <button className="px-10 py-4 bg-primary text-black-deep font-heading font-bold text-xs tracking-widest uppercase rounded-full hover:scale-105 transition-transform shadow-xl">
             Réserver un appel

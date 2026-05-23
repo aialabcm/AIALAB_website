@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 @config "../../tailwind.config.ts";
 
@@ -38,4 +38,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-roboto), Arial, sans-serif;
+}
+
+/* Accent words in titles: italic + light weight (title body stays bold) */
+.accent-italic {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.font-script {
+  font-family: "Caveat", cursive;
 }

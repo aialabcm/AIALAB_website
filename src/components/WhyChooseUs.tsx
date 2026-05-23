@@ -132,7 +132,7 @@ export default function WhyChooseUs() {
             >
               <div className={`absolute inset-0 bg-primary/20 rounded-full blur-[100px] transition-opacity duration-1000 ${hoveredId ? "opacity-100" : "opacity-40"}`} />
               <Image 
-                src="/images/AIAl-Embleme.png" 
+                src="/images/AIAl-Embleme.webp"
                 alt="AIA LAB Emblem" 
                 fill
                 className="object-contain drop-shadow-[0_0_40px_rgba(8,193,220,0.2)]"

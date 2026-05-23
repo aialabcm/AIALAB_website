@@ -131,7 +131,7 @@ function TestimonialRibbon({
                   <Star key={i} className="w-4 h-4 fill-primary text-primary opacity-80 group-hover:scale-110 transition-transform" style={{ transitionDelay: `${i * 50}ms` }} />
                 ))}
               </div>
-              <p className="font-heading font-medium text-lg md:text-xl text-black-deep/90 leading-relaxed italic">
+              <p className="font-heading accent-italic text-lg md:text-xl text-black-deep/90 leading-relaxed">
                 "{t.text}"
               </p>
             </div>

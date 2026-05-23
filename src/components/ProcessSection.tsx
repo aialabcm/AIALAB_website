@@ -45,15 +45,15 @@ export default function ProcessSection() {
   });
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-bg-main" 
+      className="relative py-24 md:py-32 overflow-hidden bg-bg-main"
       id="processus"
     >
       {/* Static Background Image */}
-      <div 
+      <div
         className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ 
+        style={{
           backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop')",
         }}
       >
@@ -62,8 +62,8 @@ export default function ProcessSection() {
       </div>
 
       <div className="max-w-container mx-auto px-6 md:px-20 relative z-10">
-        
-        <SectionHeader 
+
+        <SectionHeader
           title="Le Processus"
           highlight="Métier."
           description="Un workflow clair, structuré et suivi du brief à la livraison."
@@ -72,7 +72,7 @@ export default function ProcessSection() {
 
         {/* Timeline Path (Desktop) */}
         <div className="hidden lg:block absolute left-20 right-20 top-[400px] h-px bg-dark/20">
-          <motion.div 
+          <motion.div
             className="h-full bg-primary origin-left"
             style={{ scaleX }}
           />
@@ -89,7 +89,7 @@ export default function ProcessSection() {
               className="group relative"
             >
               <div className="h-full border border-white/80 bg-white/85 backdrop-blur-3xl p-8 md:p-10 flex flex-col justify-between hover:bg-white transition-all duration-500 shadow-premium">
-                
+
                 {/* Background Giant Number */}
                 <span className="absolute top-4 right-6 font-heading font-bold text-[100px] text-primary/5 leading-none pointer-events-none select-none transition-all duration-500 group-hover:text-primary/10">
                   {step.num}
@@ -98,7 +98,7 @@ export default function ProcessSection() {
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
-                       <span className="text-[10px] font-mono text-primary font-bold">{step.num}</span>
+                      <span className="text-[10px] font-mono text-primary font-bold">{step.num}</span>
                     </div>
                     <div className="h-px w-8 bg-primary/20" />
                   </div>

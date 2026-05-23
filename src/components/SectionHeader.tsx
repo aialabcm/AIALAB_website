@@ -12,11 +12,11 @@ interface SectionHeaderProps {
   dark?: boolean;
 }
 
-export default function SectionHeader({ 
-  title, 
-  subtitle, 
-  highlight, 
-  description, 
+export default function SectionHeader({
+  title,
+  subtitle,
+  highlight,
+  description,
   centered = false,
   dark = false
 }: SectionHeaderProps) {
@@ -24,19 +24,19 @@ export default function SectionHeader({
     <div className={`flex flex-col ${centered ? "items-center text-center mx-auto" : "items-start"} mb-16 gap-6`}>
       <div className={`max-w-3xl ${centered ? "mx-auto" : ""}`}>
         <div className="overflow-hidden">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: "100%" }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
             className={`font-heading font-bold text-4xl md:text-6xl lg:text-7xl tracking-tighter leading-[1.1] mb-4 ${dark ? "text-white" : "text-black-deep"}`}
           >
-            {title} {highlight && <span className="text-primary italic">{highlight}</span>}
+            {title} {highlight && <span className="text-primary accent-italic">{highlight}</span>}
           </motion.h2>
         </div>
-        
+
         {description && (
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -49,7 +49,7 @@ export default function SectionHeader({
       </div>
 
       {/* The Small Blue Line */}
-      <motion.div 
+      <motion.div
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}

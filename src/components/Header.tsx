@@ -136,7 +136,7 @@ export default function Header() {
           {/* Zone Gauche : Logo */}
           <a href="#" className="flex items-center gap-3 transition-transform duration-300 hover:scale-105 active:scale-95">
             <Image
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt="AIA LAB Logo"
               width={240}
               height={60}
@@ -265,7 +265,7 @@ export default function Header() {
                                </div>
                              ))}
                           </div>
-                          <span className="text-[11px] text-dark/60 font-medium italic">Rejoignez plus de 50 entreprises qui nous font confiance.</span>
+                          <span className="text-[11px] text-dark/60 accent-italic">Rejoignez plus de 50 entreprises qui nous font confiance.</span>
                         </div>
                         <a href="#cta-contact" className="group flex items-center gap-3 bg-black text-white px-7 py-3 rounded-full text-xs font-bold hover:bg-primary hover:text-black transition-all duration-500">
                           <span>Discuter du projet</span>

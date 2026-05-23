@@ -1,83 +1,78 @@
+"use client";
 import { Montserrat } from "next/font/google";
+import Image from "next/image";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["600", "700"],
 });
 
-const brands = [
+// Logos réels des clients AIA LAB
+// darkBg: true = logo sur fond sombre → on applique un filtre d'inversion pour fond clair
+const clients = [
   {
-    name: "NVIDIA",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M21.5 12.8c-.4.5-1.1 1-2.1 1.5-1.1.5-2.2.8-3.4.8-1.2 0-2.4-.3-3.4-.8-1-.5-1.7-1-2.1-1.5-.4-.4-.5-1.1-.3-1.6.2-.5.7-.9 1.3-1.1.7-.2 1.4-.3 2.1-.3s1.4.1 2.1.3c.6.2 1.1.6 1.3 1.1.2.6.1 1.2-.3 1.6zM16 2.5l-4.5 9h9l-4.5-9z" />
-      </svg>
-    ),
+    name: "B-Partners",
+    src: "/images/Websites Logo/B-Partners Logo copy.webp",
+    darkBg: false,
   },
   {
-    name: "OpenAI",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M22.28 7.53a5.02 5.02 0 0 0-4.32-2.47 5.02 5.02 0 0 0-4.32 2.47 5.02 5.02 0 0 0-4.32-2.47 5.02 5.02 0 0 0-4.32 2.47 5.02 5.02 0 0 0-4.32 2.47 5.02 5.02 0 0 0 0 5.06 5.02 5.02 0 0 0 4.32 2.47 5.02 5.02 0 0 0 4.32-2.47 5.02 5.02 0 0 0 4.32 2.47 5.02 5.02 0 0 0 4.32-2.47 5.02 5.02 0 0 0 4.32 2.47 5.02 5.02 0 0 0 4.32-2.47 5.02 5.02 0 0 0 0-5.06zM12 13.82l-1.58-.91V11.1l1.58.91 1.58-.91v1.81l-1.58.91z" />
-      </svg>
-    ),
+    name: "Linguae Translation",
+    src: "/images/Websites Logo/Linguae translation copie.webp",
+    darkBg: false,
   },
   {
-    name: "Google Cloud",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-      </svg>
-    ),
+    name: "OnlyFood",
+    src: "/images/Websites Logo/oyfd copy.webp",
+    darkBg: true,
   },
   {
-    name: "Microsoft",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M2.5 2.5h9v9h-9v-9zm10 0h9v9h-9v-9zm-10 10h9v9h-9v-9zm10 0h9v9h-9v-9z" />
-      </svg>
-    ),
+    name: "China Tech Academy",
+    src: "/images/Websites Logo/photo_2025-01-05_08-47-51.webp",
+    darkBg: true,
   },
   {
-    name: "Meta",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M12 12c-1.5-1.5-3.5-2.5-5.5-2.5S2.5 10.5 2.5 12s2 2.5 4 2.5 4-1 5.5-2.5zm0 0c1.5 1.5 3.5 2.5 5.5 2.5s4-1 4-2.5-2-2.5-4-2.5-4 1-5.5 2.5z" />
-      </svg>
-    ),
+    name: "Rehoboth Music System",
+    src: "/images/Websites Logo/photo_2025-01-05_10-03-45.webp",
+    darkBg: true,
   },
   {
-    name: "Anthropic",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5z" />
-      </svg>
-    ),
+    name: "IINL",
+    src: "/images/Websites Logo/photo_2025-01-05_10-03-46.webp",
+    darkBg: true,
   },
   {
-    name: "Mistral",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M4 4h4l4 8 4-8h4v16h-4v-8l-4 8-4-8v8H4V4z" />
-      </svg>
-    ),
+    name: "Sygalin SAS",
+    src: "/images/Websites Logo/photo_2025-01-05_10-03-47.webp",
+    darkBg: true,
   },
   {
-    name: "AWS",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.5 14h-11l5.5-8 5.5 8z" />
-      </svg>
-    ),
+    name: "AJPROS",
+    src: "/images/Websites Logo/photo_2025-01-05_10-03-48 (2).webp",
+    darkBg: true,
+  },
+  {
+    name: "AAMESP",
+    src: "/images/Websites Logo/photo_2025-01-05_10-03-48 (3).webp",
+    darkBg: true,
+  },
+  {
+    name: "LIQZO",
+    src: "/images/Websites Logo/photo_2025-01-05_10-03-48.webp",
+    darkBg: true,
+  },
+  {
+    name: "Don Tisane",
+    src: "/images/Websites Logo/don tisane.webp",
+    darkBg: true,
   },
 ];
 
 export default function MarqueeTicker() {
   // Doubler la liste pour un défilement infini fluide
-  const displayBrands = [...brands, ...brands];
+  const displayClients = [...clients, ...clients];
 
   return (
-    <section 
+    <section
       className="w-full bg-bg-main py-20 overflow-hidden border-y border-dark/5 relative"
       style={{ clipPath: "ellipse(150% 100% at 50% 100%)", marginTop: "-50px" }}
     >
@@ -85,7 +80,7 @@ export default function MarqueeTicker() {
         <p
           className={`${montserrat.className} text-[10px] lg:text-xs font-semibold tracking-[0.4em] text-dark/40 text-center uppercase`}
         >
-          Propulser l'innovation avec les meilleurs
+          Ils nous font confiance
         </p>
       </div>
 
@@ -94,22 +89,54 @@ export default function MarqueeTicker() {
         <div className="absolute inset-y-0 left-0 w-24 lg:w-48 bg-gradient-to-r from-bg-main to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 lg:w-48 bg-gradient-to-l from-bg-main to-transparent z-10 pointer-events-none" />
 
-        <div className="flex gap-16 lg:gap-24 items-center whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-4">
-          {displayBrands.map((brand, idx) => (
+        <div className="flex gap-12 lg:gap-20 items-center whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-4">
+          {displayClients.map((client, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-4 transition-all duration-300 hover:scale-105"
+              className="flex items-center gap-3 flex-shrink-0 transition-all duration-300 hover:scale-105 group/item"
+              title={client.name}
             >
+              {/* Conteneur logo avec gestion fond sombre/clair */}
               <div
-                className="w-8 h-8 lg:w-10 lg:h-10 text-dark/30 hover:text-primary transition-colors duration-300"
-                title={brand.name}
+                className="relative flex-shrink-0 transition-all duration-300"
+                style={{
+                  width: "48px",
+                  height: "48px",
+                }}
               >
-                {brand.svg}
+                <Image
+                  src={client.src}
+                  alt={`Logo ${client.name}`}
+                  fill
+                  className="object-contain"
+                  style={{
+                    // Pour les logos sur fond noir: inversion pour fond clair + grayscale + opacité
+                    filter: client.darkBg
+                      ? "invert(1) grayscale(1) opacity(0.35)"
+                      : "grayscale(1) opacity(0.35)",
+                    transition: "filter 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.filter =
+                      client.darkBg
+                        ? "invert(1) grayscale(0) opacity(0.85)"
+                        : "grayscale(0) opacity(0.85)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.filter =
+                      client.darkBg
+                        ? "invert(1) grayscale(1) opacity(0.35)"
+                        : "grayscale(1) opacity(0.35)";
+                  }}
+                  sizes="48px"
+                  unoptimized
+                />
               </div>
+              {/* Nom du client */}
               <span
-                className={`${montserrat.className} text-sm lg:text-base font-bold text-dark/20 hover:text-dark/60 tracking-tight transition-colors duration-300`}
+                className={`${montserrat.className} text-xs lg:text-sm font-bold text-dark/25 group-hover/item:text-dark/60 tracking-tight transition-colors duration-300 whitespace-nowrap`}
               >
-                {brand.name}
+                {client.name}
               </span>
             </div>
           ))}

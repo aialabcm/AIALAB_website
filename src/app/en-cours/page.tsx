@@ -248,7 +248,7 @@ function ComingSoonContent() {
   };
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center bg-black overflow-hidden selection:bg-primary/20 selection:text-primary">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center bg-white overflow-hidden selection:bg-primary/20 selection:text-primary">
       {/* ──── Noise grain ──── */}
       <NoiseOverlay />
 
@@ -310,7 +310,7 @@ function ComingSoonContent() {
       >
         <Link
           href="/"
-          className="group flex items-center gap-2 text-white/30 hover:text-white/70 transition-colors duration-300"
+          className="group flex items-center gap-2 text-dark/30 hover:text-dark/70 transition-colors duration-300"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase">
@@ -328,33 +328,19 @@ function ComingSoonContent() {
         animate="visible"
         className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto"
       >
-        {/* Status badge */}
-        <motion.div variants={item} className="mb-12">
-          <div className="relative inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-            </span>
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.35em] text-white/50">
-              En développement
-            </span>
-          </div>
-        </motion.div>
+
 
         {/* Title block */}
         <div className="mb-6">
           <div className="overflow-hidden">
-            <motion.h1
-              variants={textReveal}
-              className="font-heading font-black text-[clamp(3rem,10vw,8rem)] text-white tracking-[-0.04em] leading-[0.9] uppercase"
-            >
-              Bientôt
-            </motion.h1>
+            <motion.h1 variants={textReveal} className="font-heading font-black text-[clamp(3rem,10vw,8rem)] text-dark tracking-[-0.04em] leading-[0.9] uppercase">
+                Page en cours de création
+              </motion.h1>
           </div>
           <div className="overflow-hidden mt-1">
             <motion.span
               variants={textReveal}
-              className="block font-heading font-light text-[clamp(1.5rem,5vw,4rem)] text-primary/80 italic tracking-[-0.02em] leading-[1.1]"
+              className="block font-heading accent-italic text-[clamp(1.5rem,5vw,4rem)] text-primary/80 tracking-[-0.02em] leading-[1.1]"
             >
               disponible.
             </motion.span>
@@ -382,10 +368,7 @@ function ComingSoonContent() {
         </motion.div>
 
         {/* Description */}
-        <motion.p
-          variants={item}
-          className="font-sans text-sm md:text-base text-white/40 max-w-[48ch] mb-14 leading-[1.8] font-light"
-        >
+        <motion.p variants={item} className="font-sans text-sm md:text-base text-dark/40 max-w-[48ch] mb-14 leading-[1.8] font-light">
           <span className="text-primary/70 font-medium">{page}</span> est
           actuellement en cours de création. Notre équipe y travaille avec soin
           pour vous offrir une expérience à la hauteur.
@@ -404,10 +387,7 @@ function ComingSoonContent() {
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform duration-300" />
           </Link>
 
-          <Link
-            href="/#cta-contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-[11px] tracking-[0.2em] uppercase text-white/40 border border-white/[0.06] hover:border-primary/30 hover:text-primary/70 transition-all duration-300 hover:bg-primary/[0.03]"
-          >
+          <Link href="/#cta-contact" className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-[11px] tracking-[0.2em] uppercase text-dark/40 border border-dark/[0.06] hover:border-primary/30 hover:text-primary/70 transition-all duration-300 hover:bg-primary/[0.03]">
             <span>Nous contacter</span>
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
           </Link>
@@ -421,15 +401,15 @@ function ComingSoonContent() {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-8 left-0 right-0 z-20 flex items-center justify-between px-8 md:px-16"
       >
-        <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-white/15">
+        <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-dark/15">
           AIA LAB © {new Date().getFullYear()}
         </span>
         <div className="flex items-center gap-6">
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-white/15">
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-dark/15">
             Design & Performance
           </span>
           <div className="w-6 h-px bg-white/10" />
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-white/15">
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-dark/15">
             V.01
           </span>
         </div>

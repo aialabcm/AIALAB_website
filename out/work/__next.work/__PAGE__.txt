@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-3:I[97367,["/_next/static/chunks/15fyz6883euxw.js","/_next/static/chunks/0z1536uc9nawo.js","/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+3:I[97367,["/_next/static/chunks/0xju.agm1ziff.js","/_next/static/chunks/16r6bcem30-iq.js","/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":["$L2",null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"_WxbyYoxRUWCf1X09tyth"}
+0:{"rsc":["$","$1","c",{"children":["$L2",null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"y4NJkXkj_u4f8aaW1aNX6"}
 5:null
 2:E{"digest":"NEXT_REDIRECT;replace;/en-cours?page=La page Our Work;307;"}

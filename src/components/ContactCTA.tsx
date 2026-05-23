@@ -37,7 +37,7 @@ export default function ContactCTA() {
             transition={{ delay: 0.1, duration: 0.8 }}
             className="font-heading font-extrabold text-4xl md:text-7xl text-black-deep tracking-tighter max-w-[15ch] leading-[0.95]"
           >
-            Bâtissons ensemble <span className="text-primary italic">l'exceptionnel.</span>
+            Bâtissons ensemble <span className="text-primary accent-italic">l'exceptionnel.</span>
           </motion.h2>
 
           <motion.p
