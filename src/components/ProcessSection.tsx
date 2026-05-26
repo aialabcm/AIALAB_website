@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import SectionHeader from "./SectionHeader";
 
 const steps = [
@@ -31,6 +31,114 @@ const steps = [
   },
 ];
 
+function ProcessCard({ step, idx }: { step: typeof steps[0]; idx: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: idx * 0.12 }}
+      className="w-full h-[320px] [perspective:1200px] group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => isMobile && setIsHovered(!isHovered)}
+    >
+      <motion.div
+        className="relative w-full h-full cursor-pointer select-none"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: isHovered ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* FRONT FACE */}
+        <div
+          className="absolute inset-0 w-full h-full bg-white border border-dark/5 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] p-8 flex flex-col justify-between transition-all duration-300 group-hover:shadow-[0_12px_40px_rgba(8,193,220,0.06)]"
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
+          {/* Front Header */}
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <span className="text-[10px] font-mono text-primary font-bold">{step.num}</span>
+              </div>
+              <div className="h-px w-6 bg-primary/20" />
+            </div>
+            <span className="font-mono text-[11px] font-extrabold text-primary tracking-widest uppercase">
+              {step.sub}
+            </span>
+          </div>
+
+          {/* Front Body */}
+          <div className="my-auto py-4">
+            <h3 className="font-heading font-black text-3xl text-black-deep tracking-wide mb-1.5">
+              {step.title}
+            </h3>
+            <p className="text-dark/45 text-[10px] font-mono tracking-widest uppercase flex items-center gap-1.5 transition-colors group-hover:text-primary">
+              {isMobile ? "Touchez pour explorer" : "Survolez pour explorer"}{" "}
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">➔</span>
+            </p>
+          </div>
+
+          {/* Front Footer */}
+          <div className="flex justify-between items-center w-full pt-4 border-t border-dark/5">
+            <span className="text-[10px] text-dark/40 font-semibold uppercase tracking-wider">
+              AIA LAB PROCESS
+            </span>
+            <span className="text-2xl font-black font-heading text-primary/10 group-hover:text-primary/25 transition-colors">
+              {step.num}
+            </span>
+          </div>
+        </div>
+
+        {/* BACK FACE */}
+        <div
+          className="absolute inset-0 w-full h-full bg-gradient-to-br from-black-deep via-[#0E1524] to-black-deep border border-white/5 rounded-3xl shadow-2xl p-8 flex flex-col justify-between text-white"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+            WebkitTransform: "rotateY(180deg)",
+          }}
+        >
+          {/* Back Header */}
+          <div className="flex items-center justify-between w-full pb-3 border-b border-white/10">
+            <span className="font-mono text-xs font-bold text-primary tracking-widest uppercase">
+              Étape {step.num}
+            </span>
+            <span className="font-heading font-black text-sm text-white/50 tracking-wider">
+              {step.title}
+            </span>
+          </div>
+
+          {/* Back Description */}
+          <div className="my-auto py-4">
+            <p className="font-sans text-[14px] leading-relaxed text-white/90 font-medium">
+              {step.desc}
+            </p>
+          </div>
+
+          {/* Back Footer */}
+          <div className="flex justify-between items-center w-full pt-3 border-t border-white/10 text-white/40">
+            <span className="text-[9px] font-mono uppercase tracking-wider">
+              Processus Métier
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          </div>
+        </div>
+      </motion.div>
+    </motion.article>
+  );
+}
+
 export default function ProcessSection() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -41,7 +149,7 @@ export default function ProcessSection() {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
@@ -57,21 +165,21 @@ export default function ProcessSection() {
           backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop')",
         }}
       >
-        {/* Light Overlay (Subtle) */}
-        <div className="absolute inset-0 bg-white/40 backdrop-blur-[1px]" />
+        {/* Premium Frosted Glass Overlay */}
+        <div className="absolute inset-0 bg-white/45 backdrop-blur-[4px]" />
       </div>
 
-      <div className="max-w-container mx-auto px-6 md:px-20 relative z-10">
-
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         <SectionHeader
           title="Le Processus"
           highlight="Métier."
           description="Un workflow clair, structuré et suivi du brief à la livraison."
+          descriptionClassName="text-black font-medium"
           centered
         />
 
         {/* Timeline Path (Desktop) */}
-        <div className="hidden lg:block absolute left-20 right-20 top-[400px] h-px bg-dark/20">
+        <div className="hidden lg:block absolute left-16 right-16 top-[400px] h-px bg-dark/10">
           <motion.div
             className="h-full bg-primary origin-left"
             style={{ scaleX }}
@@ -80,45 +188,10 @@ export default function ProcessSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-16 relative">
           {steps.map((step, idx) => (
-            <motion.article
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="group relative"
-            >
-              <div className="h-full border border-white/80 bg-white/85 backdrop-blur-3xl p-8 md:p-10 flex flex-col justify-between hover:bg-white transition-all duration-500 shadow-premium">
-
-                {/* Background Giant Number */}
-                <span className="absolute top-4 right-6 font-heading font-bold text-[100px] text-primary/5 leading-none pointer-events-none select-none transition-all duration-500 group-hover:text-primary/10">
-                  {step.num}
-                </span>
-
-                <div className="relative">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
-                      <span className="text-[10px] font-mono text-primary font-bold">{step.num}</span>
-                    </div>
-                    <div className="h-px w-8 bg-primary/20" />
-                  </div>
-
-                  <span className="text-[11px] font-mono text-primary font-extrabold tracking-widest uppercase">
-                    {step.sub}
-                  </span>
-                  <h3 className="font-heading font-bold text-2xl text-black-deep mt-3 mb-6 tracking-tight">
-                    {step.title}
-                  </h3>
-                  <p className="font-sans text-[13px] text-dark font-medium leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-            </motion.article>
+            <ProcessCard key={idx} step={step} idx={idx} />
           ))}
         </div>
       </div>
     </section>
   );
 }
-

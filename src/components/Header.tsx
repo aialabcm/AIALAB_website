@@ -3,17 +3,22 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { 
   ChevronDown, 
   Sparkles, 
   Monitor, 
-  Zap, 
-  Users, 
-  ArrowRight 
+  ArrowRight,
+  PenTool,
+  Printer,
+  Megaphone,
+  ArrowUpRight,
+  Zap
 } from "lucide-react";
 
 export default function Header() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -74,15 +79,36 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // Framer Motion Variants for mobile menu
+  // Close all menus on Escape keydown
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        setIsServicesOpen(false);
+        setIsMobileServicesOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Framer Motion Variants for mobile menu (sliding from the right)
   const overlayVariants = {
     hidden: {
-      y: "-100%",
-      opacity: 0
+      x: "100%",
+      opacity: 0,
+      transition: {
+        duration: 0.45,
+        ease: [0.16, 1, 0.3, 1] as const
+      }
     },
     visible: {
-      y: 0,
-      opacity: 1
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.55,
+        ease: [0.16, 1, 0.3, 1] as const
+      }
     }
   };
 
@@ -119,39 +145,47 @@ export default function Header() {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] px-4 md:px-8 py-6 ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-      <div 
-        className={`max-w-[1280px] mx-auto transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full border ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] border-b transition-colors duration-500 ${
           isOpen
-            ? "bg-transparent border-transparent shadow-none backdrop-blur-none h-[80px] px-8"
+            ? "bg-transparent border-transparent"
             : isScrolled 
-              ? "bg-white/95 border-black/[0.05] shadow-[0_15px_45px_rgba(0,0,0,0.06)] backdrop-blur-2xl h-[72px] px-6" 
-              : "bg-white/60 border-black/[0.05] shadow-[0_15px_45px_rgba(0,0,0,0.06)] backdrop-blur-2xl h-[80px] px-8"
-        }`}
+              ? "bg-[#FAFAFA]/15 backdrop-blur-md border-black/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.02)]" 
+              : "bg-transparent border-transparent"
+        } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
       >
-        <div className="h-full flex items-center justify-between">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 h-14 md:h-16 flex items-center justify-between">
           {/* Zone Gauche : Logo */}
-          <a href="#" className="flex items-center gap-3 transition-transform duration-300 hover:scale-105 active:scale-95">
+          <Link 
+            href="/" 
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+              setIsOpen(false);
+              setIsServicesOpen(false);
+            }}
+            className="flex items-center gap-3 transition-transform duration-300 hover:scale-105 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg p-1"
+          >
             <Image
-              src="/images/logo.webp"
+              src="/images/AIALAB-secondary-logo.png"
               alt="AIA LAB Logo"
-              width={240}
-              height={60}
-              className={`transition-all duration-500 object-contain ${
-                isOpen
-                  ? "h-14 brightness-0 invert"
-                  : isScrolled ? "h-11" : "h-14"
-              }`}
+              width={110}
+              height={32}
+              className="transition-all duration-500 object-contain h-7 md:h-8"
               priority
             />
-          </a>
+          </Link>
 
-          {/* Zone Centre : Navigation Style "Pill" */}
-          <nav className="hidden md:flex items-center gap-1 bg-black/[0.02] border border-black/[0.04] rounded-full p-1 relative">
+          {/* Zone Centre : Navigation Style "Left Coast" */}
+          <nav className="hidden md:flex items-center gap-6 relative">
             {menuItems.map((item) => {
+              const isActive = item.href === "/" 
+                ? pathname === "/" 
+                : item.href.startsWith("#")
+                  ? false
+                  : pathname.startsWith(item.href);
+
               if (item.hasDropdown) {
                 return (
                   <div key={item.label} className="relative py-1">
@@ -163,113 +197,173 @@ export default function Header() {
                           setTimeout(() => setIsServicesOpen(false), 200);
                         }
                       }}
-                      className={`text-[13px] font-sans font-semibold px-5 py-2 rounded-full transition-all duration-500 flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-secondary/50 ${
+                      className={`text-[14.5px] font-sans font-semibold px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-secondary/50 ${
                         isServicesOpen 
-                          ? "bg-white text-black-deep shadow-[0_4px_20px_rgba(0,0,0,0.08)] scale-102" 
-                          : "text-black-deep/70 hover:text-black-deep hover:bg-white/60"
+                          ? "bg-black/5 text-black-deep" 
+                          : "text-black-deep/70 hover:text-black-deep hover:bg-black/5"
                       }`}
                     >
                       <span>{item.label}</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-primary' : 'text-dark/40'}`} />
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-primary' : 'text-dark/40'}`} />
                     </button>
                     
-                    {/* Mega-menu (Improved UI/UX) */}
-                    <div className={`absolute top-[140%] left-1/2 -translate-x-1/2 w-[900px] bg-white border border-black/5 rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.12)] p-12 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] z-50 ${
-                      isServicesOpen 
-                        ? "opacity-100 visible translate-y-0" 
-                        : "opacity-0 invisible translate-y-8"
-                    }`}>
-                      <div className="grid grid-cols-3 gap-12 relative">
-                        
-                        {/* Column 1: Creative & Branding */}
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 px-2 mb-8">
-                            <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
-                              <Sparkles className="w-5 h-5" />
-                            </div>
-                            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-black-deep">Branding Élite</h3>
+                    {/* Mega-menu (Exact Lesse Studio Dark Grid Aesthetic - AIA LAB Expertises) */}
+                    <div 
+                      style={{ width: "860px" }}
+                      className={`absolute top-[140%] left-1/2 -translate-x-1/2 bg-[#0A0A0A]/90 backdrop-blur-2xl border border-white/[0.08] rounded-[2rem] shadow-[0_50px_100px_rgba(0,0,0,0.85)] p-6 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] z-50 ${
+                        isServicesOpen 
+                          ? "opacity-100 visible translate-y-0 animate-in fade-in slide-in-from-top-4 duration-300" 
+                          : "opacity-0 invisible translate-y-8 pointer-events-none"
+                      }`}
+                    >
+                      <div className="grid grid-cols-3 gap-4 relative">
+                        {/* Card 1: Branding & Identité */}
+                        <a 
+                          href="#expertises" 
+                          onClick={() => setIsServicesOpen(false)}
+                          className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
+                        >
+                          <div className="flex items-center justify-between w-full relative z-10">
+                            <Sparkles className="w-5 h-5 text-white/40 group-hover/card:text-primary transition-colors duration-300" />
+                            <span className="text-white/30 text-[9px] tracking-wider font-mono uppercase">/6 services</span>
                           </div>
-                          <div className="flex flex-col gap-2">
-                            {[
-                              { title: "Identité Visuelle", desc: "Logos et chartes graphiques de luxe." },
-                              { title: "Direction Artistique", desc: "Vision créative pour marques d'élite." },
-                              { title: "Motion Design", desc: "Animations cinétiques 2D/3D.", isNew: true },
-                              { title: "Concept Créatif", desc: "Idéation et storytelling de marque." }
-                            ].map((s, idx) => (
-                              <a key={idx} href="#expertises" className="group/item p-4 rounded-2xl hover:bg-bg-alt/80 transition-all flex flex-col">
-                                <span className="text-[14px] font-bold text-black-deep group-hover/item:text-primary transition-colors flex items-center gap-2">
-                                  {s.title}
-                                  {s.isNew && <span className="px-1.5 py-0.5 bg-primary text-[8px] text-black font-black rounded text-[8px] uppercase tracking-tighter">New</span>}
-                                </span>
-                                <span className="text-[11px] text-dark/40 font-medium mt-1 leading-tight">{s.desc}</span>
-                              </a>
-                            ))}
+                          <div className="flex flex-col relative z-10">
+                            <span className="text-[13px] font-sans font-semibold text-white/95 group-hover/card:text-white transition-colors">Brand Strategy & Identity</span>
+                            <span className="text-[10px] font-sans text-white/40 mt-1 max-w-[70%] group-hover/card:text-white/60 transition-colors">Branding & Direction Artistique</span>
                           </div>
-                        </div>
+                          
+                          {/* Hover Vignette Image */}
+                          <div className="service-card-vignette">
+                            <Image
+                              src="/images/services/Branding & Identité visuelle.webp"
+                              alt="Brand Strategy & Identity"
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        </a>
 
-                        {/* Column 2: Web & Mobile */}
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 px-2 mb-8">
-                            <div className="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-600">
-                              <Monitor className="w-5 h-5" />
-                            </div>
-                            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-black-deep">Web & Tech</h3>
+                        {/* Card 2: Design Graphique & Digital */}
+                        <a 
+                          href="#expertises" 
+                          onClick={() => setIsServicesOpen(false)}
+                          className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
+                        >
+                          <div className="flex items-center justify-between w-full relative z-10">
+                            <PenTool className="w-5 h-5 text-white/40 group-hover/card:text-primary transition-colors duration-300" />
+                            <span className="text-white/30 text-[9px] tracking-wider font-mono uppercase">/3 services</span>
                           </div>
-                          <div className="flex flex-col gap-2">
-                            {[
-                              { title: "Web Design Experientiel", desc: "Interfaces immersives et interactives." },
-                              { title: "Développement Next.js", desc: "Performance et SEO à l'état pur." },
-                              { title: "E-Commerce de Luxe", desc: "Boutiques en ligne optimisées." },
-                              { title: "Maintenance & Évolution", desc: "Support technique haute réactivité." }
-                            ].map((s, idx) => (
-                              <a key={idx} href="#expertises" className="group/item p-4 rounded-2xl hover:bg-bg-alt/80 transition-all flex flex-col">
-                                <span className="text-[14px] font-bold text-black-deep group-hover/item:text-primary transition-colors">{s.title}</span>
-                                <span className="text-[11px] text-dark/40 font-medium mt-1 leading-tight">{s.desc}</span>
-                              </a>
-                            ))}
+                          <div className="flex flex-col relative z-10">
+                            <span className="text-[13px] font-sans font-semibold text-white/95 group-hover/card:text-white transition-colors">Visual Content & Design</span>
+                            <span className="text-[10px] font-sans text-white/40 mt-1 max-w-[70%] group-hover/card:text-white/60 transition-colors">Design Graphique & Contenus</span>
                           </div>
-                        </div>
+                          
+                          {/* Hover Vignette Image */}
+                          <div className="service-card-vignette">
+                            <Image
+                              src="/images/services/Design Graphique & Digital.webp"
+                              alt="Visual Content & Design"
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        </a>
 
-                        {/* Column 3: AI & Strategy */}
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 px-2 mb-8">
-                            <div className="w-10 h-10 bg-orange-500/10 rounded-xl flex items-center justify-center text-orange-600">
-                              <Zap className="w-5 h-5" />
-                            </div>
-                            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-black-deep">IA & Stratégie</h3>
+                        {/* Card 3: Print & Tangible Solutions */}
+                        <a 
+                          href="#expertises" 
+                          onClick={() => setIsServicesOpen(false)}
+                          className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
+                        >
+                          <div className="flex items-center justify-between w-full relative z-10">
+                            <Printer className="w-5 h-5 text-white/40 group-hover/card:text-primary transition-colors duration-300" />
+                            <span className="text-white/30 text-[9px] tracking-wider font-mono uppercase">/4 services</span>
                           </div>
-                          <div className="flex flex-col gap-2">
-                            {[
-                              { title: "Consulting IA", desc: "Audit de vos processus métier." },
-                              { title: "Agent IA & Chatbots", desc: "Automatisation de la relation client." },
-                              { title: "Création Générative", desc: "Assets visuels produits par IA." },
-                              { title: "Stratégie Digitale", desc: "Plan de croissance sur-mesure." }
-                            ].map((s, idx) => (
-                              <a key={idx} href="#expertises" className="group/item p-4 rounded-2xl hover:bg-bg-alt/80 transition-all flex flex-col">
-                                <span className="text-[14px] font-bold text-black-deep group-hover/item:text-primary transition-colors">{s.title}</span>
-                                <span className="text-[11px] text-dark/40 font-medium mt-1 leading-tight">{s.desc}</span>
-                              </a>
-                            ))}
+                          <div className="flex flex-col relative z-10">
+                            <span className="text-[13px] font-sans font-semibold text-white/95 group-hover/card:text-white transition-colors">Print & Tangible Solutions</span>
+                            <span className="text-[10px] font-sans text-white/40 mt-1 max-w-[70%] group-hover/card:text-white/60 transition-colors">Impressions & Supports Physiques</span>
                           </div>
-                        </div>
+                          
+                          {/* Hover Vignette Image */}
+                          <div className="service-card-vignette">
+                            <Image
+                              src="/images/services/print &i impressio.webp"
+                              alt="Print & Tangible Solutions"
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        </a>
 
-                      </div>
-                      
-                      {/* Mega Menu Footer */}
-                      <div className="mt-12 pt-8 border-t border-black/5 flex items-center justify-between px-4">
-                        <div className="flex items-center gap-4">
-                          <div className="flex -space-x-2">
-                             {[1,2,3].map(i => (
-                               <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-bg-alt overflow-hidden">
-                                 <img src={`https://i.pravatar.cc/100?img=${i+20}`} alt="Expert" className="w-full h-full object-cover grayscale" />
-                               </div>
-                             ))}
+                        {/* Card 4: Web Development & Tech */}
+                        <a 
+                          href="#expertises" 
+                          onClick={() => setIsServicesOpen(false)}
+                          className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
+                        >
+                          <div className="flex items-center justify-between w-full relative z-10">
+                            <Monitor className="w-5 h-5 text-white/40 group-hover/card:text-primary transition-colors duration-300" />
+                            <span className="text-white/30 text-[9px] tracking-wider font-mono uppercase">/7 services</span>
                           </div>
-                          <span className="text-[11px] text-dark/60 accent-italic">Rejoignez plus de 50 entreprises qui nous font confiance.</span>
-                        </div>
-                        <a href="#cta-contact" className="group flex items-center gap-3 bg-black text-white px-7 py-3 rounded-full text-xs font-bold hover:bg-primary hover:text-black transition-all duration-500">
-                          <span>Discuter du projet</span>
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <div className="flex flex-col relative z-10">
+                            <span className="text-[13px] font-sans font-semibold text-white/95 group-hover/card:text-white transition-colors">Web Development & Tech</span>
+                            <span className="text-[10px] font-sans text-white/40 mt-1 max-w-[70%] group-hover/card:text-white/60 transition-colors">Web Design Expérientiel & Next.js</span>
+                          </div>
+                          
+                          {/* Hover Vignette Image */}
+                          <div className="service-card-vignette">
+                            <Image
+                              src="/images/services/web design & developpement.webp"
+                              alt="Web Development & Tech"
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        </a>
+
+                        {/* Card 5: Digital Growth & Marketing */}
+                        <a 
+                          href="#expertises" 
+                          onClick={() => setIsServicesOpen(false)}
+                          className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
+                        >
+                          <div className="flex items-center justify-between w-full relative z-10">
+                            <Megaphone className="w-5 h-5 text-white/40 group-hover/card:text-primary transition-colors duration-300" />
+                            <span className="text-white/30 text-[9px] tracking-wider font-mono uppercase">/5 services</span>
+                          </div>
+                          <div className="flex flex-col relative z-10">
+                            <span className="text-[13px] font-sans font-semibold text-white/95 group-hover/card:text-white transition-colors">Digital Growth & Marketing</span>
+                            <span className="text-[10px] font-sans text-white/40 mt-1 max-w-[70%] group-hover/card:text-white/60 transition-colors">Marketing Digital & SEO</span>
+                          </div>
+                          
+                          {/* Hover Vignette Image */}
+                          <div className="service-card-vignette">
+                            <Image
+                              src="/images/services/marketing didgital.webp"
+                              alt="Digital Growth & Marketing"
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        </a>
+
+                        {/* Card 6: CTA Card (Premium Contrast White Glass Accent) */}
+                        <a 
+                          href="#cta-contact" 
+                          onClick={() => setIsServicesOpen(false)}
+                          className="group/card relative p-5 rounded-[1.5rem] bg-white text-black hover:bg-white/90 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_12px_40px_rgba(255,255,255,0.06)]"
+                        >
+                          <div className="flex items-center justify-between w-full relative z-10">
+                            <ArrowUpRight className="w-5 h-5 text-black/60 group-hover/card:text-primary group-hover/card:rotate-45 transition-all duration-300" />
+                            <span className="text-black/40 text-[9px] tracking-widest font-mono uppercase">/contact</span>
+                          </div>
+                          <div className="flex flex-col relative z-10">
+                            <span className="text-[13px] font-sans font-bold text-black">Démarrer un projet</span>
+                            <span className="text-[10px] font-sans text-black/60 mt-1 max-w-[80%]">Discutons de vos objectifs & de votre vision</span>
+                          </div>
+                          
+                          {/* Soft background light sweep effect */}
+                          <div className="absolute -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white/40 opacity-40 group-hover/card:animate-shine" />
                         </a>
                       </div>
                     </div>
@@ -281,16 +375,27 @@ export default function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-[13px] font-sans font-medium text-black-deep/80 hover:text-black-deep hover:bg-white/80 px-4 py-1.5 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-secondary/50"
+                  className={`text-[14.5px] font-sans font-semibold px-4 py-2 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-secondary/50 relative ${
+                    isActive 
+                      ? "text-black-deep" 
+                      : "text-black-deep/70 hover:text-black-deep hover:bg-black/5"
+                  }`}
                 >
-                  {item.label}
+                  <span className="relative z-10">{item.label}</span>
+                  {isActive && (
+                    <motion.span 
+                      layoutId="activeNavIndicator"
+                      className="absolute inset-0 bg-black/[0.04] rounded-full z-0"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </Link>
               );
             })}
           </nav>
 
           {/* Zone Droite : CTA & Mobile Toggle */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <motion.a
               href="#cta-contact"
               style={{ x: headerBtnX, y: headerBtnY }}
@@ -298,8 +403,8 @@ export default function Header() {
               onMouseLeave={handleHeaderBtnReset}
               className={`hidden md:inline-flex items-center justify-center font-sans font-bold tracking-tight rounded-full transition-all duration-300 active:scale-95 group relative overflow-hidden shadow-sm ${
                 isScrolled 
-                  ? "px-5 py-1.5 bg-black-deep text-white text-[11px]" 
-                  : "px-6 py-2 bg-black-deep text-white text-[13px]"
+                  ? "px-5 py-2.5 bg-black-deep text-white text-[12px]" 
+                  : "px-6 py-3 bg-black-deep text-white text-[13px]"
               }`}
             >
               <span className="relative z-10 transition-transform duration-300 group-hover:scale-110 block">Lancer le projet</span>
@@ -333,47 +438,72 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </div>
-    </header>
-
-      {/* Menu mobile (Fullscreen Overlay) Sibling to escape transformed containing block */}
+      </header>
+      {/* Click-outside backdrop overlay to close Mega-menu instantly when clicking anywhere else */}
+      <AnimatePresence>
+        {isServicesOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-black/[0.03] backdrop-blur-[2px] hidden md:block"
+            onClick={() => setIsServicesOpen(false)}
+          />
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            key="mobile-menu-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+        {isOpen && (
+          <motion.div
+            key="mobile-menu-drawer"
             initial="hidden"
             animate="visible"
             exit="hidden"
             variants={overlayVariants}
-            className="fixed inset-0 bg-[#FAFAFA]/98 backdrop-blur-3xl z-60 md:hidden flex flex-col pt-32 px-6 pb-8"
+            className="fixed right-0 top-0 w-full xs:w-[85vw] sm:w-[60vw] md:w-[45vw] h-screen bg-black-deep/80 backdrop-blur-[24px] border-l border-white/10 z-60 md:hidden flex flex-col pt-24 px-6 sm:px-12 pb-8 shadow-[-10px_0_50px_rgba(0,0,0,0.3)] overflow-hidden"
           >
-            {/* Glowing Effects in Background */}
-            <motion.div 
-              animate={{
-                x: [0, 20, -15, 0],
-                y: [0, -30, 15, 0],
-                scale: [1, 1.1, 0.95, 1],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="absolute top-[15%] right-[-10%] w-[260px] h-[260px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" 
-            />
-            <motion.div 
-              animate={{
-                x: [0, -20, 15, 0],
-                y: [0, 30, -15, 0],
-                scale: [1, 0.95, 1.1, 1],
-              }}
-              transition={{
-                duration: 15,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="absolute bottom-[15%] left-[-15%] w-[300px] h-[300px] rounded-full bg-secondary/5 blur-[90px] pointer-events-none" 
-            />
-            
+            {/* Glowing blobs inside drawer background */}
+            <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+              <motion.div
+                animate={{
+                  x: [0, 40, -20, 0],
+                  y: [0, -50, 30, 0],
+                  scale: [1, 1.2, 0.9, 1],
+                }}
+                transition={{
+                  duration: 15,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute -top-[10%] -right-[20%] w-[250px] h-[250px] rounded-full bg-primary/20 blur-[80px]"
+              />
+              <motion.div
+                animate={{
+                  x: [0, -30, 20, 0],
+                  y: [0, 40, -30, 0],
+                  scale: [1, 0.9, 1.15, 1],
+                }}
+                transition={{
+                  duration: 18,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2
+                }}
+                className="absolute -bottom-[10%] -left-[20%] w-[300px] h-[300px] rounded-full bg-secondary/15 blur-[90px]"
+              />
+            </div>
+
             {/* Noise overlay */}
             <div
               className="absolute inset-0 z-[1] pointer-events-none opacity-[0.01]"
@@ -384,31 +514,74 @@ export default function Header() {
               }}
             />
 
-            <div className="relative z-10 h-full flex flex-col overflow-y-auto px-2">
+            <div className="relative z-10 h-full flex flex-col overflow-y-auto px-2 no-scrollbar">
               <motion.nav 
                 variants={navContainerVariants}
-                className="flex flex-col space-y-3"
+                className="flex flex-col space-y-4"
               >
                 {menuItems.map((item, idx) => {
                   if (item.hasDropdown) {
+                    const mobileServices = [
+                      {
+                        title: "Brand Strategy & Identity",
+                        sub: "Branding & Direction Artistique",
+                        count: "/6 services",
+                        icon: Sparkles,
+                        image: "/images/services/Branding & Identité visuelle.webp",
+                        href: "#expertises"
+                      },
+                      {
+                        title: "Visual Content & Design",
+                        sub: "Design Graphique & Contenus",
+                        count: "/3 services",
+                        icon: PenTool,
+                        image: "/images/services/Design Graphique & Digital.webp",
+                        href: "#expertises"
+                      },
+                      {
+                        title: "Print & Tangible Solutions",
+                        sub: "Print & Supports",
+                        count: "/4 services",
+                        icon: Printer,
+                        image: "/images/services/print &i impressio.webp",
+                        href: "#expertises"
+                      },
+                      {
+                        title: "Web Development & Tech",
+                        sub: "Web Design Expérientiel & Next.js",
+                        count: "/7 services",
+                        icon: Monitor,
+                        image: "/images/services/web design & developpement.webp",
+                        href: "#expertises"
+                      },
+                      {
+                        title: "Digital Growth & Marketing",
+                        sub: "Marketing Digital & SEO",
+                        count: "/5 services",
+                        icon: Megaphone,
+                        image: "/images/services/marketing didgital.webp",
+                        href: "#expertises"
+                      }
+                    ];
+
                     return (
                       <motion.div 
                         variants={navItemVariants} 
                         key={item.label} 
                         className="flex flex-col"
                       >
-                        <div className="overflow-hidden flex items-center justify-between py-2 border-b border-black/[0.06]">
+                        <div className="overflow-hidden flex items-center justify-between py-2 border-b border-white/[0.08]">
                           <button
                             onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
                             className={`text-3xl font-heading font-bold text-left w-full flex items-center justify-between transition-colors duration-300 ${
-                              isMobileServicesOpen ? "text-primary" : "text-black-deep"
+                              isMobileServicesOpen ? "text-primary" : "text-white"
                             }`}
                           >
                             <span className="flex items-baseline">
                               <span className="font-mono text-xs text-primary/60 mr-4">0{idx + 1}</span>
                               <span>{item.label}</span>
                             </span>
-                            <ChevronDown className={`w-6 h-6 transition-transform duration-500 ${isMobileServicesOpen ? "rotate-180 text-primary" : "text-black-deep/30"}`} />
+                            <ChevronDown className={`w-6 h-6 transition-transform duration-500 ${isMobileServicesOpen ? "rotate-180 text-primary" : "text-white/30"}`} />
                           </button>
                         </div>
 
@@ -417,84 +590,59 @@ export default function Header() {
                            initial={false}
                            animate={isMobileServicesOpen ? { height: "auto", opacity: 1, marginTop: 16 } : { height: 0, opacity: 0, marginTop: 0 }}
                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-                           className="overflow-hidden pl-2 flex flex-col gap-4"
+                           className="overflow-hidden pl-1 pr-1 flex flex-col gap-3"
                         >
-                          <div className="bg-black/[0.015] border border-black/[0.05] rounded-2xl p-5 flex flex-col gap-5 backdrop-blur-md">
-                            {/* Branding */}
-                            <div className="space-y-2.5">
-                              <div className="flex items-center gap-2 text-primary">
-                                <Sparkles className="w-4 h-4" />
-                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] font-heading">Branding Élite</h4>
-                              </div>
-                              <div className="flex flex-col gap-2 pl-6 border-l border-black/[0.08]">
-                                {[
-                                  { label: "Identité Visuelle", href: "#expertises" },
-                                  { label: "Direction Artistique", href: "#expertises" },
-                                  { label: "Motion Design", href: "#expertises" }
-                                ].map((sub, sIdx) => (
-                                  <a
-                                    key={sIdx}
-                                    href={sub.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-[13px] text-black-deep/60 hover:text-primary transition-colors flex items-center gap-2 group/sublink"
-                                  >
-                                    <span className="w-1 h-1 rounded-full bg-black-deep/15 group-hover/sublink:bg-primary transition-colors" />
-                                    <span>{sub.label}</span>
-                                  </a>
-                                ))}
-                              </div>
+                          {mobileServices.map((service, sIdx) => {
+                            const IconComponent = service.icon;
+                            return (
+                              <a
+                                key={sIdx}
+                                href={service.href}
+                                onClick={() => setIsOpen(false)}
+                                className="group/card relative p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] hover:border-primary/20 transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[110px]"
+                              >
+                                {/* Glass card background vignette image */}
+                                <div className="absolute inset-0 z-0 opacity-10 group-hover/card:opacity-20 transition-opacity duration-300">
+                                  <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+
+                                <div className="flex items-center justify-between w-full relative z-10">
+                                  <IconComponent className="w-5 h-5 text-white/50 group-hover/card:text-primary transition-colors duration-300" />
+                                  <span className="text-white/40 text-[9px] tracking-wider font-mono uppercase">{service.count}</span>
+                                </div>
+
+                                <div className="flex flex-col mt-4 relative z-10">
+                                  <span className="text-[14px] font-heading font-bold text-white group-hover/card:text-primary transition-colors">{service.title}</span>
+                                  <span className="text-[10px] font-sans text-white/45 mt-0.5">{service.sub}</span>
+                                </div>
+                              </a>
+                            );
+                          })}
+
+                          {/* White contrast CTA card on mobile services menu */}
+                          <a
+                            href="#cta-contact"
+                            onClick={() => setIsOpen(false)}
+                            className="group/card relative p-4 rounded-2xl bg-white text-black hover:bg-white/90 transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[110px]"
+                          >
+                            <div className="flex items-center justify-between w-full relative z-10">
+                              <ArrowUpRight className="w-5 h-5 text-black/60 group-hover/card:text-primary group-hover/card:rotate-45 transition-all duration-300" />
+                              <span className="text-black/40 text-[9px] tracking-widest font-mono uppercase">/contact</span>
                             </div>
 
-                            {/* Web & Tech */}
-                            <div className="space-y-2.5">
-                              <div className="flex items-center gap-2 text-primary">
-                                <Monitor className="w-4 h-4" />
-                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] font-heading">Web & Tech</h4>
-                              </div>
-                              <div className="flex flex-col gap-2 pl-6 border-l border-black/[0.08]">
-                                {[
-                                  { label: "Web Design Expérientiel", href: "#expertises" },
-                                  { label: "Développement Next.js", href: "#expertises" },
-                                  { label: "E-Commerce de Luxe", href: "#expertises" }
-                                ].map((sub, sIdx) => (
-                                  <a
-                                    key={sIdx}
-                                    href={sub.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-[13px] text-black-deep/60 hover:text-primary transition-colors flex items-center gap-2 group/sublink"
-                                  >
-                                    <span className="w-1 h-1 rounded-full bg-black-deep/15 group-hover/sublink:bg-primary transition-colors" />
-                                    <span>{sub.label}</span>
-                                  </a>
-                                ))}
-                              </div>
+                            <div className="flex flex-col mt-4 relative z-10">
+                              <span className="text-[14px] font-heading font-black text-black">Démarrer un projet</span>
+                              <span className="text-[10px] font-sans text-black/60 mt-0.5">Discutons de vos objectifs & de votre vision</span>
                             </div>
 
-                            {/* IA & Stratégie */}
-                            <div className="space-y-2.5">
-                              <div className="flex items-center gap-2 text-primary">
-                                <Zap className="w-4 h-4" />
-                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] font-heading">IA & Stratégie</h4>
-                              </div>
-                              <div className="flex flex-col gap-2 pl-6 border-l border-black/[0.08]">
-                                {[
-                                  { label: "Consulting IA", href: "#expertises" },
-                                  { label: "Agent IA & Chatbots", href: "#expertises" },
-                                  { label: "Stratégie Digitale", href: "#expertises" }
-                                ].map((sub, sIdx) => (
-                                  <a
-                                    key={sIdx}
-                                    href={sub.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-[13px] text-black-deep/60 hover:text-primary transition-colors flex items-center gap-2 group/sublink"
-                                  >
-                                    <span className="w-1 h-1 rounded-full bg-black-deep/15 group-hover/sublink:bg-primary transition-colors" />
-                                    <span>{sub.label}</span>
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
+                            {/* Shine effect */}
+                            <div className="absolute -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white/40 opacity-40 group-hover/card:animate-shine" />
+                          </a>
                         </motion.div>
                       </motion.div>
                     );
@@ -504,12 +652,12 @@ export default function Header() {
                     <motion.div 
                       variants={navItemVariants}
                       key={item.label} 
-                      className="overflow-hidden border-b border-black/[0.06] py-2 group/menu-link"
+                      className="overflow-hidden border-b border-white/[0.08] py-2 group/menu-link"
                     >
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="text-3xl font-heading font-bold text-black-deep hover:text-primary transition-all duration-300 block relative py-1"
+                        className="text-3xl font-heading font-bold text-white hover:text-primary transition-all duration-300 block relative py-1"
                       >
                         <div className="flex items-center justify-between">
                           <span className="flex items-baseline">
@@ -526,24 +674,24 @@ export default function Header() {
 
               <motion.div 
                 variants={navItemVariants}
-                className="mt-auto pt-8 border-t border-black/[0.06]"
+                className="mt-auto pt-8 border-t border-white/[0.08]"
               >
-                <p className="text-[#32565C]/60 text-xs font-sans mb-6">Prêt à transformer votre vision en réalité augmentée ?</p>
+                <p className="text-white/50 text-xs font-sans mb-6">Prêt à transformer votre vision en réalité augmentée ?</p>
                 
                 <a
                   href="#cta-contact"
                   onClick={() => setIsOpen(false)}
-                  className="w-full inline-flex items-center justify-between p-5 bg-black-deep text-white rounded-[1.5rem] group hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
+                  className="w-full inline-flex items-center justify-between p-5 bg-primary text-black-deep rounded-[1.5rem] group hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
                 >
                   <span className="text-xs font-heading font-bold uppercase tracking-[0.25em] pl-2 z-10">Nous contacter</span>
-                  <div className="bg-primary p-3.5 rounded-full group-hover:rotate-45 transition-transform duration-500 z-10">
-                    <ArrowRight className="w-4 h-4 text-black-deep" />
+                  <div className="bg-black-deep p-3.5 rounded-full group-hover:rotate-45 transition-transform duration-500 z-10">
+                    <ArrowRight className="w-4 h-4 text-primary" />
                   </div>
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
 
-                <div className="flex items-center justify-between mt-8 px-2">
-                  <span className="font-mono text-[9px] tracking-widest text-black-deep/30 uppercase">AIA LAB © {new Date().getFullYear()}</span>
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mt-8 px-2">
+                  <span className="font-mono text-[9px] tracking-widest text-white/30 uppercase">AIA LAB © {new Date().getFullYear()}</span>
                   <div className="flex gap-2.5">
                     {[
                       { label: "LinkedIn", href: "https://linkedin.com" },
@@ -555,7 +703,7 @@ export default function Header() {
                         href={s.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-[10px] tracking-wider text-black-deep/50 hover:text-primary transition-colors duration-300 border border-black/[0.08] px-2.5 py-1 rounded-full bg-black/[0.01]"
+                        className="font-mono text-[10px] tracking-wider text-white/50 hover:text-primary transition-colors duration-300 border border-white/[0.12] px-2.5 py-1 rounded-full bg-white/[0.02]"
                       >
                         {s.label}
                       </a>
@@ -570,4 +718,3 @@ export default function Header() {
     </>
   );
 }
-

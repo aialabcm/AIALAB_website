@@ -1,6 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @config "../../tailwind.config.ts";
+
+/* Native smooth scrolling — zero JS cost */
+html {
+  scroll-behavior: smooth;
+}
 
 :root {
   --background: #FAFAFA;
@@ -11,6 +16,12 @@
   --color-accent: #2563EB;
   --color-muted: #E8ECF0;
   --color-border: #E4E4E7;
+
+  /* Font families — mapped to Tailwind config CSS vars */
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-space-grotesk: "Space Grotesk", monospace;
+  --font-caveat: "Caveat", cursive;
 
   --font-heading: "Montserrat", sans-serif;
   --font-body: "Montserrat", sans-serif;
@@ -30,8 +41,10 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 body {
@@ -47,5 +60,47 @@ body {
 }
 
 .font-script {
-  font-family: "Caveat", cursive;
+  font-family: var(--font-caveat), cursive;
+}
+
+/* Service Card & Vignette Hover Effects */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.service-card-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transform: scale(1.08);
+  filter: blur(4px);
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Semi-transparent dark overlay above the image to ensure high text contrast */
+.service-card-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.8));
+  z-index: 1;
+}
+
+/* When the card is hovered, reveal and focus the image vignette */
+.service-card:hover .service-card-vignette {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
+
+/* Ensure the text and icons are always on top and remain bright */
+.service-card>* {
+  position: relative;
+  z-index: 10;
 }

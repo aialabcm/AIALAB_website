@@ -30,7 +30,7 @@ export default function TypewriterLine({
       <span className="invisible select-none" aria-hidden="true">
         {text}
       </span>
-      <span className="absolute inset-0 text-center">{display}</span>
+      <span className="absolute inset-0 text-left">{display}</span>
     </span>
   );
 }

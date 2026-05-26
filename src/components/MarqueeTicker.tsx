@@ -1,14 +1,8 @@
 "use client";
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-});
-
 // Logos réels des clients AIA LAB
-// darkBg: true = logo sur fond sombre → on applique un filtre d'inversion pour fond clair
+// darkBg: true = logo conçu sur fond sombre → on applique un filtre d'inversion au repos pour fond clair
 const clients = [
   {
     name: "B-Partners",
@@ -72,76 +66,77 @@ export default function MarqueeTicker() {
   const displayClients = [...clients, ...clients];
 
   return (
-    <section
-      className="w-full bg-bg-main py-20 overflow-hidden border-y border-dark/5 relative"
-      style={{ clipPath: "ellipse(150% 100% at 50% 100%)", marginTop: "-50px" }}
-    >
-      <div className="container-standard mb-12">
-        <p
-          className={`${montserrat.className} text-[10px] lg:text-xs font-semibold tracking-[0.4em] text-dark/40 text-center uppercase`}
-        >
-          Ils nous font confiance
-        </p>
-      </div>
+    <section className="relative w-full bg-bg-main overflow-hidden">
+      {/* Main Content Area */}
+      <div className="pt-16 lg:pt-20 pb-8 lg:pb-10">
+        {/* Section label */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10 lg:mb-14">
+          <p
+            className="font-heading text-[10px] lg:text-[11px] font-semibold tracking-[0.35em] text-dark/30 text-center uppercase"
+          >
+            Ils nous font confiance
+          </p>
+        </div>
 
-      <div className="relative flex overflow-hidden group">
-        {/* Effet de masque (Faded Edges) */}
-        <div className="absolute inset-y-0 left-0 w-24 lg:w-48 bg-gradient-to-r from-bg-main to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 lg:w-48 bg-gradient-to-l from-bg-main to-transparent z-10 pointer-events-none" />
+        {/* Marquee Track */}
+        <div className="relative flex overflow-hidden">
+          {/* Faded edges — wider for an elegant falloff */}
+          <div className="absolute inset-y-0 left-0 w-32 lg:w-56 bg-gradient-to-r from-bg-main to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 lg:w-56 bg-gradient-to-l from-bg-main to-transparent z-10 pointer-events-none" />
 
-        <div className="flex gap-12 lg:gap-20 items-center whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-4">
-          {displayClients.map((client, idx) => (
-            <div
-              key={idx}
-              className="flex items-center gap-3 flex-shrink-0 transition-all duration-300 hover:scale-105 group/item"
-              title={client.name}
-            >
-              {/* Conteneur logo avec gestion fond sombre/clair */}
+          <div className="flex gap-14 lg:gap-24 items-center whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-6">
+            {displayClients.map((client, idx) => (
               <div
-                className="relative flex-shrink-0 transition-all duration-300"
-                style={{
-                  width: "48px",
-                  height: "48px",
-                }}
+                key={idx}
+                className="flex items-center gap-4 flex-shrink-0 transition-all duration-400 hover:scale-[1.06] group/item cursor-default"
+                title={client.name}
               >
-                <Image
-                  src={client.src}
-                  alt={`Logo ${client.name}`}
-                  fill
-                  className="object-contain"
-                  style={{
-                    // Pour les logos sur fond noir: inversion pour fond clair + grayscale + opacité
-                    filter: client.darkBg
-                      ? "invert(1) grayscale(1) opacity(0.35)"
-                      : "grayscale(1) opacity(0.35)",
-                    transition: "filter 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.filter =
-                      client.darkBg
-                        ? "invert(1) grayscale(0) opacity(0.85)"
-                        : "grayscale(0) opacity(0.85)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.filter =
-                      client.darkBg
-                        ? "invert(1) grayscale(1) opacity(0.35)"
-                        : "grayscale(1) opacity(0.35)";
-                  }}
-                  sizes="48px"
-                  unoptimized
-                />
+                {/* Logo container */}
+                <div
+                  className="relative flex-shrink-0 transition-all duration-400"
+                  style={{ width: "44px", height: "44px" }}
+                >
+                  <Image
+                    src={client.src}
+                    alt={`Logo ${client.name}`}
+                    fill
+                    className="object-contain transition-[filter] duration-400"
+                    style={{
+                      // Au repos: inverser si fond sombre + grayscale + semi-transparent
+                      filter: client.darkBg
+                        ? "invert(1) grayscale(1) opacity(0.3)"
+                        : "grayscale(1) opacity(0.3)",
+                    }}
+                    onMouseEnter={(e) => {
+                      // Au hover: retirer invert pour montrer la VRAIE couleur du logo
+                      (e.currentTarget as HTMLImageElement).style.filter =
+                        "grayscale(0) opacity(1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      // Retour au repos
+                      (e.currentTarget as HTMLImageElement).style.filter =
+                        client.darkBg
+                          ? "invert(1) grayscale(1) opacity(0.3)"
+                          : "grayscale(1) opacity(0.3)";
+                    }}
+                    sizes="44px"
+                    unoptimized
+                  />
+                </div>
+
+                {/* Client name */}
+                <span
+                  className="font-heading text-[12px] lg:text-[13px] font-bold text-dark/20 group-hover/item:text-dark/70 tracking-tight transition-colors duration-400 whitespace-nowrap"
+                >
+                  {client.name}
+                </span>
               </div>
-              {/* Nom du client */}
-              <span
-                className={`${montserrat.className} text-xs lg:text-sm font-bold text-dark/25 group-hover/item:text-dark/60 tracking-tight transition-colors duration-300 whitespace-nowrap`}
-              >
-                {client.name}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
     </section>
   );
 }
+

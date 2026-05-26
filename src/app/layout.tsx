@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import CustomCursor from "@/components/CustomCursor";
+
 export const metadata: Metadata = {
   title: "AIA LAB",
   description: "AIA LAB Portfolio and Studio",
 };
-
-import CustomCursor from "@/components/CustomCursor";
 
 export default function RootLayout({
   children,

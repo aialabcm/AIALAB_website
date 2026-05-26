@@ -10,6 +10,7 @@ interface SectionHeaderProps {
   description?: string;
   centered?: boolean;
   dark?: boolean;
+  descriptionClassName?: string;
 }
 
 export default function SectionHeader({
@@ -18,7 +19,8 @@ export default function SectionHeader({
   highlight,
   description,
   centered = false,
-  dark = false
+  dark = false,
+  descriptionClassName
 }: SectionHeaderProps) {
   return (
     <div className={`flex flex-col ${centered ? "items-center text-center mx-auto" : "items-start"} mb-16 gap-6`}>
@@ -41,7 +43,7 @@ export default function SectionHeader({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className={`font-sans text-lg leading-relaxed ${dark ? "text-white/60" : "text-dark/70"}`}
+            className={`font-sans text-lg leading-relaxed ${descriptionClassName || (dark ? "text-white/60" : "text-dark/70")}`}
           >
             {description}
           </motion.p>

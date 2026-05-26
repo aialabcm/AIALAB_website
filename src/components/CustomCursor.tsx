@@ -55,12 +55,13 @@ export default function CustomCursor() {
           y: cursorYSpring,
           translateX: "-50%",
           translateY: "-50%",
-          width: cursorType === "explore" ? 90 : 8,
-          height: cursorType === "explore" ? 90 : 8,
+          width: cursorType === "explore" ? 90 : 0,
+          height: cursorType === "explore" ? 90 : 0,
+          opacity: cursorType === "explore" ? 1 : 0,
           backgroundColor: "white",
         }}
         animate={{
-          scale: cursorType === "pointer" ? 2.5 : 1,
+          scale: 1,
           backdropFilter: cursorType === "explore" ? "invert(1) blur(4px)" : "invert(0) blur(0px)",
         }}
         transition={{ type: "spring", damping: 35, stiffness: 400 }}

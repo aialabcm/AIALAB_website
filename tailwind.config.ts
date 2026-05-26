@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "475px",
+      },
       colors: {
         primary: "#08C1DC",
         secondary: "#259EB1",
@@ -34,9 +37,11 @@ const config: Config = {
       },
       boxShadow: {
         "hover-lift": "0 10px 30px -15px rgba(0, 0, 0, 0.3)",
+        premium: "0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.02)",
       },
       animation: {
         marquee: "marquee 30s linear infinite",
+        "marquee-reverse": "marquee-reverse 30s linear infinite",
         "marquee-vertical-up": "marquee-vertical-up 40s linear infinite",
         "marquee-vertical-down": "marquee-vertical-down 40s linear infinite",
       },
@@ -44,6 +49,10 @@ const config: Config = {
         marquee: {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0%)" },
         },
         "marquee-vertical-up": {
           "0%": { transform: "translateY(0%)" },

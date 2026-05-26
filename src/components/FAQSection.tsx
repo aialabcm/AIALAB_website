@@ -67,6 +67,7 @@ export default function FAQSection() {
             <img 
               src="https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?q=80&w=2000&auto=format&fit=crop" 
               alt="AIA LAB Studio" 
+              loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black-deep/20" />
@@ -133,7 +134,7 @@ function FAQItem({
         data-cursor="explore"
         className="w-full flex items-center justify-between py-6 md:py-8 text-left focus:outline-none group"
       >
-        <span className={`font-heading font-bold text-base md:text-lg tracking-tight transition-colors duration-300 ${isOpen ? 'text-primary' : 'text-white/80 group-hover:text-white'}`}>
+        <span className={`font-heading font-bold text-[15px] sm:text-base md:text-lg tracking-tight transition-colors duration-300 pr-2 ${isOpen ? 'text-primary' : 'text-white/80 group-hover:text-white'}`}>
           {question}
         </span>
         <div className={`flex-shrink-0 ml-4 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all duration-500 ${isOpen ? 'rotate-180 bg-primary border-primary' : 'rotate-0'}`}>
@@ -150,7 +151,7 @@ function FAQItem({
             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] as const }}
             className="overflow-hidden"
           >
-            <div className="pb-8 pr-12">
+            <div className="pb-6 sm:pb-8 pr-4 sm:pr-12">
               <p className="font-sans text-white/50 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
                 {answer}
               </p>

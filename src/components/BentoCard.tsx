@@ -7,9 +7,10 @@ interface BentoCardProps {
   children: ReactNode;
   className?: string;
   dark?: boolean;
+  delay?: number;
 }
 
-export default function BentoCard({ children, className = "", dark = false }: BentoCardProps) {
+export default function BentoCard({ children, className = "", dark = false, delay = 0 }: BentoCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   
   const x = useMotionValue(0);
@@ -51,10 +52,14 @@ export default function BentoCard({ children, className = "", dark = false }: Be
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0, y: 40, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ 
+        duration: 0.7, 
+        delay,
+        ease: [0.16, 1, 0.3, 1]
+      }}
       className={`
         relative overflow-hidden rounded-3xl border border-dark/10 p-8
         transition-colors duration-300 group

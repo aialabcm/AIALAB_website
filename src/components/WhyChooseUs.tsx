@@ -41,10 +41,10 @@ export default function WhyChooseUs() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section className="bg-bg-main py-20 overflow-hidden relative" id="why-choose-us">
+    <section className="bg-bg-main pt-8 lg:pt-10 pb-20 overflow-hidden relative" id="why-choose-us">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        
-        <SectionHeader 
+
+        <SectionHeader
           title="Pourquoi nous"
           highlight="choisir ?"
           description="L'alchimie entre l'IA et l'émotion humaine pour des solutions uniques."
@@ -52,7 +52,7 @@ export default function WhyChooseUs() {
         />
 
         <div className="relative flex flex-col lg:flex-row items-center justify-between gap-24 lg:gap-0 min-h-[600px]">
-          
+
           {/* SUPERSIDE FLOW SYSTEM */}
           <div className="absolute inset-0 pointer-events-none hidden lg:block z-0">
             <svg width="100%" height="100%" viewBox="0 0 1000 600" fill="none" preserveAspectRatio="xMidYMid meet">
@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
               {/* Feature Paths (Flow into center) */}
               <motion.path d="M 230 150 Q 400 150 500 300" stroke={hoveredId === 1 ? "url(#beam-left)" : "#E2E8F0"} strokeWidth={hoveredId === 1 ? "4" : "1"} fill="none" opacity={hoveredId === 1 ? 1 : 0.2} transition={{ duration: 0.5 }} />
               <motion.path d="M 230 450 Q 400 450 500 300" stroke={hoveredId === 2 ? "url(#beam-left)" : "#E2E8F0"} strokeWidth={hoveredId === 2 ? "4" : "1"} fill="none" opacity={hoveredId === 2 ? 1 : 0.2} transition={{ duration: 0.5 }} />
-              
+
               {/* Output Paths (Flow from center) */}
               <motion.path d="M 770 150 Q 600 150 500 300" stroke={hoveredId === 3 ? "url(#beam-right)" : "#E2E8F0"} strokeWidth={hoveredId === 3 ? "4" : "1"} fill="none" opacity={hoveredId === 3 ? 1 : 0.2} transition={{ duration: 0.5 }} />
               <motion.path d="M 770 450 Q 600 450 500 300" stroke={hoveredId === 4 ? "url(#beam-right)" : "#E2E8F0"} strokeWidth={hoveredId === 4 ? "4" : "1"} fill="none" opacity={hoveredId === 4 ? 1 : 0.2} transition={{ duration: 0.5 }} />
@@ -86,9 +86,9 @@ export default function WhyChooseUs() {
                 <AnimatePresence key={f.id}>
                   {(hoveredId === f.id || !hoveredId) && (
                     <motion.circle r="4" fill={f.color} filter="url(#neon)">
-                      <animateMotion 
-                        dur={hoveredId ? "1.5s" : `${3 + i}s`} 
-                        repeatCount="indefinite" 
+                      <animateMotion
+                        dur={hoveredId ? "1.5s" : `${3 + i}s`}
+                        repeatCount="indefinite"
                         path={f.id === 1 ? "M 230 150 Q 400 150 500 300" : f.id === 2 ? "M 230 450 Q 400 450 500 300" : f.id === 3 ? "M 500 300 Q 600 150 770 150" : "M 500 300 Q 600 450 770 450"}
                       />
                     </motion.circle>
@@ -99,21 +99,34 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Left Column - INPUT BADGES */}
-          <div className="lg:w-1/3 flex flex-col gap-40 z-10">
-            {features.filter(f => f.side === "left").map((feature) => (
-              <motion.div 
+          <div className="lg:w-1/3 flex flex-col gap-10 lg:gap-24 z-10 w-full">
+            {features.filter(f => f.side === "left").map((feature, idx) => (
+              <motion.div
                 key={feature.id}
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: idx * 0.15 }}
                 onMouseEnter={() => setHoveredId(feature.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className={`p-6 rounded-2xl border transition-all duration-500 cursor-pointer text-center lg:text-right group ${hoveredId === feature.id ? "bg-white shadow-xl border-primary scale-[1.02]" : "bg-white/40 border-transparent backdrop-blur-sm shadow-sm"}`}
+                className={`p-6 md:p-8 rounded-3xl border transition-all duration-500 cursor-pointer group ${
+                  hoveredId === feature.id 
+                    ? "bg-white shadow-[0_12px_40px_rgba(8,193,220,0.08)] border-primary scale-[1.02]" 
+                    : "bg-white/95 border-dark/5 shadow-sm"
+                }`}
               >
-                <div className="flex items-center justify-center lg:justify-end gap-4 mb-3">
-                   <h3 className={`font-heading text-xl font-bold transition-colors duration-300 ${hoveredId === feature.id ? "text-primary" : "text-black-deep"}`}>
-                     {feature.title}
-                   </h3>
-                   <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${hoveredId === feature.id ? "bg-primary scale-150 shadow-[0_0_15px_#08C1DC]" : "bg-primary/20"}`} />
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <span className="font-mono text-sm font-black text-primary/40 group-hover:text-primary transition-colors tracking-wider">
+                    0{feature.id}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <h3 className={`font-heading text-lg md:text-xl font-bold transition-colors duration-300 ${hoveredId === feature.id ? "text-primary" : "text-black-deep"}`}>
+                      {feature.title}
+                    </h3>
+                    <div className={`w-2 h-2 rounded-full transition-all duration-300 ${hoveredId === feature.id ? "bg-primary scale-150 shadow-[0_0_15px_#08C1DC]" : "bg-primary/20"}`} />
+                  </div>
                 </div>
-                <p className="text-dark/60 text-sm leading-relaxed font-sans max-w-xs lg:ml-auto transition-colors duration-300 group-hover:text-dark/90">
+                <p className="text-dark/85 text-sm md:text-[14px] leading-relaxed font-sans max-w-xs lg:ml-auto text-center lg:text-right transition-colors duration-300 group-hover:text-black-deep">
                   {feature.desc}
                 </p>
               </motion.div>
@@ -122,41 +135,62 @@ export default function WhyChooseUs() {
 
           {/* Center Column - THE LAB CORE */}
           <div className="lg:w-1/3 flex justify-center relative py-12 z-20">
-            <motion.div 
-              animate={{ 
-                scale: hoveredId ? 1.08 : 1,
-                rotate: hoveredId ? [0, 2, -2, 0] : 0,
-              }}
-              transition={{ rotate: { repeat: Infinity, duration: 4, ease: "easeInOut" }}}
-              className="relative w-64 h-64 md:w-80 md:h-80 select-none"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative"
             >
-              <div className={`absolute inset-0 bg-primary/20 rounded-full blur-[100px] transition-opacity duration-1000 ${hoveredId ? "opacity-100" : "opacity-40"}`} />
-              <Image 
-                src="/images/AIAl-Embleme.webp"
-                alt="AIA LAB Emblem" 
-                fill
-                className="object-contain drop-shadow-[0_0_40px_rgba(8,193,220,0.2)]"
-                priority
-              />
+              <motion.div
+                animate={{
+                  scale: hoveredId ? 1.08 : 1,
+                  rotate: hoveredId ? [0, 2, -2, 0] : 0,
+                }}
+                transition={{ rotate: { repeat: Infinity, duration: 4, ease: "easeInOut" } }}
+                className="relative w-64 h-64 md:w-80 md:h-80 select-none"
+              >
+                <div className={`absolute inset-0 bg-primary/20 rounded-full blur-[100px] transition-opacity duration-1000 ${hoveredId ? "opacity-100" : "opacity-40"}`} />
+                <Image
+                  src="/images/AIAl-Embleme.webp"
+                  alt="AIA LAB Emblem"
+                  fill
+                  className="object-contain drop-shadow-[0_0_40px_rgba(8,193,220,0.2)]"
+                  priority
+                />
+              </motion.div>
             </motion.div>
           </div>
 
           {/* Right Column - OUTPUT BADGES */}
-          <div className="lg:w-1/3 flex flex-col gap-40 z-10">
-            {features.filter(f => f.side === "right").map((feature) => (
-              <motion.div 
+          <div className="lg:w-1/3 flex flex-col gap-10 lg:gap-24 z-10 w-full">
+            {features.filter(f => f.side === "right").map((feature, idx) => (
+              <motion.div
                 key={feature.id}
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: idx * 0.15 }}
                 onMouseEnter={() => setHoveredId(feature.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className={`p-6 rounded-2xl border transition-all duration-500 cursor-pointer text-center lg:text-left group ${hoveredId === feature.id ? "bg-white shadow-xl border-secondary scale-[1.02]" : "bg-white/40 border-transparent backdrop-blur-sm shadow-sm"}`}
+                className={`p-6 md:p-8 rounded-3xl border transition-all duration-500 cursor-pointer group ${
+                  hoveredId === feature.id 
+                    ? "bg-white shadow-[0_12px_40px_rgba(20,184,166,0.08)] border-secondary scale-[1.02]" 
+                    : "bg-white/95 border-dark/5 shadow-sm"
+                }`}
               >
-                <div className="flex items-center justify-center lg:justify-start gap-4 mb-3">
-                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${hoveredId === feature.id ? "bg-secondary scale-150 shadow-[0_0_15px_#14B8A6]" : "bg-secondary/20"}`} />
-                  <h3 className={`font-heading text-xl font-bold transition-colors duration-300 ${hoveredId === feature.id ? "text-secondary" : "text-black-deep"}`}>
-                    {feature.title}
-                  </h3>
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-2 h-2 rounded-full transition-all duration-300 ${hoveredId === feature.id ? "bg-secondary scale-150 shadow-[0_0_15px_#14B8A6]" : "bg-secondary/20"}`} />
+                    <h3 className={`font-heading text-lg md:text-xl font-bold transition-colors duration-300 ${hoveredId === feature.id ? "text-secondary" : "text-black-deep"}`}>
+                      {feature.title}
+                    </h3>
+                  </div>
+                  <span className="font-mono text-sm font-black text-secondary/40 group-hover:text-secondary transition-colors tracking-wider">
+                    0{feature.id}
+                  </span>
                 </div>
-                <p className="text-dark/60 text-sm leading-relaxed font-sans max-w-xs transition-colors duration-300 group-hover:text-dark/90">
+                <p className="text-dark/85 text-sm md:text-[14px] leading-relaxed font-sans max-w-xs text-center lg:text-left transition-colors duration-300 group-hover:text-black-deep">
                   {feature.desc}
                 </p>
               </motion.div>
@@ -166,7 +200,6 @@ export default function WhyChooseUs() {
       </div>
 
       {/* Extreme Visual Polishing */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-screen h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
     </section>
   );

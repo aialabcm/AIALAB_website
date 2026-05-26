@@ -10,6 +10,7 @@ export default function Footer() {
         <img 
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2500&auto=format&fit=crop" 
           alt="Creative Team" 
+          loading="lazy"
           className="w-full h-full object-cover opacity-40 grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black-deep via-black-deep/90 to-black-deep/60" />
@@ -19,12 +20,12 @@ export default function Footer() {
         
         {/* Top Header Section */}
         <div className="text-center mb-24 md:mb-32">
-          <h2 className="font-heading font-extrabold text-4xl md:text-7xl tracking-tighter leading-none mb-8">
+          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl md:text-7xl tracking-tighter leading-none mb-8">
             Votre lab créatif, <br/> pour vos <span className="text-primary accent-italic">idées d'élite™</span>
           </h2>
-          <button className="px-10 py-4 bg-primary text-black-deep font-heading font-bold text-xs tracking-widest uppercase rounded-full hover:scale-105 transition-transform shadow-xl">
+          <a href="#cta-contact" className="inline-block px-8 sm:px-10 py-4 bg-primary text-black-deep font-heading font-bold text-xs tracking-widest uppercase rounded-full hover:scale-105 transition-transform shadow-xl min-h-[48px] leading-[48px] text-center">
             Réserver un appel
-          </button>
+          </a>
         </div>
 
         {/* Navigation Grid */}
@@ -105,7 +106,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-24 pt-10 border-t border-white/10 flex flex-col lg:flex-row justify-between items-center gap-8">
+        <div className="mt-16 sm:mt-24 pt-8 sm:pt-10 border-t border-white/10 flex flex-col gap-8 lg:flex-row lg:justify-between lg:items-center">
           
           <div className="flex flex-col md:flex-row items-center gap-8">
             <span className="font-heading font-black text-2xl tracking-tighter">AIA LAB</span>
@@ -117,7 +118,7 @@ export default function Footer() {
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-4">
               {["Privacy policy", "Terms of use", "Trust page", "DMCA"].map(item => (
-                <Link key={item} href={`/en-cours?page=${item}`} className="font-sans text-[10px] text-white/40 hover:text-white transition-colors">{item}</Link>
+                <Link key={item} href={`/en-cours?page=${item}`} className="font-sans text-[10px] text-white/40 hover:text-white transition-colors whitespace-nowrap">{item}</Link>
               ))}
             </div>
             
