@@ -46,14 +46,14 @@ export default function StatsSection() {
                 }}
               />
               
-              <div className="absolute -top-10 -right-10 w-64 h-64 bg-black-deep/5 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-1000"></div>
+              <div className="absolute -top-10 -right-10 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-1000"></div>
               
               {/* Card Header */}
               <div className="relative z-10 flex justify-between items-start">
-                <div className="px-4 py-1.5 bg-black-deep/10 rounded-full text-[11px] font-mono font-black text-black-deep uppercase tracking-[0.15em]">
+                <div className="px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-[11px] font-mono font-black text-white uppercase tracking-[0.15em]">
                   Portfolio Global
                 </div>
-                <ArrowUpRight className="w-8 h-8 text-black-deep group-hover:rotate-45 transition-transform duration-500" />
+                <ArrowUpRight className="w-8 h-8 text-white group-hover:rotate-45 transition-transform duration-500" />
               </div>
               
               {/* Counter and Title */}
@@ -62,26 +62,26 @@ export default function StatsSection() {
                   value={500} 
                   suffix="+" 
                   trigger={trigger > 0}
-                  className="font-heading font-black text-6xl md:text-8xl text-black-deep tracking-tighter leading-none block mb-3"
+                  className="font-heading font-black text-6xl md:text-8xl text-white tracking-tighter leading-none block mb-3"
                 />
-                <h3 className="font-heading font-bold text-lg md:text-xl text-black-deep/90 uppercase tracking-tight">
+                <h3 className="font-heading font-bold text-lg md:text-xl text-white uppercase tracking-tight">
                   Projets Livrés avec Succès
                 </h3>
               </div>
 
               {/* Bottom Sub-stats (Always visible and positioned well) */}
-              <div className="relative z-10 grid grid-cols-3 gap-4 pt-6 border-t border-black/10">
+              <div className="relative z-10 grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
                 <div>
-                  <div className="text-black-deep font-black text-xl md:text-2xl">94%</div>
-                  <div className="text-[11px] uppercase font-bold tracking-widest text-black-deep/60">Rétention</div>
+                  <div className="text-white font-black text-xl md:text-2xl">94%</div>
+                  <div className="text-[11px] uppercase font-bold tracking-widest text-white/70">Rétention</div>
                 </div>
                 <div>
-                  <div className="text-black-deep font-black text-xl md:text-2xl">24+</div>
-                  <div className="text-[11px] uppercase font-bold tracking-widest text-black-deep/60">Pays</div>
+                  <div className="text-white font-black text-xl md:text-2xl">24+</div>
+                  <div className="text-[11px] uppercase font-bold tracking-widest text-white/70">Pays</div>
                 </div>
                 <div>
-                  <div className="text-black-deep font-black text-xl md:text-2xl">100%</div>
-                  <div className="text-[11px] uppercase font-bold tracking-widest text-black-deep/60">Sécurité</div>
+                  <div className="text-white font-black text-xl md:text-2xl">100%</div>
+                  <div className="text-[11px] uppercase font-bold tracking-widest text-white/70">Sécurité</div>
                 </div>
               </div>
             </div>

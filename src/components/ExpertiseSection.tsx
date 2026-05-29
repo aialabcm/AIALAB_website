@@ -120,44 +120,82 @@ const itemVariants = {
 
 export default function ExpertiseSection() {
   return (
-    <section className="bg-anthracite py-24 relative overflow-hidden" id="expertises">
-      <div className="max-w-container mx-auto px-6 md:px-20 relative z-10">
-        
-        <SectionHeader 
-          title="Nos"
-          highlight="expertises."
-          description="Une approche humaine, stratégique et sincèrement engagée pour faire grandir votre entreprise."
-          dark
+    <section className="bg-black-deep py-24 relative overflow-hidden" id="expertises">
+      {/* Background Image with Fade Effect */}
+      <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-30">
+        <Image
+          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop"
+          alt=""
+          fill
+          className="object-cover"
+          aria-hidden="true"
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-black-deep via-transparent to-black-deep" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0B0B0B_100%)]" />
+      </div>
 
-        {/* Grid of Expertise Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-          {expertises.map((exp, idx) => (
-            <ExpertiseCard 
-              key={exp.id} 
-              exp={exp} 
-              index={idx}
+      <div className="max-w-container mx-auto px-6 md:px-20 relative z-10">
+        {/* Two-Column Layout: Title Left, Cards Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left Column — Sticky Title & CTA */}
+          <div className="lg:col-span-4 lg:sticky lg:top-32 lg:h-fit">
+            <SectionHeader 
+              title="Nos"
+              highlight="expertises."
+              description="Une approche humaine, stratégique et sincèrement engagée pour faire grandir votre entreprise."
+              dark
             />
-          ))}
-        </div>
 
-        {/* Floating Call to Action (Discret) */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-20 flex justify-center lg:justify-start"
-        >
-          <a
-            href="#cta-contact"
-            className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-primary transition-colors duration-300"
-          >
-            <span>Démarrer un projet avec le lab</span>
-            <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300">
-              <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors" />
+            {/* CTA — Desktop only */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="hidden lg:flex mt-8"
+            >
+              <a
+                href="#cta-contact"
+                className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-primary transition-colors duration-300"
+              >
+                <span>Démarrer un projet avec le lab</span>
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300">
+                  <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors" />
+                </div>
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right Column — Uniform Expertise Cards Grid */}
+          <div className="lg:col-span-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {expertises.map((exp, idx) => (
+                <ExpertiseCard 
+                  key={exp.id} 
+                  exp={exp} 
+                  index={idx}
+                />
+              ))}
             </div>
-          </a>
-        </motion.div>
+
+            {/* CTA — Mobile only */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 flex justify-center lg:hidden"
+            >
+              <a
+                href="#cta-contact"
+                className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-primary transition-colors duration-300"
+              >
+                <span>Démarrer un projet avec le lab</span>
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300">
+                  <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors" />
+                </div>
+              </a>
+            </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Fond Décoratif (Subtil) */}
@@ -179,18 +217,11 @@ function ExpertiseCard({ exp, index }: { exp: Expertise; index: number }) {
 
   const showContent = isHovered || isMobile;
 
-  // Dynamic grid classes for balanced layout
-  const gridClasses = index === 4
-    ? "col-span-1 md:col-span-2 lg:col-span-3"
-    : index === 3
-      ? "col-span-1 md:col-span-1 lg:col-span-3"
-      : "col-span-1 md:col-span-1 lg:col-span-2";
-
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative h-[380px] sm:h-[420px] md:h-[480px] rounded-[1.5rem] sm:rounded-[2.25rem] overflow-hidden bg-black-deep/60 border border-white/10 flex flex-col justify-between p-6 sm:p-8 group transition-all duration-500 hover:border-primary/30 select-none cursor-pointer ${gridClasses}`}
+      className="relative h-[380px] sm:h-[400px] rounded-[1.5rem] sm:rounded-[2.25rem] overflow-hidden bg-black-deep/60 border border-white/10 flex flex-col justify-between p-6 sm:p-8 group transition-all duration-500 hover:border-primary/30 select-none cursor-pointer"
     >
       {/* Card background Image */}
       <div className="absolute inset-0 z-0">

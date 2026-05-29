@@ -149,8 +149,8 @@ export default function Header() {
           isOpen
             ? "bg-transparent border-transparent"
             : isScrolled 
-              ? "bg-[#FAFAFA]/15 backdrop-blur-md border-black/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.02)]" 
-              : "bg-transparent border-transparent"
+              ? "bg-[#FAFAFA]/80 backdrop-blur-md border-black/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.02)] md:bg-[#FAFAFA]/15" 
+              : "bg-[#FAFAFA]/60 backdrop-blur-md border-black/[0.04] md:bg-transparent md:border-transparent md:backdrop-blur-none"
         } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 h-14 md:h-16 flex items-center justify-between">

@@ -104,7 +104,7 @@ function ProjectCard({
         type="button"
         onClick={() => onSelect(project)}
         data-cursor="explore"
-        className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-black-deep cursor-pointer"
+        className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-anthracite cursor-pointer"
       >
         <motion.div
           className="relative aspect-[4/3] rounded-[1.75rem] md:rounded-[2rem] overflow-hidden bg-white/5 mb-5 md:mb-6"
@@ -215,7 +215,7 @@ export default function PortfolioSection() {
       >
         {/* Phase 1 — black background wash */}
         <motion.div
-          className="absolute inset-0 bg-black-deep z-0"
+          className="absolute inset-0 bg-anthracite z-0"
           aria-hidden
           initial={false}
           animate={{ opacity: showHeader ? 1 : 0 }}
