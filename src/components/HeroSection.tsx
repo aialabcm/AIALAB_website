@@ -146,28 +146,6 @@ export default function HeroSection() {
           </div>
         </motion.div>
       </div>
-
-      {/* Elegant Animated Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={titlesComplete ? { opacity: 0.6 } : { opacity: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 cursor-pointer hover:opacity-100 transition-opacity duration-300 hidden sm:flex"
-        onClick={() => {
-          document.querySelector('#expertises')?.scrollIntoView({ behavior: 'smooth' });
-        }}
-      >
-        <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/50">Explorer</span>
-          <div className="w-5 h-8 border border-white/30 rounded-full flex justify-center p-1" />
-      </motion.div>
-
-      {/* Horizontal bottom line decoration */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 1.2, duration: 1.5, ease: "circOut" }}
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent z-10"
-      />
     </section>
   );
 }

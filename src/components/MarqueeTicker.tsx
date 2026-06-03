@@ -66,9 +66,25 @@ export default function MarqueeTicker() {
   const displayClients = [...clients, ...clients];
 
   return (
-    <section className="relative w-full bg-bg-main overflow-hidden">
+    <section className="relative w-full bg-bg-main overflow-visible z-20">
+      {/* Separator SVG courbé vers le haut */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden -translate-y-[99%] pointer-events-none z-20">
+        <svg
+          viewBox="0 0 1440 80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-[40px] md:h-[60px] lg:h-[80px] block"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 80 Q 720 0 1440 80 L 1440 80 L 0 80 Z"
+            fill="#FAFAFA"
+          />
+        </svg>
+      </div>
+
       {/* Main Content Area */}
-      <div className="pt-16 lg:pt-20 pb-8 lg:pb-10">
+      <div className="pt-12 md:pt-16 pb-8 lg:pb-10">
         {/* Section label */}
         <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10 lg:mb-14">
           <p

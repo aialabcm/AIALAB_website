@@ -16,13 +16,13 @@ export default function StatsSection() {
 
   return (
     <section 
-      className="bg-bg-alt py-24 relative overflow-hidden" 
+      className="bg-white py-24 relative overflow-hidden" 
       id="stats"
       onMouseEnter={handleHover}
     >
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] -mr-64 -mt-64 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -ml-48 -mb-48 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-64 -mt-64 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/3 rounded-full blur-[100px] -ml-48 -mb-48 pointer-events-none"></div>
 
       <div className="max-w-container mx-auto px-6 md:px-20 relative z-10">
         <SectionHeader 
@@ -150,7 +150,7 @@ function EfficiencyCard({ trigger }: { trigger: number }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <BentoCard delay={0.25} className="md:col-span-4 md:row-span-1 bg-white border border-dark/5 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden">
+    <BentoCard delay={0.25} className="md:col-span-4 md:row-span-1 bg-white border border-dark/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden">
       <div 
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -170,7 +170,7 @@ function EfficiencyCard({ trigger }: { trigger: number }) {
           className="font-heading font-black text-5xl md:text-5xl text-black-deep tracking-tighter leading-none mb-2"
         />
         <p className="font-sans text-dark/80 text-sm leading-relaxed max-w-[85%]">
-          Heures d'exécution économisées par l'automatisation.
+          Heures d&apos;exécution économisées par l&apos;automatisation.
         </p>
       </div>
       <TrendLineChart isHovered={isHovered} />
@@ -180,7 +180,7 @@ function EfficiencyCard({ trigger }: { trigger: number }) {
 
 function TrendLineChart({ isHovered }: { isHovered: boolean }) {
   return (
-    <div className="absolute right-0 bottom-0 left-0 h-16 overflow-hidden pointer-events-none z-0">
+    <div className="absolute right-0 bottom-0 left-0 h-10 overflow-hidden pointer-events-none z-0 opacity-60">
       <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
         <defs>
           <linearGradient id="trend-gradient" x1="0" y1="0" x2="0" y2="1">
@@ -213,7 +213,7 @@ function SatisfactionCard() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <BentoCard delay={0.3} className="md:col-span-4 md:row-span-1 bg-white border border-dark/5 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
+    <BentoCard delay={0.3} className="md:col-span-4 md:row-span-1 bg-white border border-dark/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
       <div 
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -271,7 +271,7 @@ function TokenCard({ trigger }: { trigger: number }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <BentoCard delay={0.45} className="md:col-span-5 md:row-span-1 flex items-center justify-between gap-8 bg-white border border-dark/5 p-6 md:p-8 group overflow-hidden relative">
+    <BentoCard delay={0.45} className="md:col-span-5 md:row-span-1 flex items-center justify-between gap-8 bg-white border border-dark/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] p-6 md:p-8 group overflow-hidden relative">
       <div 
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

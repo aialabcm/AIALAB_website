@@ -235,30 +235,30 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
                       {/* Client */}
                       <div>
-                        <span className="block font-script text-[24px] md:text-[28px] text-secondary leading-none mb-1 lowercase">
+                        <span className="block font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-primary mb-2">
                           client
                         </span>
-                        <span className="font-heading font-bold text-base text-[#172A2E]">
+                        <span className="font-heading font-black text-base md:text-lg text-black-deep">
                           {project.client}
                         </span>
                       </div>
 
                       {/* Services */}
                       <div>
-                        <span className="block font-script text-[24px] md:text-[28px] text-secondary leading-none mb-1 lowercase">
+                        <span className="block font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-primary mb-2">
                           services
                         </span>
-                        <span className="font-heading font-bold text-base text-[#172A2E]">
+                        <span className="font-heading font-black text-base md:text-lg text-black-deep">
                           {project.services.join(", ")}
                         </span>
                       </div>
 
                       {/* Location */}
                       <div>
-                        <span className="block font-script text-[24px] md:text-[28px] text-secondary leading-none mb-1 lowercase">
+                        <span className="block font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-primary mb-2">
                           location
                         </span>
-                        <span className="font-heading font-bold text-base text-[#172A2E]">
+                        <span className="font-heading font-black text-base md:text-lg text-black-deep">
                           {project.location}
                         </span>
                       </div>

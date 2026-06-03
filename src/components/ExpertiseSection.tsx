@@ -120,9 +120,9 @@ const itemVariants = {
 
 export default function ExpertiseSection() {
   return (
-    <section className="bg-black-deep py-24 relative overflow-hidden" id="expertises">
-      {/* Background Image with Fade Effect */}
-      <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-30">
+    <section className="bg-black-deep py-20 md:py-28 relative overflow-hidden" id="expertises">
+      {/* Background Image with Fade Effect — très subtil pour ne pas écraser les cartes */}
+      <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-[0.06]">
         <Image
           src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop"
           alt=""
@@ -130,72 +130,50 @@ export default function ExpertiseSection() {
           className="object-cover"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black-deep via-transparent to-black-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0B0B0B_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black-deep via-black-deep/60 to-black-deep" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,#0B0B0B_80%)]" />
       </div>
 
-      <div className="max-w-container mx-auto px-6 md:px-20 relative z-10">
-        {/* Two-Column Layout: Title Left, Cards Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Column — Sticky Title & CTA */}
-          <div className="lg:col-span-4 lg:sticky lg:top-32 lg:h-fit">
-            <SectionHeader 
-              title="Nos"
-              highlight="expertises."
-              description="Une approche humaine, stratégique et sincèrement engagée pour faire grandir votre entreprise."
-              dark
-            />
-
-            {/* CTA — Desktop only */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="hidden lg:flex mt-8"
-            >
-              <a
-                href="#cta-contact"
-                className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-primary transition-colors duration-300"
-              >
-                <span>Démarrer un projet avec le lab</span>
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300">
-                  <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors" />
-                </div>
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right Column — Uniform Expertise Cards Grid */}
-          <div className="lg:col-span-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {expertises.map((exp, idx) => (
-                <ExpertiseCard 
-                  key={exp.id} 
-                  exp={exp} 
-                  index={idx}
-                />
-              ))}
-            </div>
-
-            {/* CTA — Mobile only */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-12 flex justify-center lg:hidden"
-            >
-              <a
-                href="#cta-contact"
-                className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-primary transition-colors duration-300"
-              >
-                <span>Démarrer un projet avec le lab</span>
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300">
-                  <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors" />
-                </div>
-              </a>
-            </motion.div>
-          </div>
+      <div className="max-w-container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
+        {/* Header — centré en haut */}
+        <div className="text-center mb-14 md:mb-20">
+          <SectionHeader 
+            title="Nos"
+            highlight="expertises."
+            description="Une approche humaine, stratégique et sincèrement engagée pour faire grandir votre entreprise."
+            dark
+            centered
+          />
         </div>
+
+        {/* Grille de cartes — pleine largeur, dernière rangée centrée */}
+        <div className="flex flex-wrap justify-center gap-5 md:gap-6 [&>*]:w-full [&>*]:sm:w-[calc(50%-0.75rem)] [&>*]:lg:w-[calc(33.333%-1rem)]">
+          {expertises.map((exp, idx) => (
+            <ExpertiseCard 
+              key={exp.id} 
+              exp={exp} 
+              index={idx}
+            />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-14 md:mt-20 flex justify-center"
+        >
+          <a
+            href="#cta-contact"
+            className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-primary transition-colors duration-300"
+          >
+            <span>Démarrer un projet avec le lab</span>
+            <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300">
+              <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors" />
+            </div>
+          </a>
+        </motion.div>
       </div>
 
       {/* Fond Décoratif (Subtil) */}
