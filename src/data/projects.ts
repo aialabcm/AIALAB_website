@@ -9,6 +9,7 @@ export interface PortfolioProject {
   story: [string, string];
   client: string;
   services: string[];
+  gallery: string[];
 }
 
 export const projects: PortfolioProject[] = [
@@ -25,7 +26,8 @@ export const projects: PortfolioProject[] = [
       "Nous avons conçu une landing page qui allie animation fluide et contenu stratégique, transformant chaque visiteur en prospect qualifié. Le résultat : un taux de conversion multiplié par 3 en deux mois."
     ],
     client: "Studio Landing Inc.",
-    services: ["Web Design", "Développement", "Stratégie UX"]
+    services: ["Web Design", "Développement", "Stratégie UX"],
+    gallery: []
   },
   {
     id: "aia-identity",
@@ -40,7 +42,8 @@ export const projects: PortfolioProject[] = [
       "Nous avons développé un système visuel complet — du logo aux supports de communication — qui positionne AIA comme un leader incontournable de son secteur. Une identité pensée pour durer."
     ],
     client: "AIA Technologies",
-    services: ["Branding", "Identité Visuelle", "Direction Artistique"]
+    services: ["Branding", "Identité Visuelle", "Direction Artistique"],
+    gallery: []
   },
   {
     id: "ecommerce-lux",
@@ -51,11 +54,12 @@ export const projects: PortfolioProject[] = [
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop",
     headline: "Le Luxe Accessible En Quelques Clics",
     story: [
-      "E-commerce Lux souhaitait offrir une expérience d'achat en ligne qui rivalise avec le service en boutique. Chaque détail devait respirer l'élégance et le raffinement.",
+      "E-commerce Lux souhaitait offrir une expérience d'achat en ligne qui rivalise avec le service en boutique. Chaque detail devait respirer l'élégance et le raffinement.",
       "Notre solution : une plateforme e-commerce immersive avec des micro-interactions soignées, une navigation intuitive et un tunnel d'achat simplifié. Le panier moyen a augmenté de 45%."
     ],
     client: "Lux Commerce SA",
-    services: ["Digital Experience", "E-commerce", "UI Design"]
+    services: ["Digital Experience", "E-commerce", "UI Design"],
+    gallery: []
   },
   {
     id: "nectar",
@@ -66,11 +70,12 @@ export const projects: PortfolioProject[] = [
     image: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1200&auto=format&fit=crop",
     headline: "L'Art De La Fragrance Réinventé",
     story: [
-      "Nectar Fragrance lançait une nouvelle gamme de parfums artisanaux et avait besoin d'une identité de marque aussi raffinée que ses créations. L'enjeu : se démarquer dans un marché saturé.",
-      "Nous avons créé un univers visuel sensoriel, mêlant typographie élégante et palette de couleurs évocatrice. La marque a gagné 200% de visibilité sur les réseaux sociaux en trois mois."
+      "Nectar Fragrance lançait une nouvelle gamme de parfums artisanaux et avait besoin d'une identité de marque aussi raffinee que ses creations. L'enjeu : se demarquer dans un marche sature.",
+      "Nous avons crée un univers visuel sensoriel, mêlant typographie élégante et palette de couleurs évocatrice. La marque a gagné 200% de visibilité sur les réseaux sociaux en trois mois."
     ],
     client: "Nectar Fragrance",
-    services: ["Branding", "Packaging", "Stratégie Digitale"]
+    services: ["Branding", "Packaging", "Stratégie Digitale"],
+    gallery: []
   },
   {
     id: "metaverse-studio",
@@ -85,7 +90,8 @@ export const projects: PortfolioProject[] = [
       "Nous avons intégré des rendus WebGL légers et des grilles CSS asymétriques pour simuler le relief sans ralentir la navigation. Un design fluide qui a attiré plus de 50 000 curieux le premier mois."
     ],
     client: "Metaverse Corp",
-    services: ["Web Design", "Expérience 3D", "WebGL"]
+    services: ["Web Design", "Expérience 3D", "WebGL"],
+    gallery: []
   },
   {
     id: "growth-accelerator",
@@ -100,6 +106,7 @@ export const projects: PortfolioProject[] = [
       "Notre équipe a mené un audit de friction UX complet et déployé des tunnels interactifs sur mesure. Le taux d'activation a bondi de 34% en l'espace de 4 semaines."
     ],
     client: "Accelerator Group",
-    services: ["Digital Experience", "UX Optimization", "Conversion Strategy"]
+    services: ["Digital Experience", "UX Optimization", "Conversion Strategy"],
+    gallery: []
   }
 ];

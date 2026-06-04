@@ -17,6 +17,7 @@ export interface PortfolioProject {
   story: [string, string];
   client: string;
   services: string[];
+  gallery: string[];
 }
 
 interface ProjectModalProps {
@@ -222,6 +223,39 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     </motion.p>
                   </div>
                 </div>
+
+                {/* Gallery */}
+                <motion.div
+                  className="mt-8 sm:mt-12 md:mt-16 px-4 sm:px-6 md:px-16 max-w-4xl mx-auto"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, delay: 0.38 }}
+                >
+                  {project.gallery.length > 0 && (
+                    <>
+                      <span className="block font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-primary mb-6">
+                        Galerie du projet
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {project.gallery.map((url, i) => (
+                          <div
+                            key={i}
+                            className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden group/img"
+                          >
+                            <Image
+                              src={url}
+                              alt={`${project.name} — image ${i + 1}`}
+                              fill
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              className="object-cover transition-transform duration-500 group-hover/img:scale-105"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </motion.div>
 
                 {/* Recap */}
                 <motion.div

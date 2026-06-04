@@ -5,31 +5,27 @@ import { ArrowUpRight, Star } from "lucide-react";
 import { useEffect, useRef } from "react";
 import SectionHeader from "./SectionHeader";
 
-interface Testimonial {
+export interface Testimonial {
   name: string;
   role: string;
   text: string;
 }
 
-const testimonials1: Testimonial[] = [
-  { name: "Camille R.", role: "Responsable Marketing", text: "Une direction artistique forte et une exécution très structurée. Le résultat dépasse nos attentes initiales par sa justesse et sa puissance visuelle." },
-  { name: "Nassim K.", role: "Fondateur SaaS", text: "Le site convertit beaucoup mieux. Les choix UI/UX sont modernes, extrêmement efficaces et le workflow a été d'une clarté exemplaire." },
-  { name: "Sarah L.", role: "Directrice Générale", text: "On a gagné un temps précieux : processus carré, livrables nets et une communication fluide à chaque étape critique du projet." },
-  { name: "Hugo M.", role: "Directeur de Création", text: "Style brutaliste parfaitement maîtrisé. Notre marque a pris une dimension unique. Un vrai travail de laboratoire créatif." },
-  { name: "Léa V.", role: "CEO Tech Lab", text: "Une approche radicale qui nous a permis de nous démarquer sur un marché saturé. L'impact a été immédiat sur notre image." },
-  { name: "Marc A.", role: "Head of Product", text: "Rigoureux, créatifs et réactifs. AIA LAB est devenu notre partenaire stratégique pour tous nos futurs lancements." },
-];
+export default function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
+  const half = Math.ceil(testimonials.length / 2);
+  const testimonials1 = testimonials.slice(0, half);
+  const testimonials2 = testimonials.slice(half);
 
-const testimonials2: Testimonial[] = [
-  { name: "Julie D.", role: "Art Director", text: "L'œil de l'équipe pour le détail est exceptionnel. Chaque pixel a une raison d'être et l'harmonie globale est bluffante." },
-  { name: "Thomas B.", role: "Startup Founder", text: "L'implémentation Next.js/Tailwind est d'une propreté exemplaire. Performance au rendez-vous et maintenance facilitée." },
-  { name: "Inès F.", role: "Brand Manager", text: "Ils ont capturé l'essence de notre marque dès le premier workshop. Une équipe qui comprend les enjeux business autant que créatifs." },
-  { name: "Éric P.", role: "Consultant Digital", text: "Un workflow transparent et des outils de suivi qui facilitent énormément la collaboration. Très rare dans le milieu des agences." },
-  { name: "Sophia G.", role: "UX Researcher", text: "Leur compréhension des flux utilisateurs se ressent dans chaque interaction. Un design qui pense avant tout à l'utilisateur." },
-  { name: "David L.", role: "DevOps Engineer", text: "Architecture front-end robuste et scalable. Un plaisir de travailler sur une base de code aussi soignée et optimisée." },
-];
+  if (testimonials.length === 0) {
+    return (
+      <section className="bg-bg-main py-16 md:py-20 overflow-hidden border-b border-dark/5" id="temoignages">
+        <div className="text-center text-dark/40 py-12">
+          Aucun témoignage disponible.
+        </div>
+      </section>
+    );
+  }
 
-export default function TestimonialsSection() {
   return (
     <section className="bg-bg-main py-16 md:py-20 overflow-hidden border-b border-dark/5" id="temoignages">
       <div className="max-w-[1700px] mx-auto px-6 md:px-10 lg:px-20">

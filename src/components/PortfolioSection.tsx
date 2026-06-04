@@ -4,10 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { projects, type PortfolioProject } from "@/data/projects";
+import { type PortfolioProject } from "@/data/projects";
 import ProjectModal from "./ProjectModal";
-
-const latestProjects = projects.slice(0, 4);
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -83,7 +81,8 @@ function ProjectCard({
 /* ─────────────────────────────────────────────────────────────
    Main Section — Option A (Static on Mobile, Sticky on Desktop)
    ───────────────────────────────────────────────────────────── */
-export default function PortfolioSection() {
+export default function PortfolioSection({ projects }: { projects: PortfolioProject[] }) {
+  const latestProjects = projects.slice(0, 4);
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const reduceMotion = useReducedMotion();

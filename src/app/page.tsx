@@ -10,8 +10,18 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
+import { getProjects, getTestimonials } from "@/lib/wordpress";
+import { projects as fallbackProjects } from "@/data/projects";
 
-export default function Home() {
+export default async function Home() {
+  const [wpProjects, testimonials] = await Promise.all([
+    getProjects(),
+    getTestimonials(),
+  ]);
+
+  // Combine WordPress projects and fallback projects so they all display together for testing
+  const projects = [...wpProjects, ...fallbackProjects];
+
   return (
     <>
       <Header />
@@ -21,9 +31,9 @@ export default function Home() {
         <WhyChooseUs />
         <ExpertiseSection />
         <StatsSection />
-        <PortfolioSection />
+        <PortfolioSection projects={projects} />
         <ProcessSection />
-        <TestimonialsSection />
+        <TestimonialsSection testimonials={testimonials} />
         <FAQSection />
         <ContactCTA />
       </main>
@@ -31,4 +41,3 @@ export default function Home() {
     </>
   );
 }
-

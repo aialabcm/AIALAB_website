@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   output: "export",
   images: {
     unoptimized: true,
-    domains: ["images.unsplash.com"],
+    domains: ["images.unsplash.com", "cms.aialabcmr.com"],
   },
   turbopack: {
     root: '.',
