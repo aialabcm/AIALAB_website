@@ -1,0 +1,49 @@
+{
+  "data": {
+    "projets": {
+      "nodes": [
+        {
+          "title": "NectarShop E-commerce",
+          "slug": "nectarshop-e-commerce",
+          "projectCategories": {
+            "nodes": []
+          },
+          "projectServices": {
+            "nodes": [
+              {
+                "name": "Développement Next.js",
+                "slug": "developpement-next-js"
+              },
+              {
+                "name": "SEO & Performance",
+                "slug": "seo-performance"
+              },
+              {
+                "name": "UI Design",
+                "slug": "ui-design"
+              }
+            ]
+          }
+        },
+        {
+          "title": "BrandForce Identity",
+          "slug": "brandforce-identity",
+          "projectCategories": {
+            "nodes": []
+          },
+          "projectServices": {
+            "nodes": []
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "debug": [
+      {
+        "type": "DEBUG_LOGS_INACTIVE",
+        "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+      }
+    ]
+  }
+}

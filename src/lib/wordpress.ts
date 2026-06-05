@@ -25,6 +25,22 @@ async function fetchGraphQL(
       ...(!isDev && { next: { revalidate: 3600 } }),
     });
 
+    // Guard: if the response isn't JSON (e.g. WordPress returned an HTML error page),
+    // bail out gracefully instead of crashing JSON.parse.
+    const contentType = res.headers.get("content-type") ?? "";
+    if (!res.ok || !contentType.includes("application/json")) {
+      if (res.status === 403 && contentType.includes("text/html")) {
+        console.error(
+          `[wordpress] 403 Forbidden: Non-JSON HTML response. This is caused by Hostinger CDN (HCDN) Browser Integrity Check / DDoS Protection blocking API requests. To resolve this, disable DDoS Protection or Browser Integrity Check for cms.aialabcmr.com in your Hostinger control panel.`
+        );
+      } else {
+        console.error(
+          `[wordpress] Non-JSON response (status ${res.status}, content-type: ${contentType})`
+        );
+      }
+      return null;
+    }
+
     const json = await res.json();
 
     if (json.errors) {
@@ -194,6 +210,17 @@ const GET_TESTIMONIALS = `
 // E) Mapper: WPProjectNode → PortfolioProject
 // ─────────────────────────────────────────────────────────
 
+/**
+ * Normalise une chaîne en Title Case pour éviter les doublons
+ * de casse (ex: "branding" → "Branding", "web design" → "Web Design").
+ */
+function titleCase(str: string): string {
+  return str
+    .trim()
+    .toLowerCase()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 function mapProjectNode(node: WPProjectNode): PortfolioProject {
   const details = node.projectDetails;
   const gallery = [
@@ -203,6 +230,8 @@ function mapProjectNode(node: WPProjectNode): PortfolioProject {
     details?.imageGalerie4?.node?.sourceUrl,
     details?.imageGalerie5?.node?.sourceUrl,
   ].filter((url): url is string => Boolean(url));
+
+  const rawCategory = node.projectCategories?.nodes?.[0]?.name ?? "";
 
   return {
     id: node.slug,
@@ -219,8 +248,8 @@ function mapProjectNode(node: WPProjectNode): PortfolioProject {
       node.featuredImage?.node?.sourceUrl ??
       gallery[0] ??
       "",
-    category: node.projectCategories?.nodes?.[0]?.name ?? "",
-    services: node.projectServices?.nodes?.map((s) => s.name) ?? [],
+    category: rawCategory ? titleCase(rawCategory) : "",
+    services: node.projectServices?.nodes?.map((s) => titleCase(s.name)) ?? [],
     gallery,
   };
 }

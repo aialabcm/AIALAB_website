@@ -1,0 +1,130 @@
+{
+  "taxonomies": {
+    "data": {
+      "taxonomies": {
+        "nodes": [
+          {
+            "name": "category",
+            "graphqlSingleName": "category",
+            "graphqlPluralName": "categories",
+            "description": "",
+            "connectedContentTypes": {
+              "nodes": [
+                {
+                  "name": "post",
+                  "graphqlSingleName": "post"
+                }
+              ]
+            }
+          },
+          {
+            "name": "post_tag",
+            "graphqlSingleName": "tag",
+            "graphqlPluralName": "tags",
+            "description": "",
+            "connectedContentTypes": {
+              "nodes": [
+                {
+                  "name": "post",
+                  "graphqlSingleName": "post"
+                }
+              ]
+            }
+          },
+          {
+            "name": "post_format",
+            "graphqlSingleName": "postFormat",
+            "graphqlPluralName": "postFormats",
+            "description": "",
+            "connectedContentTypes": {
+              "nodes": [
+                {
+                  "name": "post",
+                  "graphqlSingleName": "post"
+                }
+              ]
+            }
+          },
+          {
+            "name": "project_category",
+            "graphqlSingleName": "ProjectCategory",
+            "graphqlPluralName": "ProjectCategories",
+            "description": "",
+            "connectedContentTypes": {
+              "nodes": [
+                {
+                  "name": "project",
+                  "graphqlSingleName": "Projet"
+                }
+              ]
+            }
+          },
+          {
+            "name": "project_service",
+            "graphqlSingleName": "ProjectService",
+            "graphqlPluralName": "ProjectServices",
+            "description": "",
+            "connectedContentTypes": {
+              "nodes": [
+                {
+                  "name": "project",
+                  "graphqlSingleName": "Projet"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "extensions": {
+      "debug": [
+        {
+          "type": "DEBUG_LOGS_INACTIVE",
+          "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+        }
+      ]
+    }
+  },
+  "projects": {
+    "errors": [
+      {
+        "message": "Cannot query field \"categories\" on type \"Projet\".",
+        "locations": [
+          {
+            "line": 14,
+            "column": 9
+          }
+        ]
+      }
+    ],
+    "extensions": {
+      "debug": [
+        {
+          "type": "DEBUG_LOGS_INACTIVE",
+          "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+        }
+      ]
+    }
+  },
+  "introspect": {
+    "errors": [
+      {
+        "message": "The query contained __schema or __type, however GraphQL introspection is not allowed for public requests by default. Public introspection can be enabled under the WPGraphQL Settings.",
+        "locations": [
+          {
+            "line": 3,
+            "column": 5
+          }
+        ]
+      }
+    ],
+    "extensions": {
+      "debug": [
+        {
+          "type": "DEBUG_LOGS_INACTIVE",
+          "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+        }
+      ]
+    }
+  }
+}

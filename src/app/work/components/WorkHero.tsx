@@ -52,8 +52,12 @@ export default function WorkHero() {
       
       {/* Background Soft Glows */}
       <div className="absolute inset-0 pointer-events-none select-none z-0">
-        <div className="absolute top-[5%] left-[25%] w-[320px] h-[320px] rounded-full bg-primary/8 blur-[100px]" />
-        <div className="absolute bottom-[5%] right-[25%] w-[380px] h-[380px] rounded-full bg-secondary/8 blur-[110px]" />
+        {/* Centered Cyan Cloud behind text */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[520px] sm:h-[520px] rounded-full bg-[#08C1DC]/16 blur-[90px] sm:blur-[110px]" />
+        
+        {/* Soft side glows */}
+        <div className="absolute top-[10%] left-[15%] w-[250px] h-[250px] rounded-full bg-[#08C1DC]/8 blur-[80px]" />
+        <div className="absolute bottom-[10%] right-[15%] w-[300px] h-[300px] rounded-full bg-[#259EB1]/8 blur-[90px]" />
       </div>
 
       {/* LEFT GALLERY PANEL (Penji Style) */}
@@ -91,9 +95,17 @@ export default function WorkHero() {
 
       {/* CENTER TEXT BLOCK */}
       <div className="relative z-10 text-center max-w-2xl mx-auto px-5 sm:px-6 flex flex-col items-center justify-center py-4">
-        <h1 className="font-heading font-black text-black-deep leading-[1.1] sm:leading-[0.95] tracking-tight sm:tracking-tighter uppercase text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6.5rem]">
+        <h1 className="font-heading font-black text-black-deep leading-[0.95] tracking-tight sm:tracking-tighter uppercase text-[2.5rem] xs:text-5xl sm:text-6xl md:text-[5rem] lg:text-[6rem] xl:text-[7rem] 2xl:text-[8rem]">
           <span>Notre Galerie</span>
-          <span className="block font-heading accent-italic bg-gradient-to-r from-[#057E90] to-primary bg-clip-text text-transparent mt-1.5 sm:-mt-1 md:-mt-3 py-1">
+          <span
+            className="block font-heading accent-italic mt-1.5 sm:-mt-1 md:-mt-3 py-1"
+            style={{
+              backgroundImage: "linear-gradient(to right, #057E90, #08C1DC)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
             créative.
           </span>
         </h1>
