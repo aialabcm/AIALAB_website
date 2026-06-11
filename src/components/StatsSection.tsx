@@ -91,7 +91,7 @@ export default function StatsSection() {
           <BentoCard delay={0.1} className="md:col-span-4 md:row-span-2 p-0 overflow-hidden border-none group">
             <div className="relative w-full h-full">
               <img 
-                src="https://images.unsplash.com/photo-1581291518655-9523c932ded7?q=80&w=1200&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" 
                 alt="Creative Studio" 
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
