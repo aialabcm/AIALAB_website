@@ -91,7 +91,7 @@ export default function StatsSection() {
           <BentoCard delay={0.1} className="md:col-span-4 md:row-span-2 p-0 overflow-hidden border-none group">
             <div className="relative w-full h-full">
               <img 
-                src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1581291518655-9523c932ded7?q=80&w=1200&auto=format&fit=crop" 
                 alt="Creative Studio" 
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
@@ -128,7 +128,7 @@ export default function StatsSection() {
           <BentoCard delay={0.4} className="md:col-span-3 md:row-span-1 p-0 overflow-hidden border-none group">
             <div className="relative w-full h-full">
               <img 
-                src="https://images.unsplash.com/photo-1675271591211-126ad94e495d?q=80&w=2000&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" 
                 alt="AI Neural" 
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
               />

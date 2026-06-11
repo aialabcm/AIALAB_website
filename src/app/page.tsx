@@ -12,15 +12,19 @@ import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
 import { getProjects, getTestimonials } from "@/lib/wordpress";
 import { projects as fallbackProjects } from "@/data/projects";
+import { testimonials as fallbackTestimonials } from "@/data/testimonials";
 
 export default async function Home() {
-  const [wpProjects, testimonials] = await Promise.all([
+  const [wpProjects, wpTestimonials] = await Promise.all([
     getProjects(),
     getTestimonials(),
   ]);
 
   // Combine WordPress projects and fallback projects so they all display together for testing
   const projects = [...wpProjects, ...fallbackProjects];
+
+  // Combine WordPress testimonials and fallback testimonials so they all display together for testing
+  const testimonials = [...wpTestimonials, ...fallbackTestimonials];
 
   return (
     <>
