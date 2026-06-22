@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import MarqueeTicker from "@/components/MarqueeTicker";
@@ -11,20 +12,18 @@ import FAQSection from "@/components/FAQSection";
 import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
 import { getProjects, getTestimonials } from "@/lib/wordpress";
-import { projects as fallbackProjects } from "@/data/projects";
-import { testimonials as fallbackTestimonials } from "@/data/testimonials";
+
+export const metadata: Metadata = {
+  title: "AIA LAB — Studio de Création Digitale d'Élite",
+  description:
+    "AIA LAB fusionne intelligence artificielle, design haut de gamme et développement Next.js pour créer des expériences digitales d'exception. Branding, Web Design, Marketing Digital.",
+};
 
 export default async function Home() {
-  const [wpProjects, wpTestimonials] = await Promise.all([
+  const [projects, testimonials] = await Promise.all([
     getProjects(),
     getTestimonials(),
   ]);
-
-  // Combine WordPress projects and fallback projects so they all display together for testing
-  const projects = [...wpProjects, ...fallbackProjects];
-
-  // Combine WordPress testimonials and fallback testimonials so they all display together for testing
-  const testimonials = [...wpTestimonials, ...fallbackTestimonials];
 
   return (
     <>

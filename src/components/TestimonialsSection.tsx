@@ -5,11 +5,7 @@ import { ArrowUpRight, Star } from "lucide-react";
 import { useEffect, useRef } from "react";
 import SectionHeader from "./SectionHeader";
 
-export interface Testimonial {
-  name: string;
-  role: string;
-  text: string;
-}
+import { testimonials as fallbackTestimonials, type Testimonial } from "@/data/testimonials";
 
 export default function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
   const half = Math.ceil(testimonials.length / 2);

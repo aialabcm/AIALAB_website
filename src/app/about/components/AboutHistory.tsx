@@ -1,162 +1,194 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
-import SectionHeader from "@/components/SectionHeader";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
-const epochs = [
+type Epoch = {
+  year: string;
+  title: string;
+  text: string;
+};
+
+const epochs: Epoch[] = [
   {
     year: "2023",
-    title: "Fondation & Vision.",
-    text: "Lancement d'AIA LAB. Notre ambition : créer un studio hybride fusionnant design d'art géométrique et technologies web émergentes.",
-    svgType: "prism"
+    title: "Fondation & Vision",
+    text: "Lancement d'AIA LAB à Douala. Notre ambition première : bâtir un studio hybride d'exception fusionnant direction artistique novatrice et technologies web de pointe pour redéfinir la présence en ligne des marques les plus exigeantes d'Afrique Centrale.",
   },
   {
     year: "2024",
-    title: "Expansion & Réalisations.",
-    text: "Déploiement d'interfaces d'exception pour nos premiers grands partenaires. Structuration de notre méthodologie de design d'interaction.",
-    svgType: "mesh"
+    title: "Expansion & Réalisations",
+    text: "Déploiement d'interfaces d'exception pour nos premiers partenaires nationaux et sous-régionaux. Structuration de notre méthodologie propriétaire basée sur l'ergonomie et l'optimisation des performances pour plus de 24 pays cibles.",
   },
   {
     year: "2025",
-    title: "Le Laboratoire d'IA.",
-    text: "Intégration et lancement de pipelines connectant l'IA générative et de précision à la conception visuelle haut de gamme.",
-    svgType: "neural"
-  }
+    title: "Le Laboratoire d'IA",
+    text: "Intégration systématique de pipelines de travail connectant l'intelligence artificielle générative et de précision à notre processus créatif. Cette innovation majeure décuple notre capacité de production d'actifs graphiques haut de gamme et d'expériences sur mesure.",
+  },
+  {
+    year: "2026",
+    title: "Aujourd'hui & Futur",
+    text: "Aujourd'hui, nous consolidons notre rôle de leader créatif et technologique d'Afrique Centrale. Nous propulsons nos clients vers l'élite digitale grâce à des expériences immersives et des solutions logicielles durables et performantes.",
+  },
 ];
 
-function EpochCard({ epoch, delay }: { epoch: typeof epochs[0]; delay: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { damping: 20, stiffness: 150 });
-  const mouseYSpring = useSpring(y, { damping: 20, stiffness: 150 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["6deg", "-6deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-6deg", "6deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    const xPct = (mouseX / width) - 0.5;
-    const yPct = (mouseY / height) - 0.5;
-    
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-[2.5rem] border border-black/[0.04] bg-white p-10 shadow-sm hover:shadow-premium hover:border-primary/20 transition-all duration-500 min-h-[360px] flex flex-col justify-between group cursor-default"
-    >
-      {/* Huge Background Outline Year */}
-      <div 
-        style={{ transform: "translateZ(10px)" }}
-        className="absolute -bottom-8 -right-4 font-mono font-black text-[7rem] sm:text-[8rem] text-transparent select-none pointer-events-none opacity-[0.06] group-hover:opacity-10 transition-opacity duration-500 [-webkit-text-stroke:1.5px_black]"
-      >
-        {epoch.year}
-      </div>
-
-      {/* Top: Custom Interactive SVG Graphic */}
-      <div 
-        style={{ transform: "translateZ(30px)" }} 
-        className="relative w-16 h-16 flex items-center justify-center text-primary mb-12"
-      >
-        {epoch.svgType === "prism" && (
-          <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current" strokeWidth="1.5">
-            <polygon points="50,15 15,80 85,80" />
-            <line x1="50" y1="15" x2="50" y2="80" strokeDasharray="3 3" />
-            <circle cx="50" cy="15" r="4" fill="currentColor" />
-            {/* Ray emissions */}
-            <path d="M 15 80 L 35 60 M 85 80 L 65 60" />
-          </svg>
-        )}
-
-        {epoch.svgType === "mesh" && (
-          <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current" strokeWidth="1.5">
-            {/* Grid structure */}
-            <path d="M 20 20 L 80 20 L 80 80 L 20 80 Z" />
-            <path d="M 20 50 L 80 50 M 50 20 L 50 80" />
-            <path d="M 20 20 L 80 80 M 80 20 L 20 80" strokeWidth="1" strokeDasharray="2 2" />
-            <circle cx="50" cy="50" r="3" fill="currentColor" />
-            <circle cx="20" cy="20" r="3" fill="currentColor" />
-            <circle cx="80" cy="80" r="3" fill="currentColor" />
-          </svg>
-        )}
-
-        {epoch.svgType === "neural" && (
-          <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-current animate-[spin_30s_linear_infinite]" strokeWidth="1.5">
-            <circle cx="50" cy="50" r="35" strokeDasharray="5 3" />
-            <circle cx="50" cy="50" r="15" />
-            {/* Connecting nodes */}
-            <circle cx="50" cy="15" r="3" fill="currentColor" />
-            <circle cx="15" cy="50" r="3" fill="currentColor" />
-            <circle cx="85" cy="50" r="3" fill="currentColor" />
-            <circle cx="50" cy="85" r="3" fill="currentColor" />
-            <line x1="50" y1="15" x2="50" y2="85" strokeWidth="1" />
-            <line x1="15" y1="50" x2="85" y2="50" strokeWidth="1" />
-          </svg>
-        )}
-      </div>
-
-      {/* Bottom Content */}
-      <div style={{ transform: "translateZ(25px)" }} className="space-y-3 z-10">
-        <h4 className="font-heading font-black text-xl text-black-deep uppercase tracking-tight">
-          {epoch.title}
-        </h4>
-        <p className="font-sans text-dark/70 text-sm sm:text-base leading-relaxed">
-          {epoch.text}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
 export default function AboutHistory() {
-  return (
-    <section className="bg-[#F5F5F5] py-20 md:py-24 border-y border-black/[0.05]" id="history">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16">
-        
-        <SectionHeader
-          title="L'évolution"
-          highlight="du lab."
-          description="Nos cycles de maturité technique et artistique, structurés sous forme d'époques d'innovation."
-          centered
-        />
+  const [active, setActive] = useState(3); // Start at 2026 (index 3)
 
-        {/* Bento Epoch Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-16 md:mt-24">
-          {epochs.map((epoch, idx) => (
-            <EpochCard 
-              key={epoch.year} 
-              epoch={epoch} 
-              delay={idx * 0.15} 
-            />
-          ))}
+  // Auto-play interval: cycles every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % epochs.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [active]); // Re-run when active changes to reset the 5s timer on manual click
+
+  return (
+    <section
+      className="relative overflow-hidden"
+      style={{
+        backgroundColor: "#0B0B0B",
+        paddingTop: "8rem",
+        paddingBottom: "16rem",
+      }}
+      id="historique"
+    >
+      {/* Background Image with Fade Effect — matching homepage ExpertiseSection */}
+      <div className="absolute inset-0 z-0 select-none pointer-events-none opacity-[0.03]">
+        <Image
+          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop"
+          alt=""
+          fill
+          className="object-cover"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0B] via-[#0B0B0B]/60 to-[#0B0B0B]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,#0B0B0B_80%)]" />
+      </div>
+
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
+
+        {/* ── Section Header (Coherent with AboutADN.tsx) ── */}
+        <div className="flex flex-col items-start mb-16 md:mb-20 gap-6">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-8 h-[1.5px] bg-[#08C1DC]/40 rounded-full" />
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#08C1DC]">
+                Notre Parcours
+              </span>
+              <div className="w-8 h-[1.5px] bg-[#08C1DC]/40 rounded-full" />
+            </div>
+            <h2 className="font-heading font-bold text-4xl md:text-6xl lg:text-7xl tracking-tighter leading-[1.1] text-white">
+              Notre <span className="text-primary accent-italic">trajectoire.</span>
+            </h2>
+            <p className="font-sans text-white/80 text-base md:text-lg max-w-[50ch] mt-6 leading-relaxed">
+              De notre genèse à nos perspectives futures, découvrez les étapes clés qui dessinent la trajectoire d&apos;AIA LAB.
+            </p>
+          </div>
+          <div className="w-16 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full origin-left" />
+        </div>
+
+        {/* ── Timeline Container: Vertical on Mobile/Tablet, Grid on Desktop ── */}
+        <div className="w-full relative pl-8 lg:pl-0 border-l border-white/[0.08] lg:border-l-0">
+          <div className="flex flex-col lg:grid lg:grid-cols-4 gap-12 lg:gap-8 relative">
+
+            {epochs.map((epoch, idx) => {
+              const isActive = idx === active;
+              
+              // Stair-step margin values only applied on desktop
+              const stairMargin = 
+                idx === 0 ? "lg:mt-0" 
+                : idx === 1 ? "lg:mt-[40px]" 
+                : idx === 2 ? "lg:mt-[80px]" 
+                : "lg:mt-[120px]";
+
+              return (
+                <div
+                  key={epoch.year}
+                  className={`flex flex-col group/col relative transition-all duration-300 ${stairMargin}`}
+                >
+                  
+                  {/* Timeline Axis Bullet (Mobile Only, perfectly aligned with border-l) */}
+                  <div
+                    className={`absolute lg:hidden left-[-38px] top-3.5 w-3 h-3 rounded-full border transition-all duration-300 z-20 cursor-pointer ${
+                      isActive
+                        ? "bg-primary border-primary scale-125 shadow-[0_0_10px_rgba(8,193,220,0.6)]"
+                        : "bg-[#0B0B0B] border-white/20 hover:border-primary/50"
+                    }`}
+                    onClick={() => setActive(idx)}
+                  />
+
+                  {/* Header Row: Year Badge + Title (Mobile: flex row, Desktop: block) */}
+                  <div className="flex items-center lg:block gap-4">
+                    {/* Year Cell Button */}
+                    <button
+                      onClick={() => setActive(idx)}
+                      className={`relative w-24 lg:w-full h-10 lg:h-[72px] flex items-center justify-center border border-white/[0.08] rounded-xl cursor-pointer focus:outline-none transition-all duration-300 active:scale-[0.98] flex-shrink-0 ${
+                        isActive ? "z-10 animate-pulse-subtle" : "bg-white/[0.02] hover:bg-white/[0.04]"
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeYear"
+                          className="absolute inset-0 bg-primary z-0 rounded-xl"
+                          style={{
+                            boxShadow: "0 10px 30px rgba(8, 193, 220, 0.4)",
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 30,
+                          }}
+                        />
+                      )}
+                      <span
+                        className={`relative z-10 font-heading font-bold text-base lg:text-[22px] transition-colors duration-300 ${
+                          isActive ? "text-[#0B0B0B]" : "text-white/60 hover:text-[#08C1DC]"
+                        }`}
+                      >
+                        {epoch.year}
+                      </span>
+                    </button>
+
+                    {/* Title (Mobile Only inline placement, Desktop displays inside desc block) */}
+                    <h3
+                      onClick={() => setActive(idx)}
+                      className={`lg:hidden font-heading text-base md:text-lg leading-snug cursor-pointer transition-colors duration-300 ${
+                        isActive ? "font-bold text-white" : "font-semibold text-white/80"
+                      }`}
+                    >
+                      {epoch.title}
+                    </h3>
+                  </div>
+
+                  {/* Description block (Mobile: no left border/padding, Desktop: left border indicator) */}
+                  <div
+                    onClick={() => setActive(idx)}
+                    className={`mt-4 lg:mt-14 pl-2 lg:pl-6 flex flex-col cursor-pointer transition-all duration-500 border-l-0 lg:border-l-2 ${
+                      isActive 
+                        ? "opacity-100 translate-y-0 lg:border-[#08C1DC]" 
+                        : "opacity-45 hover:opacity-60 translate-y-0 lg:translate-y-1 lg:border-transparent"
+                    }`}
+                  >
+                    {/* Desktop Title */}
+                    <h3
+                      className={`hidden lg:block font-heading text-base lg:text-xl leading-snug mb-4 transition-colors duration-300 ${
+                        isActive ? "font-bold text-white" : "font-semibold text-white/80"
+                      }`}
+                    >
+                      {epoch.title}
+                    </h3>
+                    <p className="font-sans text-white/70 text-[14px] md:text-[15px] leading-[1.8] tracking-[0.02em] max-w-full lg:max-w-[90%]">
+                      {epoch.text}
+                    </p>
+                  </div>
+
+                </div>
+              );
+            })}
+
+          </div>
         </div>
 
       </div>

@@ -1,4 +1,6 @@
+import { projects as fallbackProjects } from "@/data/projects";
 import type { PortfolioProject } from "@/data/projects";
+import { testimonials as fallbackTestimonials, type Testimonial } from "@/data/testimonials";
 
 // ─────────────────────────────────────────────────────────
 // A) Generic GraphQL fetcher
@@ -8,10 +10,10 @@ async function fetchGraphQL(
   query: string,
   variables?: Record<string, unknown>
 ): Promise<unknown> {
-  const url = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+  const url = process.env.WORDPRESS_API_URL;
 
   if (!url) {
-    console.error("[wordpress] NEXT_PUBLIC_WORDPRESS_API_URL is not defined");
+    console.error("[wordpress] WORDPRESS_API_URL is not defined");
     return null;
   }
 
@@ -19,10 +21,13 @@ async function fetchGraphQL(
     const isDev = process.env.NODE_ENV === "development";
     const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*"
+      },
       body: JSON.stringify({ query, variables }),
-      cache: isDev ? "no-store" : "force-cache",
-      ...(!isDev && { next: { revalidate: 3600 } }),
+      next: isDev ? { revalidate: 0 } : { revalidate: 3600 },
     });
 
     // Guard: if the response isn't JSON (e.g. WordPress returned an HTML error page),
@@ -103,15 +108,7 @@ interface WPTestimonialNode {
   } | null;
 }
 
-// ─────────────────────────────────────────────────────────
-// Testimonial interface (matches TestimonialsSection)
-// ─────────────────────────────────────────────────────────
 
-export interface Testimonial {
-  name: string;
-  role: string;
-  text: string;
-}
 
 // ─────────────────────────────────────────────────────────
 // C) Query GET_PROJECTS
@@ -273,11 +270,19 @@ function mapTestimonialNode(node: WPTestimonialNode): Testimonial {
 export async function getProjects(): Promise<PortfolioProject[]> {
   try {
     const data = await fetchGraphQL(GET_PROJECTS);
+    if (!data) {
+      console.warn("[wordpress] Falling back to local static projects data.");
+      return fallbackProjects;
+    }
     const nodes = (data as any)?.projets?.nodes ?? [];
+    if (nodes.length === 0) {
+      console.warn("[wordpress] No projects returned from WordPress, falling back to local static projects data.");
+      return fallbackProjects;
+    }
     return nodes.map(mapProjectNode);
   } catch (error) {
-    console.error("getProjects failed:", error);
-    return []; // fallback silencieux
+    console.error("getProjects failed, using fallback:", error);
+    return fallbackProjects;
   }
 }
 
@@ -288,10 +293,18 @@ export async function getProjects(): Promise<PortfolioProject[]> {
 export async function getTestimonials(): Promise<Testimonial[]> {
   try {
     const data = await fetchGraphQL(GET_TESTIMONIALS);
+    if (!data) {
+      console.warn("[wordpress] Falling back to local static testimonials data.");
+      return fallbackTestimonials;
+    }
     const nodes = (data as any)?.tMoignages?.nodes ?? [];
+    if (nodes.length === 0) {
+      console.warn("[wordpress] No testimonials returned from WordPress, falling back to local static testimonials data.");
+      return fallbackTestimonials;
+    }
     return nodes.map(mapTestimonialNode);
   } catch (error) {
-    console.error("getTestimonials failed:", error);
-    return [];
+    console.error("getTestimonials failed, using fallback:", error);
+    return fallbackTestimonials;
   }
 }

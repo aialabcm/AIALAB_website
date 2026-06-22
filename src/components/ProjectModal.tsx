@@ -5,20 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
-
-export interface PortfolioProject {
-  id: string;
-  name: string;
-  tagline: string;
-  category: string;
-  location: string;
-  image: string;
-  headline: string;
-  story: [string, string];
-  client: string;
-  services: string[];
-  gallery: string[];
-}
+import type { PortfolioProject } from "@/data/projects";
 
 interface ProjectModalProps {
   project: PortfolioProject | null;

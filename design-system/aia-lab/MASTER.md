@@ -7,7 +7,7 @@
 ---
 
 **Project:** AIA LAB
-**Generated:** 2026-05-20 20:34:00
+**Generated:** 2026-06-08 20:07:30
 **Category:** Marketing Agency
 
 ---
@@ -18,18 +18,18 @@
 
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
-| Primary | `#EC4899` | `--color-primary` |
+| Primary | `#4F46E5` | `--color-primary` |
 | On Primary | `#FFFFFF` | `--color-on-primary` |
-| Secondary | `#F472B6` | `--color-secondary` |
-| Accent/CTA | `#0891B2` | `--color-accent` |
-| Background | `#FDF2F8` | `--color-background` |
-| Foreground | `#831843` | `--color-foreground` |
-| Muted | `#F1EEF5` | `--color-muted` |
-| Border | `#FBCFE8` | `--color-border` |
+| Secondary | `#6366F1` | `--color-secondary` |
+| Accent/CTA | `#EA580C` | `--color-accent` |
+| Background | `#EEF2FF` | `--color-background` |
+| Foreground | `#312E81` | `--color-foreground` |
+| Muted | `#EBEEF8` | `--color-muted` |
+| Border | `#C7D2FE` | `--color-border` |
 | Destructive | `#DC2626` | `--color-destructive` |
-| Ring | `#EC4899` | `--color-ring` |
+| Ring | `#4F46E5` | `--color-ring` |
 
-**Color Notes:** Bold pink + cyan accent [Accent adjusted from #06B6D4 for WCAG 3:1]
+**Color Notes:** Indigo brand + doc hierarchy [Accent adjusted from #F97316 for WCAG 3:1]
 
 ### Typography
 
@@ -73,7 +73,7 @@
 ```css
 /* Primary Button */
 .btn-primary {
-  background: #0891B2;
+  background: #EA580C;
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
@@ -90,8 +90,8 @@
 /* Secondary Button */
 .btn-secondary {
   background: transparent;
-  color: #EC4899;
-  border: 2px solid #EC4899;
+  color: #4F46E5;
+  border: 2px solid #4F46E5;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -104,7 +104,7 @@
 
 ```css
 .card {
-  background: #FDF2F8;
+  background: #EEF2FF;
   border-radius: 12px;
   padding: 24px;
   box-shadow: var(--shadow-md);
@@ -130,9 +130,9 @@
 }
 
 .input:focus {
-  border-color: #EC4899;
+  border-color: #4F46E5;
   outline: none;
-  box-shadow: 0 0 0 3px #EC489920;
+  box-shadow: 0 0 0 3px #4F46E520;
 }
 ```
 
@@ -158,21 +158,21 @@
 
 ## Style Guidelines
 
-**Style:** Neo Brutalism (Mobile)
+**Style:** Brutalism
 
-**Keywords:** neo brutalism, pop art, stickers, thick borders, cream background, hot red, vivid yellow, soft violet, hard offset shadow, mechanical press, collage
+**Keywords:** Raw, unpolished, stark, high contrast, plain text, default fonts, visible borders, asymmetric, anti-design
 
-**Best For:** Creative tools, collab platforms, Gen Z marketing & e-commerce, portfolio sites, sticker-book style content apps
+**Best For:** Design portfolios, artistic projects, counter-culture brands, editorial/media sites, tech blogs
 
-**Key Effects:** Thick 4px black borders on all major elements, hard offset shadows (4–8px, no blur), mechanical press: translateX/Y equal to shadow offset, slightly rotated cards/badges (-2deg/2deg), high-saturation color blocking, spring/linear animations only
+**Key Effects:** No smooth transitions (instant), sharp corners (0px), bold typography (700+), visible grid, large blocks
 
 ### Page Pattern
 
-**Pattern Name:** Portfolio Grid
+**Pattern Name:** Hero + Features + CTA
 
-- **Conversion Strategy:** Visuals first. Filter by category. Fast loading essential.
-- **CTA Placement:** Project Card Hover + Footer Contact
-- **Section Order:** 1. Hero (Name/Role), 2. Project Grid (Masonry), 3. About/Philosophy, 4. Contact
+- **Conversion Strategy:** Deep CTA placement. Use contrasting color (at least 7:1 contrast ratio). Sticky navbar CTA.
+- **CTA Placement:** Hero (sticky) + Bottom
+- **Section Order:** 1. Hero with headline/image, 2. Value prop, 3. Key features (3-5), 4. CTA section, 5. Footer
 
 ---
 

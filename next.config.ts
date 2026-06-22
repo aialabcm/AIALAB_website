@@ -2,13 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true,
   images: {
     unoptimized: true,
-    domains: ["images.unsplash.com", "cms.aialabcmr.com"],
-  },
-  turbopack: {
-    root: '.',
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "cms.aialabcmr.com" },
+    ],
   },
 };
 
 export default nextConfig;
+

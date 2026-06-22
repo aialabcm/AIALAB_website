@@ -444,6 +444,7 @@ function MarketingIcon({ isHovered }: { isHovered: boolean }) {
         cx="12"
         cy="12"
         r="6"
+        initial={{ opacity: 0.6 }}
         animate={{
           stroke: isHovered ? "#08C1DC" : "#ffffff",
           scale: isHovered ? [1, 1.2, 1] : 1,
@@ -455,6 +456,7 @@ function MarketingIcon({ isHovered }: { isHovered: boolean }) {
         cx="12"
         cy="12"
         r="10"
+        initial={{ opacity: 0.2 }}
         animate={{
           stroke: isHovered ? "#08C1DC" : "rgba(255,255,255,0.3)",
           scale: isHovered ? [1, 1.15, 1] : 1,
@@ -465,6 +467,7 @@ function MarketingIcon({ isHovered }: { isHovered: boolean }) {
       <motion.path
         d="M12 2V4 M12 20V22 M2 12H4 M20 12H22"
         strokeLinecap="round"
+        initial={{ opacity: 0.3 }}
         animate={{
           stroke: isHovered ? "#08C1DC" : "rgba(255,255,255,0.3)",
           opacity: isHovered ? [0.4, 1, 0.4] : 0.3,

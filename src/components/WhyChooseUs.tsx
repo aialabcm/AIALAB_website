@@ -74,12 +74,12 @@ export default function WhyChooseUs() {
               </defs>
 
               {/* Feature Paths (Flow into center) */}
-              <motion.path d="M 230 150 Q 400 150 500 300" stroke={hoveredId === 1 ? "url(#beam-left)" : "#E2E8F0"} strokeWidth={hoveredId === 1 ? "4" : "1"} fill="none" opacity={hoveredId === 1 ? 1 : 0.2} transition={{ duration: 0.5 }} />
-              <motion.path d="M 230 450 Q 400 450 500 300" stroke={hoveredId === 2 ? "url(#beam-left)" : "#E2E8F0"} strokeWidth={hoveredId === 2 ? "4" : "1"} fill="none" opacity={hoveredId === 2 ? 1 : 0.2} transition={{ duration: 0.5 }} />
+              <motion.path d="M 230 150 Q 400 150 500 300" stroke={hoveredId === 1 ? "url(#beam-left)" : "#E2E8F0"} strokeWidth={hoveredId === 1 ? "4" : "1"} fill="none" initial={{ opacity: 0.2 }} animate={{ opacity: hoveredId === 1 ? 1 : 0.2 }} transition={{ duration: 0.5 }} />
+              <motion.path d="M 230 450 Q 400 450 500 300" stroke={hoveredId === 2 ? "url(#beam-left)" : "#E2E8F0"} strokeWidth={hoveredId === 2 ? "4" : "1"} fill="none" initial={{ opacity: 0.2 }} animate={{ opacity: hoveredId === 2 ? 1 : 0.2 }} transition={{ duration: 0.5 }} />
 
               {/* Output Paths (Flow from center) */}
-              <motion.path d="M 770 150 Q 600 150 500 300" stroke={hoveredId === 3 ? "url(#beam-right)" : "#E2E8F0"} strokeWidth={hoveredId === 3 ? "4" : "1"} fill="none" opacity={hoveredId === 3 ? 1 : 0.2} transition={{ duration: 0.5 }} />
-              <motion.path d="M 770 450 Q 600 450 500 300" stroke={hoveredId === 4 ? "url(#beam-right)" : "#E2E8F0"} strokeWidth={hoveredId === 4 ? "4" : "1"} fill="none" opacity={hoveredId === 4 ? 1 : 0.2} transition={{ duration: 0.5 }} />
+              <motion.path d="M 770 150 Q 600 150 500 300" stroke={hoveredId === 3 ? "url(#beam-right)" : "#E2E8F0"} strokeWidth={hoveredId === 3 ? "4" : "1"} fill="none" initial={{ opacity: 0.2 }} animate={{ opacity: hoveredId === 3 ? 1 : 0.2 }} transition={{ duration: 0.5 }} />
+              <motion.path d="M 770 450 Q 600 450 500 300" stroke={hoveredId === 4 ? "url(#beam-right)" : "#E2E8F0"} strokeWidth={hoveredId === 4 ? "4" : "1"} fill="none" initial={{ opacity: 0.2 }} animate={{ opacity: hoveredId === 4 ? 1 : 0.2 }} transition={{ duration: 0.5 }} />
 
               {/* Energy Particles */}
               {features.map((f, i) => (

@@ -188,7 +188,7 @@ export default function WorkCTA() {
               className="relative z-10 w-full h-36 sm:h-44 md:h-52 rounded-xl sm:rounded-2xl overflow-hidden border border-black/[0.08] bg-black shadow-inner mt-5 sm:mt-8 group/vignette cursor-pointer flex-shrink-0"
             >
               <video
-                src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-41885-large.mp4"
+                src="/images/video/aialab.mp4"
                 className="w-full h-full object-cover opacity-80 group-hover/vignette:opacity-100 group-hover/vignette:scale-[1.03] transition-all duration-500"
                 autoPlay
                 loop
@@ -308,7 +308,7 @@ export default function WorkCTA() {
               {/* Balise Vidéo réelle */}
               <video
                 ref={videoRef}
-                src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-41885-large.mp4"
+                src="/images/video/aialab.mp4"
                 className="w-full h-full object-cover"
                 autoPlay
                 loop

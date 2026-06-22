@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
 export default function Footer() {
@@ -7,11 +8,12 @@ export default function Footer() {
       
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2500&auto=format&fit=crop" 
           alt="Creative Team" 
-          loading="lazy"
-          className="w-full h-full object-cover opacity-40 grayscale"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-40 grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black-deep via-black-deep/90 to-black-deep/60" />
       </div>
