@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { type PortfolioProject } from "@/data/projects";
@@ -227,7 +228,7 @@ export default function PortfolioSection({ projects }: { projects: PortfolioProj
                 transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
                 className="flex justify-center"
               >
-                <a
+                <Link
                   href="/work"
                   className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white/70 hover:text-primary transition-colors duration-300"
                 >
@@ -235,7 +236,7 @@ export default function PortfolioSection({ projects }: { projects: PortfolioProj
                   <div className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 transition-all duration-300">
                     <ArrowUpRight className="w-4 h-4 group-hover:text-primary transition-colors" />
                   </div>
-                </a>
+                </Link>
               </motion.div>
             </div>
           </div>

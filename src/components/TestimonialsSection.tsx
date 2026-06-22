@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import SectionHeader from "./SectionHeader";
 
 import { testimonials as fallbackTestimonials, type Testimonial } from "@/data/testimonials";
@@ -36,19 +37,19 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
             />
             
             <div className="mt-10 flex flex-col gap-4">
-              <motion.button
-                whileHover={{ x: 10 }}
-                className="group flex items-center justify-between px-7 py-4 bg-black-deep text-white rounded-full transition-all duration-500 overflow-hidden relative"
+              <Link
+                href="/lancer-un-projet"
+                className="group flex items-center justify-between px-7 py-4 bg-black-deep text-white rounded-full transition-all duration-500 overflow-hidden relative hover:translate-x-2.5"
               >
                 <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                 <span className="relative z-10 font-heading font-bold text-[11px] tracking-widest uppercase">Démarrer l'aventure</span>
                 <ArrowUpRight className="relative z-10 w-4 h-4 group-hover:rotate-45 transition-transform" />
-              </motion.button>
+              </Link>
               
-              <button className="group flex items-center gap-4 px-7 py-4 border border-dark/10 rounded-full hover:border-dark transition-all duration-500">
+              <Link href="/en-cours?page=T%C3%A9moignages%20Clients" className="group flex items-center gap-4 px-7 py-4 border border-dark/10 rounded-full hover:border-dark transition-all duration-500">
                 <span className="font-heading font-bold text-[11px] tracking-widest uppercase text-dark">Voir plus de retours</span>
                 <div className="w-5 h-px bg-dark/20 group-hover:w-8 group-hover:bg-dark transition-all" />
-              </button>
+              </Link>
             </div>
 
             {/* Metrics Mini-Block */}

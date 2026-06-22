@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import AnimatedCounter from "./AnimatedCounter";
 import BentoCard from "./BentoCard";
 import SectionHeader from "./SectionHeader";
@@ -35,6 +36,7 @@ export default function StatsSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch md:auto-rows-[180px]">
           
           {/* Main Stat Card : 500+ (col-span-8, row-span-2) */}
+          <Link href="/work" className="md:col-span-8 md:row-span-2 contents">
           <BentoCard delay={0} className="md:col-span-8 md:row-span-2 bg-gradient-to-br from-[#08C1DC] via-[#10CBD6] to-[#14B8A6] border-none group cursor-pointer overflow-hidden p-0">
             <div className="flex flex-col h-full p-8 md:p-10 relative justify-between">
               {/* Dot Grid overlay */}
@@ -86,6 +88,7 @@ export default function StatsSection() {
               </div>
             </div>
           </BentoCard>
+          </Link>
 
           {/* Image Card 1 : Studio/Architecture (col-span-4, row-span-2) */}
           <BentoCard delay={0.1} className="md:col-span-4 md:row-span-2 p-0 overflow-hidden border-none group">
@@ -100,6 +103,7 @@ export default function StatsSection() {
           </BentoCard>
 
           {/* Article Card : AI & Design (col-span-4, row-span-2) */}
+          <Link href="/about#manifeste" className="md:col-span-4 md:row-span-2 contents">
           <BentoCard delay={0.2} dark className="md:col-span-4 md:row-span-2 flex flex-col justify-between group cursor-pointer bg-anthracite p-8 md:p-10">
             <div>
               <div className="p-3 bg-primary/20 rounded-xl w-fit mb-6 md:mb-8">
@@ -117,6 +121,7 @@ export default function StatsSection() {
               <ArrowUpRight className="w-5 h-5" />
             </div>
           </BentoCard>
+          </Link>
 
           {/* Efficiency Stat Card (col-span-4, row-span-1) */}
           <EfficiencyCard trigger={trigger} />

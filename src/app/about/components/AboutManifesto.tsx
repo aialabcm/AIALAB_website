@@ -7,7 +7,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function AboutManifesto() {
   return (
-    <section className="relative w-full bg-black-deep py-[180px] md:py-[280px] min-h-[100dvh] flex items-center overflow-hidden">
+    <section className="relative w-full bg-black-deep py-[180px] md:py-[280px] min-h-[100dvh] flex items-center overflow-hidden" id="manifeste">
 
       {/* Emblem watermark — centered filigrane */}
       <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none">

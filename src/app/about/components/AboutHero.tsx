@@ -87,13 +87,13 @@ export default function AboutHero() {
                 Lancer un projet
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-              <a
+              <Link
                 href="/work"
                 className="group cursor-pointer bg-white/60 hover:bg-white text-black-deep py-3.5 px-8 rounded-full font-sans font-extrabold text-xs tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-[0.98] backdrop-blur-sm border border-black/[0.06] hover:border-black/[0.12] outline-none focus-visible:ring-2 focus-visible:ring-primary/50 min-h-[48px] flex items-center justify-center gap-2"
               >
                 Nos réalisations
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+              </Link>
             </div>
           </motion.div>
 

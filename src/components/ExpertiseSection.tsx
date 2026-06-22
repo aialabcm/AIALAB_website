@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 
@@ -164,15 +165,15 @@ export default function ExpertiseSection() {
           transition={{ delay: 0.5 }}
           className="mt-14 md:mt-20 flex justify-center"
         >
-          <a
-            href="#cta-contact"
+          <Link
+            href="/lancer-un-projet"
             className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-primary transition-colors duration-300"
           >
             <span>Démarrer un projet avec le lab</span>
             <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300">
               <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors" />
             </div>
-          </a>
+          </Link>
         </motion.div>
       </div>
 
