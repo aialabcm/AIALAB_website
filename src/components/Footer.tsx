@@ -38,11 +38,11 @@ export default function Footer() {
             <h4 className="font-heading font-bold text-[10px] tracking-[0.2em] uppercase text-white/40">Expertises</h4>
             <ul className="space-y-4">
               {[
-                { label: "Brand Strategy & Identity", href: "/services/branding-identite" },
-                { label: "Visual Content & Design", href: "/services/design-graphique-digital" },
-                { label: "Print & Tangible Solutions", href: "/services/solutions-print" },
-                { label: "Web Development & Tech", href: "/services/developpement-web-tech" },
-                { label: "Digital Growth & Marketing", href: "/services/marketing-digital" }
+                { label: "Brand Strategy & Identity", href: "/#expertises" },
+                { label: "Visual Content & Design", href: "/#expertises" },
+                { label: "Print & Tangible Solutions", href: "/#expertises" },
+                { label: "Web Development & Tech", href: "/#expertises" },
+                { label: "Digital Growth & Marketing", href: "/#expertises" }
               ].map(item => (
                 <li key={item.label}>
                   <Link href={item.href} className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">
@@ -126,10 +126,10 @@ export default function Footer() {
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-4">
               {[
-                { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
-                { label: "Conditions d'utilisation", href: "/conditions-d-utilisation" },
-                { label: "Mentions légales", href: "/mentions-legales" },
-                { label: "DMCA", href: "/dmca" }
+                { label: "Politique de confidentialité", href: "/en-cours?page=Politique de Confidentialité" },
+                { label: "Conditions d'utilisation", href: "/en-cours?page=Conditions d'Utilisation" },
+                { label: "Mentions légales", href: "/en-cours?page=Mentions Légales" },
+                { label: "DMCA", href: "/en-cours?page=DMCA" }
               ].map(item => (
                 <Link key={item.label} href={item.href} className="font-sans text-[10px] text-white/40 hover:text-white transition-colors whitespace-nowrap">
                   {item.label}

@@ -137,7 +137,7 @@ export default function Header() {
 
   const menuItems = [
     { label: "Accueil", href: "/" },
-    { label: "Services", href: "#expertises", hasDropdown: true },
+    { label: "Services", href: "/#expertises", hasDropdown: true },
     { label: "Portfolio", href: "/work" },
     { label: "À propos", href: "/about" },
   ];
@@ -219,7 +219,7 @@ export default function Header() {
                       <div className="grid grid-cols-3 gap-4 relative">
                         {/* Card 1: Branding & Identité */}
                         <a 
-                          href="#expertises" 
+                          href="/#expertises" 
                           onClick={() => setIsServicesOpen(false)}
                           className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
                         >
@@ -245,7 +245,7 @@ export default function Header() {
 
                         {/* Card 2: Design Graphique & Digital */}
                         <a 
-                          href="#expertises" 
+                          href="/#expertises" 
                           onClick={() => setIsServicesOpen(false)}
                           className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
                         >
@@ -271,7 +271,7 @@ export default function Header() {
 
                         {/* Card 3: Print & Tangible Solutions */}
                         <a 
-                          href="#expertises" 
+                          href="/#expertises" 
                           onClick={() => setIsServicesOpen(false)}
                           className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
                         >
@@ -297,7 +297,7 @@ export default function Header() {
 
                         {/* Card 4: Web Development & Tech */}
                         <a 
-                          href="#expertises" 
+                          href="/#expertises" 
                           onClick={() => setIsServicesOpen(false)}
                           className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
                         >
@@ -323,7 +323,7 @@ export default function Header() {
 
                         {/* Card 5: Digital Growth & Marketing */}
                         <a 
-                          href="#expertises" 
+                          href="/#expertises" 
                           onClick={() => setIsServicesOpen(false)}
                           className="service-card group/card relative p-5 rounded-[1.5rem] bg-[#121212]/35 border border-white/[0.05] hover:bg-[#161616]/50 hover:border-white/15 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]"
                         >
@@ -528,7 +528,7 @@ export default function Header() {
                         count: "/6 services",
                         icon: Sparkles,
                         image: "/images/services/Branding & Identité visuelle.webp",
-                        href: "#expertises"
+                        href: "/#expertises"
                       },
                       {
                         title: "Visual Content & Design",
@@ -536,7 +536,7 @@ export default function Header() {
                         count: "/3 services",
                         icon: PenTool,
                         image: "/images/services/Design Graphique & Digital.webp",
-                        href: "#expertises"
+                        href: "/#expertises"
                       },
                       {
                         title: "Print & Tangible Solutions",
@@ -544,7 +544,7 @@ export default function Header() {
                         count: "/4 services",
                         icon: Printer,
                         image: "/images/services/print &i impressio.webp",
-                        href: "#expertises"
+                        href: "/#expertises"
                       },
                       {
                         title: "Web Development & Tech",
@@ -552,7 +552,7 @@ export default function Header() {
                         count: "/7 services",
                         icon: Monitor,
                         image: "/images/services/web design & developpement.webp",
-                        href: "#expertises"
+                        href: "/#expertises"
                       },
                       {
                         title: "Digital Growth & Marketing",
@@ -560,7 +560,7 @@ export default function Header() {
                         count: "/5 services",
                         icon: Megaphone,
                         image: "/images/services/marketing didgital.webp",
-                        href: "#expertises"
+                        href: "/#expertises"
                       }
                     ];
 

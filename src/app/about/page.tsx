@@ -8,8 +8,10 @@ import AboutHistory from "./components/AboutHistory";
 import AboutTeam from "./components/AboutTeam";
 import ContactCTA from "@/components/ContactCTA";
 
-export const metadata = {
-  title: "About Us | AIA LAB",
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Notre Agence & Vision | AIA LAB — Studio Digital d'Élite",
   description:
     "Découvrez notre histoire, notre équipe, nos valeurs et notre vision créative au service de l'élite digitale.",
 };

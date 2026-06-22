@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WorkHero from "./components/WorkHero";
@@ -6,6 +7,12 @@ import WallOfFame from "./components/WallOfFame";
 import WorkCTA from "./components/WorkCTA";
 import ContactCTA from "@/components/ContactCTA";
 import { getProjects } from "@/lib/wordpress";
+
+export const metadata: Metadata = {
+  title: "Nos Réalisations | AIA LAB — Portfolio d'Élite",
+  description:
+    "Découvrez le portfolio des réalisations d'AIA LAB : branding haut de gamme, création de sites internet d'exception et campagnes de marketing digital.",
+};
 
 export default async function WorkPage() {
   const projects = await getProjects();

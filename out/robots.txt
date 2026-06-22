@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /en-cours/
+
+Sitemap: https://aialabcmr.com/sitemap.xml
