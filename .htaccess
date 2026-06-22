@@ -1,8 +1,22 @@
-# Redirect all traffic to the built site in aia-lab-website/out/
-# This is needed because Hostinger Git deploy clones the entire repo
-
+# Enable rewrite engine
 RewriteEngine On
 
+# 1) Force HTTPS redirect
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2) Block access to hidden files and directories (starting with a dot)
+# Exempt .well-known (used for SSL certificate validation like Let's Encrypt)
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteRule ^\..*$ - [F,L]
+
+# 3) Block access to sensitive files in the root folder
+RewriteRule ^(package(-lock)?\.json|tsconfig\.json|next\.config\.(ts|js|mjs)|tailwind\.config\.(ts|js)|postcss\.config\.mjs|eslint\.config\.mjs|CLAUDE\.md|AGENTS\.md|README\.md|\.env.*)$ - [F,L]
+
+# 4) Block access to development/source folders
+RewriteRule ^(src|components|hooks|lib|scripts|node_modules)/.*$ - [F,L]
+
+# 5) Serve built site from out/ (existing logic)
 # If the request is for a file/folder that exists in aia-lab-website/out/, serve it
 RewriteCond %{REQUEST_URI} !^/aia-lab-website/out/
 RewriteCond %{DOCUMENT_ROOT}/aia-lab-website/out%{REQUEST_URI} -f [OR]
@@ -24,3 +38,24 @@ RewriteRule ^_next/(.*)$ /aia-lab-website/out/_next/$1 [L]
 
 # 404 fallback
 ErrorDocument 404 /aia-lab-website/out/404.html
+
+# 6) Security Headers
+<IfModule mod_headers.c>
+    # Protect against Clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Block MIME-type sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Control Referrer information sent
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Enable XSS protection in older browsers
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Enforce HTTPS (HSTS) - 1 year
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Content Security Policy (CSP)
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://cms.aialabcmr.com https://i.pravatar.cc; connect-src 'self' https://api.web3forms.com https://cms.aialabcmr.com; frame-src 'self'; object-src 'none';"
+</IfModule>

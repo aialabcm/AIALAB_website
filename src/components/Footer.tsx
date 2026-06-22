@@ -25,9 +25,9 @@ export default function Footer() {
           <h2 className="font-heading font-extrabold text-3xl sm:text-4xl md:text-7xl tracking-tighter leading-none mb-8">
             Votre lab créatif, <br/> pour vos <span className="text-primary accent-italic">idées d'élite™</span>
           </h2>
-          <a href="#cta-contact" className="inline-block px-8 sm:px-10 py-4 bg-primary text-black-deep font-heading font-bold text-xs tracking-widest uppercase rounded-full hover:scale-105 transition-transform shadow-xl min-h-[48px] leading-[48px] text-center">
+          <Link href="/lancer-un-projet" className="inline-block px-8 sm:px-10 py-4 bg-primary text-black-deep font-heading font-bold text-xs tracking-widest uppercase rounded-full hover:scale-105 transition-transform shadow-xl min-h-[48px] leading-[48px] text-center">
             Réserver un appel
-          </a>
+          </Link>
         </div>
 
         {/* Navigation Grid */}
@@ -38,28 +38,34 @@ export default function Footer() {
             <h4 className="font-heading font-bold text-[10px] tracking-[0.2em] uppercase text-white/40">Expertises</h4>
             <ul className="space-y-4">
               {[
-                "Branding Élite", "Digital Experience", "Motion Design", 
-                "Contenu Stratégique", "Architecture Web", "IA Générative"
+                { label: "Brand Strategy & Identity", href: "/services/branding-identite" },
+                { label: "Visual Content & Design", href: "/services/design-graphique-digital" },
+                { label: "Print & Tangible Solutions", href: "/services/solutions-print" },
+                { label: "Web Development & Tech", href: "/services/developpement-web-tech" },
+                { label: "Digital Growth & Marketing", href: "/services/marketing-digital" }
               ].map(item => (
-                <li key={item}>
-                  <a href="#expertises" className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">
-                    {item}
-                  </a>
+                <li key={item.label}>
+                  <Link href={item.href} className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Réalisations */}
+          {/* Portfolio */}
           <div className="space-y-8">
-            <h4 className="font-heading font-bold text-[10px] tracking-[0.2em] uppercase text-white/40">Réalisations</h4>
+            <h4 className="font-heading font-bold text-[10px] tracking-[0.2em] uppercase text-white/40">Portfolio</h4>
             <ul className="space-y-4">
               {[
-                "Projets 2024", "Études de cas", "Archives créatives",
-                "Lab Experimental", "Showreel"
+                { label: "Tous nos projets", href: "/work" },
+                { label: "Showreel vidéo", href: "/work?showreel=true" },
+                { label: "Études de cas", href: "/work#etudes-de-cas" }
               ].map(item => (
-                <li key={item}>
-                  <a href="#portfolio" className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">{item}</a>
+                <li key={item.label}>
+                  <Link href={item.href} className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -70,17 +76,15 @@ export default function Footer() {
             <h4 className="font-heading font-bold text-[10px] tracking-[0.2em] uppercase text-white/40">Le Lab</h4>
             <ul className="space-y-4">
               {[
-                { label: "Notre Processus", page: "Notre Processus" },
-                { label: "Témoignages", page: "Les Témoignages" },
-                { label: "FAQ", href: "#faq" },
-                { label: "L'Équipe", page: "La page Équipe" }
+                { label: "Notre Processus", href: "/#processus" },
+                { label: "Témoignages", href: "/#temoignages" },
+                { label: "FAQ", href: "/#faq" },
+                { label: "À propos", href: "/about" }
               ].map(item => (
                 <li key={item.label}>
-                  {item.href ? (
-                    <a href={item.href} className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">{item.label}</a>
-                  ) : (
-                    <Link href={`/en-cours?page=${item.page}`} className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">{item.label}</Link>
-                  )}
+                  <Link href={item.href} className="font-sans text-[13px] font-medium text-white/70 hover:text-primary transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -95,12 +99,14 @@ export default function Footer() {
                 Vallée Nlongkak
               </li>
               <li className="text-[13px] font-medium text-white/70">
-                contact@aialab.com
+                <a href="mailto:contact@aialab.com" className="hover:text-primary transition-colors">
+                  contact@aialab.com
+                </a>
               </li>
               <li>
-                <a href="#cta-contact" className="inline-flex items-center gap-2 font-heading font-bold text-[10px] tracking-widest uppercase text-primary">
-                  Prendre RDV <ExternalLink className="w-3 h-3" />
-                </a>
+                <Link href="/lancer-un-projet" className="inline-flex items-center gap-2 font-heading font-bold text-[10px] tracking-widest uppercase text-primary">
+                  Lancer un projet <ExternalLink className="w-3 h-3" />
+                </Link>
               </li>
             </ul>
           </div>
@@ -119,8 +125,15 @@ export default function Footer() {
 
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-4">
-              {["Privacy policy", "Terms of use", "Trust page", "DMCA"].map(item => (
-                <Link key={item} href={`/en-cours?page=${item}`} className="font-sans text-[10px] text-white/40 hover:text-white transition-colors whitespace-nowrap">{item}</Link>
+              {[
+                { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
+                { label: "Conditions d'utilisation", href: "/conditions-d-utilisation" },
+                { label: "Mentions légales", href: "/mentions-legales" },
+                { label: "DMCA", href: "/dmca" }
+              ].map(item => (
+                <Link key={item.label} href={item.href} className="font-sans text-[10px] text-white/40 hover:text-white transition-colors whitespace-nowrap">
+                  {item.label}
+                </Link>
               ))}
             </div>
             

@@ -8,7 +8,7 @@ import { Send, ArrowUpRight, CheckCircle, Loader2 } from "lucide-react";
 // Replace this with your real Web3Forms access key
 // Get one for free at https://web3forms.com
 // ──────────────────────────────────────────────────────────────
-const WEB3FORMS_KEY = "YOUR_ACCESS_KEY_HERE";
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE";
 
 const projectTypes = [
   "Branding & Identité visuelle",

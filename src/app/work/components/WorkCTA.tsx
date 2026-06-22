@@ -39,6 +39,16 @@ export default function WorkCTA() {
     return () => clearInterval(timer);
   }, []);
 
+  // Déclencher le showreel si le paramètre est présent dans l'URL
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("showreel") === "true") {
+        setShowVideo(true);
+      }
+    }
+  }, []);
+
   // Gérer la lecture / pause
   const togglePlay = () => {
     if (!videoRef.current) return;

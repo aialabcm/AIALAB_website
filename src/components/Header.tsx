@@ -136,10 +136,10 @@ export default function Header() {
   };
 
   const menuItems = [
-    { label: "Home", href: "/" },
+    { label: "Accueil", href: "/" },
     { label: "Services", href: "#expertises", hasDropdown: true },
-    { label: "Our Work", href: "/work" },
-    { label: "About Us", href: "/about" },
+    { label: "Portfolio", href: "/work" },
+    { label: "À propos", href: "/about" },
   ];
 
   return (
