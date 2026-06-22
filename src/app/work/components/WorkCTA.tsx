@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, X, Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const stackImages = [
   {
@@ -231,12 +232,12 @@ export default function WorkCTA() {
             {/* Header */}
             <div className="relative z-10 flex items-center justify-between w-full">
               <span className="text-[9px] sm:text-[10px] font-mono font-bold text-secondary bg-secondary/5 border border-secondary/10 px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wider">/ contact</span>
-              <a
-                href="#cta-contact"
+              <Link
+                href="/lancer-un-projet"
                 className="w-10 h-10 rounded-full bg-[#EAEAEA] flex items-center justify-center group-hover:rotate-45 transition-transform duration-300 min-w-[44px] min-h-[44px]"
               >
                 <ArrowUpRight className="w-4 h-4 text-black-deep" />
-              </a>
+              </Link>
             </div>
 
             {/* Content Area */}
@@ -271,9 +272,9 @@ export default function WorkCTA() {
 
             {/* CTA Button */}
             <div className="relative z-10 mt-auto pt-4 sm:pt-6">
-              <a href="#cta-contact" className="inline-block px-5 sm:px-6 py-3 bg-primary text-black-deep hover:bg-black-deep hover:text-white font-sans font-bold text-[10px] sm:text-xs uppercase tracking-wider rounded-full transition-colors duration-300 min-h-[44px] leading-[44px]">
+              <Link href="/lancer-un-projet" className="inline-flex items-center justify-center px-5 sm:px-6 py-3 bg-primary text-black-deep hover:bg-black-deep hover:text-white font-sans font-bold text-[10px] sm:text-xs uppercase tracking-wider rounded-full transition-colors duration-300 min-h-[44px]">
                 Prendre rendez-vous
-              </a>
+              </Link>
             </div>
           </motion.div>
 

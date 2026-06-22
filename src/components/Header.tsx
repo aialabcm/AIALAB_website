@@ -349,7 +349,7 @@ export default function Header() {
 
                         {/* Card 6: CTA Card (Premium Contrast White Glass Accent) */}
                         <a 
-                          href="#cta-contact" 
+                          href="/lancer-un-projet" 
                           onClick={() => setIsServicesOpen(false)}
                           className="group/card relative p-5 rounded-[1.5rem] bg-white text-black hover:bg-white/90 transition-all duration-500 overflow-hidden flex flex-col justify-between h-[175px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_12px_40px_rgba(255,255,255,0.06)]"
                         >
@@ -397,7 +397,7 @@ export default function Header() {
           {/* Zone Droite : CTA & Mobile Toggle */}
           <div className="flex items-center gap-4">
             <motion.a
-              href="#cta-contact"
+              href="/lancer-un-projet"
               style={{ x: headerBtnX, y: headerBtnY }}
               onMouseMove={handleHeaderBtnMove}
               onMouseLeave={handleHeaderBtnReset}
@@ -626,7 +626,7 @@ export default function Header() {
 
                           {/* White contrast CTA card on mobile services menu */}
                           <a
-                            href="#cta-contact"
+                            href="/lancer-un-projet"
                             onClick={() => setIsOpen(false)}
                             className="group/card relative p-4 rounded-2xl bg-white text-black hover:bg-white/90 transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[110px]"
                           >
@@ -679,7 +679,7 @@ export default function Header() {
                 <p className="text-white/50 text-xs font-sans mb-6">Prêt à transformer votre vision en réalité augmentée ?</p>
                 
                 <a
-                  href="#cta-contact"
+                  href="/lancer-un-projet"
                   onClick={() => setIsOpen(false)}
                   className="w-full inline-flex items-center justify-between p-5 bg-primary text-black-deep rounded-[1.5rem] group hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
                 >

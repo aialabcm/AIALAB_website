@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import TypewriterLine from "@/components/TypewriterLine";
 
 const HERO_LINE_1 = "Design &";
@@ -85,12 +86,12 @@ export default function HeroSection() {
             }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 justify-start w-full"
           >
-            <a
-              href="#cta-contact"
-              className="bg-primary text-black-deep py-4 px-8 sm:px-10 rounded-full font-sans font-extrabold text-sm tracking-wider transition-all duration-300 hover:bg-white hover:text-black-deep hover:scale-105 shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-primary/50 text-center min-h-[48px]"
+            <Link
+              href="/lancer-un-projet"
+              className="bg-primary text-black-deep py-4 px-8 sm:px-10 rounded-full font-sans font-extrabold text-sm tracking-wider transition-all duration-300 hover:bg-white hover:text-black-deep hover:scale-105 shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-primary/50 text-center min-h-[48px] flex items-center justify-center"
             >
               Lancer un projet
-            </a>
+            </Link>
             <a
               href="#portfolio"
               className="bg-white/10 hover:bg-white/20 text-white py-4 px-8 sm:px-10 rounded-full font-sans font-extrabold text-sm tracking-wider transition-all duration-300 hover:scale-105 backdrop-blur-sm outline-none focus-visible:ring-2 focus-visible:ring-white/50 text-center min-h-[48px]"

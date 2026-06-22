@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -79,13 +80,13 @@ export default function AboutHero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="#cta-contact"
+              <Link
+                href="/lancer-un-projet"
                 className="group cursor-pointer bg-primary text-black-deep py-3.5 px-8 rounded-full font-sans font-extrabold text-xs tracking-wider uppercase transition-all duration-300 hover:bg-black-deep hover:text-white hover:scale-105 active:scale-[0.98] shadow-md hover:shadow-xl outline-none focus-visible:ring-2 focus-visible:ring-primary/50 min-h-[48px] flex items-center justify-center gap-2.5"
               >
                 Lancer un projet
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </Link>
               <a
                 href="/work"
                 className="group cursor-pointer bg-white/60 hover:bg-white text-black-deep py-3.5 px-8 rounded-full font-sans font-extrabold text-xs tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-[0.98] backdrop-blur-sm border border-black/[0.06] hover:border-black/[0.12] outline-none focus-visible:ring-2 focus-visible:ring-primary/50 min-h-[48px] flex items-center justify-center gap-2"
