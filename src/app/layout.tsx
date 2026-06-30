@@ -23,6 +23,8 @@ export default function RootLayout({
       className="h-full antialiased"
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <JsonLdSchema />
       </head>
       <body className="min-h-full flex flex-col bg-[#FAFAFA] text-[#0B0B0B]">

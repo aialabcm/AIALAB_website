@@ -96,6 +96,9 @@ export default function StatsSection() {
               <img 
                 src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" 
                 alt="Creative Studio" 
+                width={600}
+                height={400}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-primary/10 opacity-30 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none" />
@@ -135,6 +138,9 @@ export default function StatsSection() {
               <img 
                 src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" 
                 alt="AI Neural" 
+                width={600}
+                height={400}
+                loading="lazy"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-primary/5 opacity-40 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none" />

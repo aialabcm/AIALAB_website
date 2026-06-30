@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ExpertiseSection from "@/components/ExpertiseSection";
-import StatsSection from "@/components/StatsSection";
-import PortfolioSection from "@/components/PortfolioSection";
-import ProcessSection from "@/components/ProcessSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import FAQSection from "@/components/FAQSection";
-import ContactCTA from "@/components/ContactCTA";
-import Footer from "@/components/Footer";
 import { getProjects, getTestimonials } from "@/lib/wordpress";
+
+// ─── Below-the-fold components: lazy-loaded to reduce initial JS bundle ───
+const StatsSection = dynamic(() => import("@/components/StatsSection"));
+const PortfolioSection = dynamic(() => import("@/components/PortfolioSection"));
+const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
+const FAQSection = dynamic(() => import("@/components/FAQSection"));
+const ContactCTA = dynamic(() => import("@/components/ContactCTA"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export const metadata: Metadata = {
   title: "AIA LAB — Studio de Création Digitale d'Élite",

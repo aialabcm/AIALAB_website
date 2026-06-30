@@ -186,6 +186,8 @@ export default function ContactCTA() {
                       <img
                         src={`https://i.pravatar.cc/100?img=${i + 10}`}
                         alt="Expert"
+                        width={32}
+                        height={32}
                         loading="lazy"
                         className="w-full h-full object-cover grayscale"
                       />
