@@ -22,10 +22,10 @@ export default function HeroSection() {
   return (
     <section className="relative h-screen min-h-[750px] w-full flex items-center bg-white overflow-hidden pt-20">
       {/* Background Image with overlays */}
-      <motion.div 
+      <motion.div
         initial={{ scale: 1.08, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="absolute inset-0 z-0"
       >
         <Image
@@ -38,7 +38,7 @@ export default function HeroSection() {
       </motion.div>
 
       <div className="relative z-10 w-full max-w-container mx-auto px-6 md:px-12 lg:px-20 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 mt-10 md:mt-0">
-        
+
         {/* Left Column: Text and CTAs */}
         <div className="flex flex-col items-start w-full lg:max-w-[60%] z-10 py-8 lg:py-16">
 
@@ -71,7 +71,7 @@ export default function HeroSection() {
             technologique pour sculpter des expériences qui redéfinissent
             l&apos;élite digitale.
           </motion.p>
- 
+
           <motion.div
             initial={false}
             animate={
@@ -122,7 +122,7 @@ export default function HeroSection() {
               <p className="text-[10px] uppercase font-bold tracking-widest text-white/50 mb-4">
                 Projets d&apos;exception
               </p>
-              
+
               <div className="w-8 h-[2px] bg-primary/30 rounded mb-6" />
 
               <ul className="space-y-2 text-[11px] font-medium text-white/70">
@@ -140,7 +140,7 @@ export default function HeroSection() {
                 </li>
               </ul>
             </div>
-            
+
             <div className="text-[9px] font-mono text-white/30 uppercase tracking-widest mt-4">
               AIA LAB EST. 2024
             </div>
