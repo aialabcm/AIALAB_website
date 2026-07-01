@@ -3,6 +3,7 @@ import "./globals.css";
 
 import CustomCursor from "@/components/CustomCursor";
 import JsonLdSchema from "@/components/JsonLdSchema";
+import { montserrat, roboto, spaceGrotesk, caveat } from "./fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -20,11 +21,9 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className="h-full antialiased"
+      className={`h-full antialiased ${montserrat.variable} ${roboto.variable} ${spaceGrotesk.variable} ${caveat.variable}`}
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <JsonLdSchema />
       </head>
       <body className="min-h-full flex flex-col bg-[#FAFAFA] text-[#0B0B0B]">
