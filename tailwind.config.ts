@@ -44,6 +44,7 @@ const config: Config = {
         "marquee-reverse": "marquee-reverse 30s linear infinite",
         "marquee-vertical-up": "marquee-vertical-up 40s linear infinite",
         "marquee-vertical-down": "marquee-vertical-down 40s linear infinite",
+        "typewriter-reveal": "typewriter-reveal linear forwards",
       },
       keyframes: {
         marquee: {
@@ -61,6 +62,10 @@ const config: Config = {
         "marquee-vertical-down": {
           "0%": { transform: "translateY(-50%)" },
           "100%": { transform: "translateY(0%)" },
+        },
+        "typewriter-reveal": {
+          "0%": { clipPath: "inset(0 100% 0 0)" },
+          "100%": { clipPath: "inset(0 0% 0 0)" },
         },
       },
     },

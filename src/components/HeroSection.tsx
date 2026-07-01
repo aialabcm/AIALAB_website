@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import TypewriterLine from "@/components/TypewriterLine";
 
 const HERO_LINE_1 = "Design &";
@@ -15,10 +14,12 @@ const LINE_2_START_DELAY = Math.round(
   HERO_LINE_1.length * LINE_2_OVERLAP * MS_PER_CHAR,
 );
 const REVEAL_STAGGER_S = 0.3;
+// Total time for the title's CSS typewriter reveal to finish — used to
+// stagger the paragraph/CTA fade-in without depending on a JS callback.
+const TITLES_COMPLETE_S =
+  (LINE_2_START_DELAY + HERO_LINE_2.length * MS_PER_CHAR) / 1000;
 
 export default function HeroSection() {
-  const [titlesComplete, setTitlesComplete] = useState(false);
-
   return (
     <section className="relative h-screen min-h-[750px] w-full flex items-center bg-white overflow-hidden pt-20">
       {/* Background Image with overlays */}
@@ -52,19 +53,14 @@ export default function HeroSection() {
               text={HERO_LINE_2}
               startDelay={LINE_2_START_DELAY}
               msPerChar={MS_PER_CHAR}
-              onComplete={() => setTitlesComplete(true)}
               className="font-heading accent-italic text-[2.5rem] xs:text-5xl sm:text-6xl md:text-[5rem] lg:text-[6rem] xl:text-[7rem] text-primary tracking-tighter -mt-1 md:-mt-2"
             />
           </h1>
 
           <motion.p
-            initial={false}
-            animate={
-              titlesComplete
-                ? { opacity: 0.8, y: 0 }
-                : { opacity: 0, y: 20 }
-            }
-            transition={{ duration: 0.55, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 0.8, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut", delay: TITLES_COMPLETE_S }}
             className="font-sans text-sm md:text-base text-white/70 max-w-[55ch] mb-12 lg:mb-16 leading-relaxed font-normal text-left"
           >
             Nous fusionnons l&apos;excellence esthétique avec la puissance
@@ -73,16 +69,12 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div
-            initial={false}
-            animate={
-              titlesComplete
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 20 }
-            }
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.55,
               ease: "easeOut",
-              delay: REVEAL_STAGGER_S,
+              delay: TITLES_COMPLETE_S + REVEAL_STAGGER_S,
             }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 justify-start w-full"
           >
@@ -103,13 +95,9 @@ export default function HeroSection() {
 
         {/* Right Column: Glassmorphic stats */}
         <motion.div
-          initial={false}
-          animate={
-            titlesComplete
-              ? { opacity: 1, x: 0 }
-              : { opacity: 0, x: 30 }
-          }
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: TITLES_COMPLETE_S + 0.4 }}
           className="hidden lg:flex w-full lg:w-auto mt-8 lg:mt-0 z-10 translate-y-16"
         >
           {/* Glassmorphic Card */}

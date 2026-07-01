@@ -1,0 +1,23 @@
+# Disable directory listing
+Options -Indexes
+
+# Set the default index file
+DirectoryIndex index.html
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect /index.html to / (avoid duplicate content)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Redirect /page.html to /page (remove .html extension)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+)\.html\ HTTP/
+RewriteRule ^([^/]+)\.html$ /$1 [R=301,L]
+
+# Serve pages without extension (e.g. /about -> about.html)
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# 404 Error handling
+ErrorDocument 404 /404.html
