@@ -50,24 +50,41 @@ export default function Header() {
     // Initialize to current position to avoid incorrect transitions on refresh
     lastScrollY.current = window.scrollY;
 
+    // Track accumulated scroll delta to require a minimum movement before toggling
+    const SCROLL_DELTA_THRESHOLD = 10; // px of continuous scroll needed to toggle
+    let accumulatedDelta = 0;
+    let lastDirection: "up" | "down" | null = null;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Scrolled state for styling
+      // Scrolled state for styling (instant, no threshold needed)
       setIsScrolled((prev) => {
         const next = currentScrollY > 20;
         return prev === next ? prev : next;
       });
 
-      // Update visibility only if scroll position actually changed
-      if (currentScrollY !== lastScrollY.current) {
-        setIsVisible((prev) => {
-          const isScrollingDown = currentScrollY > lastScrollY.current;
-          const isPastThreshold = currentScrollY > 100;
-          const next = !(isScrollingDown && isPastThreshold);
-          return prev === next ? prev : next;
-        });
-        lastScrollY.current = currentScrollY;
+      const delta = currentScrollY - lastScrollY.current;
+      if (delta === 0) return;
+
+      const direction: "up" | "down" = delta > 0 ? "down" : "up";
+
+      // Reset accumulated delta when direction changes
+      if (direction !== lastDirection) {
+        accumulatedDelta = 0;
+        lastDirection = direction;
+      }
+
+      accumulatedDelta += Math.abs(delta);
+      lastScrollY.current = currentScrollY;
+
+      // Only toggle visibility after scrolling enough in one direction
+      if (accumulatedDelta < SCROLL_DELTA_THRESHOLD) return;
+
+      if (direction === "down" && currentScrollY > 100) {
+        setIsVisible(false);
+      } else if (direction === "up") {
+        setIsVisible(true);
       }
     };
 
