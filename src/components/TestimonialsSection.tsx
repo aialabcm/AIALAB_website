@@ -90,27 +90,13 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
             </div>
           </div>
 
-          {/* Mobile/Tablet Layout (below lg): Horizontal Marquee Ticker with Drag support */}
+          {/* Mobile/Tablet Layout (below lg): Horizontal Carousel with native scroll snap */}
           <div className="lg:hidden col-span-1 relative w-full overflow-hidden py-4 mt-8">
             {/* Gradient Mask for Smooth Edge Fade (Horizontal) */}
             <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bg-main to-transparent z-20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg-main to-transparent z-20 pointer-events-none" />
             
-            <div className="flex flex-col gap-6">
-              {/* Track 1: Left scrolling */}
-              <DraggableMarqueeTrack 
-                items={testimonials1} 
-                direction="left" 
-                speed={40} 
-              />
-
-              {/* Track 2: Right scrolling */}
-              <DraggableMarqueeTrack 
-                items={testimonials2} 
-                direction="right" 
-                speed={40} 
-              />
-            </div>
+            <MobileTestimonialsCarousel items={testimonials} />
           </div>
         </div>
       </div>
@@ -173,101 +159,16 @@ function TestimonialRibbon({
   );
 }
 
-function DraggableMarqueeTrack({ 
-  items, 
-  direction, 
-  speed 
-}: { 
-  items: Testimonial[], 
-  direction: "left" | "right", 
-  speed: number 
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isInteracting = useRef(false);
-  const duplicatedItems = [...items, ...items, ...items];
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    // Set initial scroll position to the middle third for seamless looping
-    const oneThird = container.scrollWidth / 3;
-    container.scrollLeft = oneThird;
-
-    let animationFrameId: number;
-    let lastTime = performance.now();
-
-    const loop = (now: number) => {
-      if (!isInteracting.current && container) {
-        const delta = (now - lastTime) / 1000;
-        const scrollSpeed = direction === "left" ? speed : -speed;
-        container.scrollLeft += scrollSpeed * delta;
-
-        const width = container.scrollWidth;
-        const third = width / 3;
-
-        // Loop boundaries
-        if (container.scrollLeft >= third * 2) {
-          container.scrollLeft -= third;
-        } else if (container.scrollLeft <= third) {
-          container.scrollLeft += third;
-        }
-      }
-      lastTime = now;
-      animationFrameId = requestAnimationFrame(loop);
-    };
-
-    animationFrameId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [direction, speed]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const container = containerRef.current;
-    if (!container) return;
-    isInteracting.current = true;
-    const startX = e.pageX - container.offsetLeft;
-    const scrollLeft = container.scrollLeft;
-
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      const x = moveEvent.pageX - container.offsetLeft;
-      const walk = (x - startX) * 1.5; // Drag sensitivity
-      container.scrollLeft = scrollLeft - walk;
-    };
-
-    const handleMouseUp = () => {
-      isInteracting.current = false;
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-  };
-
-  const handleTouchStart = () => {
-    isInteracting.current = true;
-  };
-
-  const handleTouchEnd = () => {
-    // Small timeout to allow touch inertia physics to finish
-    setTimeout(() => {
-      isInteracting.current = false;
-    }, 1000);
-  };
-
+function MobileTestimonialsCarousel({ items }: { items: Testimonial[] }) {
   return (
-    <div className="relative flex overflow-hidden w-full">
+    <div className="relative flex w-full">
       <div
-        ref={containerRef}
-        className="flex gap-4 overflow-x-auto no-scrollbar py-2 cursor-grab active:cursor-grabbing select-none w-full"
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar w-full px-6 py-2"
       >
-        {duplicatedItems.map((t, idx) => (
+        {items.map((t, idx) => (
           <div
             key={idx}
-            className="w-[290px] xs:w-[320px] flex-shrink-0 bg-white border border-dark/5 p-6 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all duration-300 rounded-2xl whitespace-normal pointer-events-none select-none"
+            className="w-[290px] xs:w-[320px] flex-shrink-0 snap-center bg-white border border-dark/5 p-6 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all duration-300 rounded-2xl whitespace-normal"
           >
             <div>
               <div className="flex gap-1 mb-3">

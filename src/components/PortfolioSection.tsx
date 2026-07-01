@@ -33,6 +33,7 @@ function ProjectCard({
       <button
         type="button"
         onClick={() => onSelect(project)}
+        data-cursor="explore"
         className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-black rounded-[2rem] overflow-hidden cursor-pointer"
       >
         {/* Image wrapper with high-end hover effects */}

@@ -1,17 +1,20 @@
-const fs = require("fs");
-const path = require("path");
-const sharp = require("sharp");
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
-const IMAGE_EXTS = [".png", ".jpg", ".jpeg"];
-const ROOT = path.resolve(__dirname, "..");
-const SOURCE_DIR = path.join(ROOT, "assets", "source", "images");
-const OUTPUT_DIR = path.join(ROOT, "public", "images");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-/** @type {Record<string, number>} */
+const IMAGE_EXTS = ['.png', '.jpg', '.jpeg'];
+const ROOT = path.resolve(__dirname, '..');
+const TARGET_DIR = path.join(ROOT, 'public', 'images');
+
 const QUALITY_BY_BASENAME = {
-  "hero-bg": 88,
+  'hero-bg': 88,
   logo: 80,
-  "AIAl-Embleme": 80,
+  'AIAl-Embleme': 80,
+  'about-hero-studio': 82,
 };
 
 function qualityFor(filePath) {
@@ -20,19 +23,29 @@ function qualityFor(filePath) {
 }
 
 async function convertFile(sourcePath) {
-  const rel = path.relative(SOURCE_DIR, sourcePath);
-  const outPath = path.join(OUTPUT_DIR, rel.replace(/\.[^.]+$/i, ".webp"));
-  fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  await sharp(sourcePath)
-    .webp({ quality: qualityFor(sourcePath) })
-    .toFile(outPath);
-  console.log(
-    `✔ ${path.relative(ROOT, sourcePath)} → ${path.relative(ROOT, outPath)} (q=${qualityFor(sourcePath)})`,
-  );
+  const ext = path.extname(sourcePath);
+  const outPath = sourcePath.substring(0, sourcePath.length - ext.length) + '.webp';
+  
+  // If the webp file already exists, skip it
+  if (fs.existsSync(outPath)) {
+    return;
+  }
+  
+  try {
+    await sharp(sourcePath)
+      .webp({ quality: qualityFor(sourcePath) })
+      .toFile(outPath);
+      
+    console.log(`✔ Converted: ${path.relative(ROOT, sourcePath)} → ${path.relative(ROOT, outPath)} (q=${qualityFor(sourcePath)})`);
+  } catch (err) {
+    console.error(`❌ Failed to convert ${sourcePath}:`, err.message);
+  }
 }
 
 function walk(dir) {
   const tasks = [];
+  if (!fs.existsSync(dir)) return tasks;
+  
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
@@ -45,20 +58,18 @@ function walk(dir) {
 }
 
 async function main() {
-  if (!fs.existsSync(SOURCE_DIR)) {
-    console.error(`❌ Source directory missing: ${SOURCE_DIR}`);
-    process.exit(1);
-  }
-  const tasks = walk(SOURCE_DIR);
+  console.log(`Scanning public/images directory: ${TARGET_DIR}`);
+  const tasks = walk(TARGET_DIR);
   if (tasks.length === 0) {
-    console.warn("No images found in assets/source/images/");
+    console.log('No new images to convert in public/images/');
     return;
   }
+  console.log(`Found ${tasks.length} candidate images. Checking and converting...`);
   await Promise.all(tasks);
+  console.log('All image conversions checked/finished!');
 }
 
 main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
-

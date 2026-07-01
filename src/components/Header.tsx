@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,7 +24,7 @@ export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
 
   // Magnetic Button Logic
   const headerBtnX = useSpring(useMotionValue(0), { damping: 20, stiffness: 150 });
@@ -47,25 +47,36 @@ export default function Header() {
   };
 
   useEffect(() => {
+    // Initialize to current position to avoid incorrect transitions on refresh
+    lastScrollY.current = window.scrollY;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       // Scrolled state for styling
-      setIsScrolled(currentScrollY > 20);
+      setIsScrolled((prev) => {
+        const next = currentScrollY > 20;
+        return prev === next ? prev : next;
+      });
 
-      // Visibility state (hide on scroll down, show on scroll up)
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
+      // Update visibility only if scroll position actually changed
+      if (currentScrollY !== lastScrollY.current) {
+        setIsVisible((prev) => {
+          const isScrollingDown = currentScrollY > lastScrollY.current;
+          const isPastThreshold = currentScrollY > 100;
+          const next = !(isScrollingDown && isPastThreshold);
+          return prev === next ? prev : next;
+        });
+        lastScrollY.current = currentScrollY;
       }
-
-      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    // Run once to set initial state correctly
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {

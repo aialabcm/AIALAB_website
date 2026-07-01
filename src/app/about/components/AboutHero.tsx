@@ -141,7 +141,7 @@ export default function AboutHero() {
             
             {[
               {
-                src: "/images/about-hero-studio.png",
+                src: "/images/about-hero-studio.webp",
                 alt: "AIA LAB Creative Studio",
                 rotate: -5,
                 x: "0%",

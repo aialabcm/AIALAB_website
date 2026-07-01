@@ -77,7 +77,7 @@ export default function CustomCursor() {
         }}
         animate={{
           scale: 1,
-          backdropFilter: cursorType === "explore" ? "invert(1) blur(4px)" : "invert(0) blur(0px)",
+          backdropFilter: cursorType === "explore" ? "invert(1)" : "invert(0)",
         }}
         transition={{ type: "spring", damping: 35, stiffness: 400 }}
       >
