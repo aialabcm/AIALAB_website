@@ -24,7 +24,7 @@ export default function JsonLdSchema() {
     "description": "Studio et agence digitale d'élite spécialisée dans le branding de prestige, le design graphique de pointe, le développement Next.js sur-mesure et la stratégie de croissance.",
     "url": "https://aialabcmr.com/",
     "logo": "https://aialabcmr.com/images/logo.png",
-    "email": "contact@aialab.com",
+    "email": "contact@aialabcmr.com",
     "telephone": "+237690123456",
     "address": {
       "@type": "PostalAddress",

@@ -383,10 +383,10 @@ export default function ContactCTA() {
                         Une erreur est survenue. Réessayez ou contactez-nous
                         directement à{" "}
                         <a
-                          href="mailto:contact@aialab.com"
+                          href="mailto:contact@aialabcmr.com"
                           className="underline"
                         >
-                          contact@aialab.com
+                          contact@aialabcmr.com
                         </a>
                       </motion.p>
                     )}
