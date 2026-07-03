@@ -6,7 +6,7 @@ import { Send, CheckCircle, Loader2, Mail, Phone, MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE";
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "ec7f7e16-795f-4caa-8c52-a880efe637b0";
 
 const projectTypes = [
   "Branding & Identité visuelle",
@@ -68,7 +68,7 @@ export default function LancerProjetClient() {
   return (
     <>
       <Header />
-      <main 
+      <main
         className="min-h-screen bg-bg-main pb-0 selection:bg-primary/20 selection:text-primary"
         style={{ paddingTop: "clamp(88px, 6vw + 40px, 150px)" }}
       >
@@ -105,10 +105,10 @@ export default function LancerProjetClient() {
                       Email
                     </span>
                     <a
-                      href="mailto:contact@aialab.com"
+                      href="mailto:contact@aialabcmr.com"
                       className="font-heading font-bold text-lg sm:text-xl text-black-deep hover:text-primary transition-colors duration-300"
                     >
-                      contact@aialab.com
+                      contact@aialabcmr.com
                     </a>
                   </div>
                 </div>
@@ -154,15 +154,21 @@ export default function LancerProjetClient() {
                   </span>
                   <div className="flex items-center gap-3">
                     {[
-                      { label: "LinkedIn", href: "https://linkedin.com", icon: (
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                      )},
-                      { label: "Instagram", href: "https://instagram.com", icon: (
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5M12 7a5 5 0 110 10 5 5 0 010-10m0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
-                      )},
-                      { label: "Dribbble", href: "https://dribbble.com", icon: (
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]"><path d="M12 2A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2m0 2a7.95 7.95 0 015.26 1.98c-.53.82-1.58 2.11-3.27 3.2A28.07 28.07 0 0010.28 4.2 7.93 7.93 0 0112 4M8.67 5.05c.82 1.13 2.15 3.22 3.68 5.7-3.6.94-7.05.92-7.55.91A8.03 8.03 0 018.67 5.05M4 12.05v-.25c.47.01 4.6.11 8.57-.99.24.47.47.95.68 1.42-4.47 1.29-7.03 4.88-7.33 5.37A7.97 7.97 0 014 12.05m3.72 7.35c.23-.42 2.25-3.65 7.12-5.32.03-.01.06-.02.08-.03a34.09 34.09 0 011.74 6.27A7.96 7.96 0 0112 20a7.97 7.97 0 01-4.28-1.6M18.22 19a36.13 36.13 0 00-1.6-5.85c1.91-.3 3.6.2 3.91.31A8.03 8.03 0 0118.22 19M17 9.66c1.6-1.15 2.57-2.4 3.06-3.2A7.97 7.97 0 0119.95 11c-.4-.07-2.27-.42-4.36-.1.19-.45.38-.91.54-1.36.11-.27.21-.54.3-.8l.57-.08z"/></svg>
-                      )},
+                      {
+                        label: "LinkedIn", href: "https://linkedin.com", icon: (
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" /></svg>
+                        )
+                      },
+                      {
+                        label: "Instagram", href: "https://instagram.com", icon: (
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5M12 7a5 5 0 110 10 5 5 0 010-10m0 2a3 3 0 100 6 3 3 0 000-6z" /></svg>
+                        )
+                      },
+                      {
+                        label: "Dribbble", href: "https://dribbble.com", icon: (
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]"><path d="M12 2A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2m0 2a7.95 7.95 0 015.26 1.98c-.53.82-1.58 2.11-3.27 3.2A28.07 28.07 0 0010.28 4.2 7.93 7.93 0 0112 4M8.67 5.05c.82 1.13 2.15 3.22 3.68 5.7-3.6.94-7.05.92-7.55.91A8.03 8.03 0 018.67 5.05M4 12.05v-.25c.47.01 4.6.11 8.57-.99.24.47.47.95.68 1.42-4.47 1.29-7.03 4.88-7.33 5.37A7.97 7.97 0 014 12.05m3.72 7.35c.23-.42 2.25-3.65 7.12-5.32.03-.01.06-.02.08-.03a34.09 34.09 0 011.74 6.27A7.96 7.96 0 0112 20a7.97 7.97 0 01-4.28-1.6M18.22 19a36.13 36.13 0 00-1.6-5.85c1.91-.3 3.6.2 3.91.31A8.03 8.03 0 0118.22 19M17 9.66c1.6-1.15 2.57-2.4 3.06-3.2A7.97 7.97 0 0119.95 11c-.4-.07-2.27-.42-4.36-.1.19-.45.38-.91.54-1.36.11-.27.21-.54.3-.8l.57-.08z" /></svg>
+                        )
+                      },
                     ].map((social) => (
                       <a
                         key={social.label}
@@ -358,10 +364,10 @@ export default function LancerProjetClient() {
                           Une erreur est survenue. Réessayez ou contactez-nous
                           directement à{" "}
                           <a
-                            href="mailto:contact@aialab.com"
+                            href="mailto:contact@aialabcmr.com"
                             className="underline"
                           >
-                            contact@aialab.com
+                            contact@aialabcmr.com
                           </a>
                         </motion.p>
                       )}
