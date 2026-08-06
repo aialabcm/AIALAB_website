@@ -10,7 +10,7 @@ async function fetchGraphQL(
   query: string,
   variables?: Record<string, unknown>
 ): Promise<unknown> {
-  const url = process.env.WORDPRESS_API_URL;
+  const url = process.env.WORDPRESS_API_URL || "https://cms.aialabcmr.com/graphql";
 
   if (!url) {
     console.error("[wordpress] WORDPRESS_API_URL is not defined");
