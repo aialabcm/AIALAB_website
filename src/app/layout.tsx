@@ -21,6 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      suppressHydrationWarning
       className={`h-full antialiased ${montserrat.variable} ${roboto.variable} ${spaceGrotesk.variable} ${caveat.variable}`}
     >
       <head>

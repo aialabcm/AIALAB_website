@@ -118,7 +118,7 @@ export default function Footer() {
 
           <div className="flex flex-col md:flex-row items-center gap-8">
             <span className="font-heading font-black text-2xl tracking-tighter">AIA LAB</span>
-            <span className="font-sans text-[10px] text-white/30 truncate">
+            <span className="font-sans text-[10px] text-white/30 truncate" suppressHydrationWarning>
               © {new Date().getFullYear()} AIA LAB. All rights reserved. Au-delà du possible.
             </span>
           </div>

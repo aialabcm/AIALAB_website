@@ -711,7 +711,7 @@ export default function Header() {
                 </a>
 
                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mt-8 px-2">
-                  <span className="font-mono text-[9px] tracking-widest text-white/30 uppercase">AIA LAB © {new Date().getFullYear()}</span>
+                  <span className="font-mono text-[9px] tracking-widest text-white/30 uppercase" suppressHydrationWarning>AIA LAB © {new Date().getFullYear()}</span>
                   <div className="flex gap-2.5">
                     {[
                       { label: "LinkedIn", href: "https://linkedin.com" },
